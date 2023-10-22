@@ -28,8 +28,32 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cosmos-beauty-133a3d7898aa.herokuapp.com','8000-mbilalqures-cosmosbeaut-t555x6i9jv7.ws-us105.gitpod.io']
+ALLOWED_HOSTS = ['cosmos-beauty-133a3d7898aa.herokuapp.com', '8000-mbilalqures-cosmosbeaut-t555x6i9jv7.ws-us105.gitpod.io']
 
+# Site id = 1 means django can handle one db from many sites
+SITE_ID = 1
+
+CSRF_TRUSTED_ORIGINS = ['https://8000-mbilalqures-cosmosbeaut-t555x6i9jv7.ws-us105.gitpod.io']
+
+# Redirect to home after login and logout
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+# ACCOUNT_EMAIL_VERIFICATION = 'mandatory'
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+
+# Add backend auth for email login
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend"
+)
 
 # Application definition
 
@@ -81,6 +105,12 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'cosmosbeauty.wsgi.application'
+
+# Setting up custom form for sign up
+ACCOUNT_FORMS = {
+    'signup': 'ecommerce.forms.CustomSignupForm',
+}
+
 
 
 # Database
