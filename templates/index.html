@@ -1,5 +1,50 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-    hello
+
+<div id="heroCarousel" class="carousel slide carousel-fade carousel-dark" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active" data-bs-interval="3000">
+            <div class="overlay-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url('../static/images/pexels-valeria-boltneva-965989.jpg')"></div>
+            <div class="container">
+                <h2>Get free gifts</h2>
+                <p>Sign up today, get your free gifts!</p>
+                <a href="#" class="btn btn-primary">Sign Up</a>
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="3000">
+            <div class="overlay-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url('../static/images/pexels-pixabay-206299.webp')"></div>
+            <!-- <img src="{% static 'images/pexels-pixabay-206299.webp' %}" class="d-block w-100" alt="..."> -->
+            <div class="container">               
+                <h2>10% Discount</h2>
+                <p>Get 10% discount, Subscribe to our newsletters.</p>
+                <a href="#" class="btn btn-primary">Subscribe now</a>
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="3000">
+            <div class="overlay-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) ,url('../static/images/pexels-zhugewala-2113855.webp')"></div>
+            <!-- <img src="{% static 'images/pexels-zhugewala-2113855.webp' %}" class="d-block w-100" alt="..."> -->
+            <div class="container">
+                <h2>10% Discount2</h2>
+                <p>Get 10% discount, Subscribe to our newsletters.</p>
+                <a href="#" class="btn btn-primary">Subscribe now</a>
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </a>
+</div>
 {% endblock content %}
