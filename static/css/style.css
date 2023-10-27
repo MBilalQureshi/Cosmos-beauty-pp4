@@ -8,7 +8,9 @@ body{
     margin: 0;
     padding: 0;
     border: 0;
-    background-color: #B5CB99;
+    /* font-size: 16px; */
+    /* @include font-size(4rem); */
+    /* background-color: #B5CB99; */
 }
 /* nav */
 .main-navbar{
@@ -21,7 +23,7 @@ body{
 }
 .main-navbar .top-navbar .brand-name{
     font-family: 'Oswald', sans-serif;
-    font-size: xx-large;
+    /* font-size: 2em; */
     color: #fff;
 }
 .main-navbar .top-navbar .nav-link{
@@ -72,7 +74,7 @@ body{
     color: #ffffff;
     font-weight: bolder;
     font-family: 'Roboto', sans-serif;
-    font-size: xx-large;
+    /* font-size: 3em; */
 }
 
 .carousel-item .container{
@@ -96,9 +98,40 @@ body{
    background-repeat: no-repeat;
    background-blend-mode:hard-light;
 }
-.carousel-item .container{
-    /* background-color: ; */
+
+/* Free gift banner */
+#banner-ouuter{
+    text-decoration: none;
 }
+
+.banner{
+    /* position: relative; */
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* height: 8rem; */
+    background-color: rgba(9, 9, 12, 0.788);
+}
+
+#free-gift-banner p{
+    font-family: 'Ubuntu', sans-serif;
+    /* font-size: 1.8em; */
+    color: #fff;
+}
+
+small{
+    color: #fff;
+}
+/* @media screen and (max-width: 625px) {
+    #main-banner-text{
+        font-size: 16px;
+    }
+} */
+
+#free-gift-banner .display-6{
+    line-height: 1.6;
+}
+
 /* footer */
 .footer-area{
     padding: 40px 0px;
