@@ -42,7 +42,7 @@ class ProductDiscountAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(SummernoteModelAdmin):
-    list_display = ('name', 'available', 'stock','product_category', 'discount_name', 'slug')
+    list_display = ('name', 'available', 'stock','product_category', 'price', 'slug')
     search_fields = ('name', 'sku')
     list_filter = ('name', 'created_on', 'updated_on')
     summernote_fields = ('description')

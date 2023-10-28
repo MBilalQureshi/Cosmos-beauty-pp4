@@ -16,7 +16,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-2 my-auto d-none d-sm-none d-md-block d-lg-block">
-                        <h5 class="brand-name">Cosmos Beauty</h5>
+                        <h5 class="brand-name display-6">Cosmos Beauty</h5>
                     </div>
                     <div class="col-md-5 my-auto">
                         <form role="search">
@@ -69,10 +69,10 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Home</a>
+                            <a class="nav-link" href="{% url 'home' %}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">All Categories</a>
+                            <a class="nav-link" href="{% url 'products' %}">All Products</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">New Arrivals</a>
