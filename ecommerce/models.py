@@ -87,6 +87,7 @@ class Product(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     slug = AutoSlugField(populate_from='name', unique=True)
+    # popularproduct based on most bought products
 
     class Meta:
         ordering = ['-created_on']

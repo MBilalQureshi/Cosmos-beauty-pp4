@@ -15,9 +15,8 @@ class Products (generic.ListView):
     Fetch products data from database and display on
     products.html
     """
-    model = Product
     # reduce the col required from db from next iteration
-    queryset = Product.objects.filter(available=True).order_by('-created_on')
+    queryset = Product.objects.filter(available=True).filter(stock__gt=0).order_by('-created_on')
     template_name = 'products.html'
     paginate_by = 12
 
