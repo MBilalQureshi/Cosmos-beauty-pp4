@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}CosmosBeauty | Product Details{% endblock %}
+
+{% block content %}
+<div class="container-gutter my-3 mx-4">
+    <div class="row">
+        <div id="product-img" class="col-md-5 offset-lg-2 col-lg-4 offset-xl-2 img-hover-zoom">
+            {% if "placeholder" in product.image.url %}
+                <img src="https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg" class="img-fluid rounded" alt="Placeholder Image"> 
+            {% else %}
+                <img src="{{ product.image.url }}" class="img-fluid rounded" alt="Product image">
+            {% endif %}
+        </div>
+        <div class="col-md-7 col-lg-4">
+                <h2  class="mb-3 display-6"><strong>{{ product.name }}</strong></h2>
+                <p><small><strong>Product Category: </strong> {{ product.product_category }}</small></p>
+                <p><small><strong>In Stock: </strong>{{ product.stock }}</small></p>
+                <p><small><strong>Price: </strong>{{ product.price }}&euro;</small></p>
+                <div class="d-grid">
+                    <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg">Add to cart</button><br>
+                    <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg">Add to wishlist</button><br>
+                    <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg">Checkout</button>
+                </div>
+        </div>
+    </div>
+    <div class="row"><div class="col-md-12 offset-lg-3 col-lg-6 offset-xl-3 mt-4"><hr class="hr hr-blurry" /></div></div>
+    <div class="row">
+        <!-- TASK add toggle collapse dropdown-->
+        <div class="col-md-5 offset-lg-2 col-lg-8 offset-xl-2 px-0 mt-4">
+            <div id="product-desc">
+                <h2 class="display-6"><strong>Product Description</strong></h2>
+                <p class="dispaly-6"><small>{{ product.description | safe }}</small></p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

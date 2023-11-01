@@ -45,7 +45,7 @@ class Fragrence (generic.ListView):
     paginate_by = 12
 
 
-class Bathandbody (generic.ListView):
+class BathAndbody (generic.ListView):
     queryset = Product.objects.filter(available=True).filter(stock__gt=0).filter(product_category=6).order_by('-created_on')
     template_name = 'products.html'
     paginate_by = 12
@@ -55,3 +55,19 @@ class SpecialOffers (generic.ListView):
     queryset = Product.objects.filter(available=True).filter(stock__gt=0).filter(discount_name__gt=1).order_by('-created_on')
     template_name = 'products.html'
     paginate_by = 12
+
+
+class ProductDetail(generic.DetailView):
+    # queryset = Product.objects.filter(available=True).filter(stock__gt=0).filter(discount_name__gt=1).order_by('-created_on')
+    def get(self, request, slug, *args, **kwargs):
+        queryset = Product.objects.filter(stock__gt=0).filter(slug=slug).order_by('-created_on')
+        product = get_object_or_404(queryset)
+    # template_name = 'product_detail.html'
+        # accessary_type = ProductCategories.objects.from_queryset()
+        return render(
+            request,
+            "product_detail.html",
+            {
+                'product': product,
+            },
+        )
