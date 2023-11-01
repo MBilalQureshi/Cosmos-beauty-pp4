@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
-from .models import Address, UserPayment, ProductCategories, ProductDiscount, Product, CartItems, ConfirmedOrderDetails
+from .models import Address, UserPayment, ProductCategories, ProductDiscount, Product, CartItems, ConfirmedOrderDetails, Wishes
 from django_summernote.admin import SummernoteModelAdmin
 # Register your models here.
 # admin.site.register(Address)
@@ -62,3 +62,8 @@ class ConfirmedOrderDetailsAdmin(admin.ModelAdmin):
     search_fields = ('user_info', 'total', 'shipment_via','user_payment',)
     list_filter = ('user_info', 'total', 'shipment_via','user_payment', 'created_on')
 
+@admin.register(Wishes)
+class WishesAdmin(admin.ModelAdmin):
+    list_display = ('wish', 'created_on', 'updated_on')
+    search_fields = ('wish', 'created_on')
+    list_filter = ('user_info', 'user_info', 'created_on', 'updated_on')

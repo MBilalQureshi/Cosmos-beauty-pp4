@@ -134,3 +134,16 @@ class ConfirmedOrderDetails(models.Model):
 
     def __str__(self):
         return f"{self.user_info.first_name} {self.user_info.last_name}"
+
+
+class Wishes(models.Model):
+    user_info = models.ManyToManyField(User, default=None, blank=True, related_name="userid")
+    wish = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="user_wish")
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['-created_on']
+
+    def __str__(self):
+        return f"{self.user_info.first_name} {self.user_info.last_name}"
