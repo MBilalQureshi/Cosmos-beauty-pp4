@@ -61,11 +61,20 @@ class ProductDetail(generic.DetailView):
     def get(self, request, slug, *args, **kwargs):
         queryset = Product.objects.filter(stock__gt=0).filter(slug=slug).order_by('-created_on')
         product = get_object_or_404(queryset)
+        # check if product is added to wishlist
+        # wish_id=product.id ??????????????
+        product_wish = False
+        if(Wishes.objects.filter(user=request.user, wish_id=product.id)):
+            print('exist')
+            product_wish = True
+        else:
+            product_wish = False
         return render(
             request,
             "product_detail.html",
             {
                 'product': product,
+                'product_wish': product_wish,
             },
         )
 
@@ -73,9 +82,12 @@ class ProductDetail(generic.DetailView):
 @login_required(login_url='/accounts/login/')
 def WishList(request):
         wishlist = Wishes.objects.filter(user=request.user)
+        # product = get_object_or_404(wishlist)
+
         context = {'wishlist':wishlist}
         return render(request, 'wishlist.html',context)
 
+# only adding and removing from wishlist
 class AddToWishlist(generic.DetailView):
     def post(self, request):
         if request.method == 'POST':
@@ -92,7 +104,6 @@ class AddToWishlist(generic.DetailView):
                     else:
                         # add to wish list
                         Wishes.objects.create(user=request.user, wish_id=prod_id)
-
                 else:
                     return JsonResponse('status', 'Login to continue')
         else:

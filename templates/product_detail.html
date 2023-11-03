@@ -22,7 +22,14 @@
                     <!-- add to wish list if user is authenticated else signup popup -->
                     <!-- <span type="hidden" value="{{ product.id }}" id="prod_id"></span> -->
                     <!-- {% csrf_token %} -->
-                    <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg add-to-wishlist" value="{{ product.id }}">Add to wishlist</button><br>
+                    <!-- <i class="fa-regular fa-heart"></i> -->
+                    <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg add-to-wishlist" value="{{ product.id }}">
+                    {% if product_wish == True %}
+                        Remove from wishlist
+                    {% else %}
+                        Add to wishlist
+                    {% endif %}
+                    </button><br>            
                     <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg">Checkout</button>
                 </div>
         </div>
