@@ -66,4 +66,4 @@ class ConfirmedOrderDetailsAdmin(admin.ModelAdmin):
 class WishesAdmin(admin.ModelAdmin):
     list_display = ('wish', 'created_on', 'updated_on')
     search_fields = ('wish', 'created_on')
-    list_filter = ('user_info', 'user_info', 'created_on', 'updated_on')
+    list_filter = ('wish', 'created_on', 'updated_on')

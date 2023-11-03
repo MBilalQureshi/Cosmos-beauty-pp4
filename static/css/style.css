@@ -100,8 +100,9 @@ body{
 }
 
 /* Free gift banner */
-a{
+#brand-hash-tag, a{
     text-decoration: none;
+    color: #ffffff;
 }
 
 .banner{

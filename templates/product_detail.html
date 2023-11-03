@@ -2,6 +2,7 @@
 {% block title %}CosmosBeauty | Product Details{% endblock %}
 
 {% block content %}
+{% csrf_token %}
 <div class="container-gutter my-3 mx-4">
     <div class="row">
         <div id="product-img" class="col-md-5 offset-lg-2 col-lg-4 offset-xl-2 img-hover-zoom">
@@ -18,7 +19,10 @@
                 <p><small><strong>Price: </strong>{{ product.price }}&euro;</small></p>
                 <div class="d-grid">
                     <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg">Add to cart</button><br>
-                    <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg">Add to wishlist</button><br>
+                    <!-- add to wish list if user is authenticated else signup popup -->
+                    <!-- <span type="hidden" value="{{ product.id }}" id="prod_id"></span> -->
+                    <!-- {% csrf_token %} -->
+                    <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg add-to-wishlist" value="{{ product.id }}">Add to wishlist</button><br>
                     <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg">Checkout</button>
                 </div>
         </div>
