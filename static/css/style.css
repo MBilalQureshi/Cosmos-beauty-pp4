@@ -228,6 +228,10 @@ body{
     transform: scaleX(1);
   }
 
+  .btn-number{
+    border: 0.4 px solid grey;
+  }
+
 /* footer */
 .footer-area{
     padding: 40px 0px;
