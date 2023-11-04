@@ -6,28 +6,33 @@
 <!-- Looping -->
 <div class="container mt-4 mr-1">
   <div class="row mb-4">
-    {% for item in wishlist %}
-    <!-- col-12 col-sm-6 col-md-4 col-lg-3 h-100 w-auto -->
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-      <a href="{% url 'product_detail' item.wish.slug %}">
-        <div class="card h-100" id ="product-card">
-          {% if "placeholder" in item.wish.image.url %}
-            <img src="https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg" class="card-img-top" alt="Placeholder Image">
-          {% else %}
-            <img src="{{ item.wish.image.url }}" class="card-img-top" alt="Product image">
-          {% endif %}
-          <div class="card-body">
-            <!-- FIX TRUNCATE TEXT ... -->
-            <h5 class="card-title fs-6 text-truncate"><strong>{{ item.wish.name }}</strong></h5>
+    {% if wishlist %}
+      {% for item in wishlist %}
+      <!-- col-12 col-sm-6 col-md-4 col-lg-3 h-100 w-auto -->
+      <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+        <a href="{% url 'product_detail' item.wish.slug %}">
+          <div class="card h-100" id ="product-card">
+            {% if "placeholder" in item.wish.image.url %}
+              <img src="https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg" class="card-img-top" alt="Placeholder Image">
+            {% else %}
+              <img src="{{ item.wish.image.url }}" class="card-img-top" alt="Product image">
+            {% endif %}
+            <div class="card-body">
+              <!-- FIX TRUNCATE TEXT ... -->
+              <h5 class="card-title fs-6 text-truncate"><strong>{{ item.wish.name }}</strong></h5>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><strong>Product in stock:</strong> {{ item.wish.stock }}</li>
+              <li class="list-group-item"><strong>Price:</strong> {{ item.wish.price }}&euro;</li>
+            </ul>
           </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item"><strong>Product in stock:</strong> {{ item.wish.stock }}</li>
-            <li class="list-group-item"><strong>Price:</strong> {{ item.wish.price }}&euro;</li>
-          </ul>
-        </div>
-      </a>
-    </div>
+        </a>
+      </div>
     {% endfor %}
+  {% else %}
+      <!-- TASK Style this later -->
+      <p>Sorry, no items in wishlist.</p>
+  {% endif %}    
   </div>
 </div>
 {% endblock content %}
