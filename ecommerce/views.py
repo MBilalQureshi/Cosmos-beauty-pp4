@@ -1,8 +1,10 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.views import generic, View
 from .models import Address, UserPayment, ProductCategories, ProductDiscount, Product, CartItems, ConfirmedOrderDetails, Wishes
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
+import datetime
+from django.conf import settings
 
 class Home (generic.TemplateView):
     """
@@ -64,11 +66,12 @@ class ProductDetail(generic.DetailView):
         # check if product is added to wishlist
         # wish_id=product.id ??????????????
         product_wish = False
-        if(Wishes.objects.filter(user=request.user, wish_id=product.id)):
-            print('exist')
-            product_wish = True
-        else:
-            product_wish = False
+        if request.user.is_authenticated:
+            if(Wishes.objects.filter(user=request.user, wish_id=product.id)):
+                print('exist')
+                product_wish = True
+            else:
+                product_wish = False
         return render(
             request,
             "product_detail.html",
@@ -89,7 +92,6 @@ def wishlist(request):
 class AddToWishlist(generic.DetailView):
     def post(self, request):
         if request.method == 'POST':
-            print('hey')
             if request.user.is_authenticated:
                 prod_id = int(request.POST.get('productId'))
                 product_check = Product.objects.get(id=prod_id)
@@ -109,5 +111,65 @@ class AddToWishlist(generic.DetailView):
         return redirect('/')
 
 
-# def cart(request):
-#     cart = CartItems.objects.filter
+# @login_required(login_url='/accounts/login/')
+def cart(request):
+    cart = CartItems.objects.filter(user_info=request.user)
+    # save cart data from session
+    context = {'cart':cart}
+    return render(request, 'cart.html',context)
+
+
+class AddToCart(View):
+
+    def post(self, request):
+        if request.method == 'POST':
+            prod_id = int(request.POST.get('productId'))
+            prod_quantity = int(request.POST.get('productQuantity'))
+            if request.user.is_authenticated:
+                product_check = Product.objects.get(id=prod_id)
+                
+                if(product_check):
+                    if(CartItems.objects.filter(user_info=request.user, product_info=prod_id)):
+                        # remove from wishlist
+                        cart_delete = get_object_or_404(CartItems, user_info=request.user, product_info_id=prod_id, quantity=prod_quantity)
+                        cart_delete.delete()
+                    else:
+                        # add to wish list
+                        CartItems.objects.create(user_info=request.user, product_info_id=prod_id, quantity=prod_quantity)
+            else:
+
+
+                # request.session[prod_id].insert(0, prod_id)
+                # request.session.modified = True
+                # print(self.session)
+
+                # print('HELLO')
+                self.session = request.session
+                cart = self.session.get(settings.CART_SESSION_ID)
+                # empty cart saved in session
+                if not cart:
+                    print('cart empty')
+                    cart = self.session[settings.CART_SESSION_ID]={}
+                self.cart = cart
+                prod_id = str(prod_id)
+                if prod_id not in self.cart:
+                    print('no delete')
+                    self.cart[int(prod_id)]={'quantity':prod_quantity, 'price':str(3)}
+                else:
+                    print('delete')
+                    del self.cart[prod_id]
+                # self.session.save()
+                request.session.modified = True
+                print(self.cart)
+
+                # print(request.session.get(cart['4']['quantity']))
+                # session_id = request.session._get_or_create_session_key()
+                # response = HttpResponse('sessionID_set')
+                # tomorrow = datetime.datetime.now() + datetime.timedelta(days = 1)
+                # response.set_cookie('sessionid', session_id, expires=tomorrow)
+                # print(session_id)
+                
+                return redirect('/')
+
+        else:
+            return redirect('/')

@@ -99,12 +99,13 @@ class Product(models.Model):
 class CartItems(models.Model):
     user_info = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_info")
     product_info = models.ForeignKey(Product, on_delete=models.PROTECT, related_name="user_product_info")
+    # sessionId = 
     quantity = models.PositiveIntegerField(blank=True, validators=[
         MinValueValidator(1),
         MaxValueValidator(10)
     ])
     # TASK SEE LATER IF EXTRA INFO NEEDE BASIC INTENTION WAS FROM FRANGRENCE ML
-    extra_info = models.CharField(max_length=250, blank=True)
+    extra_info = models.CharField(max_length=250, blank=True, default=False)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 

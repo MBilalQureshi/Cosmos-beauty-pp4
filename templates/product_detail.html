@@ -39,7 +39,7 @@
                         </span>
                     </div>
                     
-                    <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg">Add to cart</button><br>
+                    <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg add-to-cart" value="{{ product.id }}" >Add to cart</button><br>
                     
                     {% else %}
                     <!-- TASK design this later -->
@@ -47,13 +47,17 @@
                     {% endif %}
                     <!-- add to wish list if user is authenticated else signup popup -->
                     <!-- <i class="fa-regular fa-heart"></i> -->
-                    <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg add-to-wishlist" value="{{ product.id }}">
-                    {% if product_wish == True %}
-                        Remove from wishlist
+                    {% if user.is_authenticated %}
+                        <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg add-to-wishlist" value="{{ product.id }}">
+                        {% if product_wish == True %}
+                            Remove from wishlist
+                        {% else %}
+                            Add to wishlist
+                        {% endif %}
+                        </button><br>
                     {% else %}
-                        Add to wishlist
+                    <a href="{% url 'account_login' %}" class="hvr-sweep-to-right btn btn-dark btn-lg">Add to wishlist</a><br>
                     {% endif %}
-                    </button><br>            
                     <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg">Checkout</button>
                 </div>
         </div>

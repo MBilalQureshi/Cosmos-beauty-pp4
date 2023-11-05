@@ -16,7 +16,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-md-2 my-auto d-none d-sm-none d-md-block d-lg-block">
-                        <h5 class="brand-name display-6">Cosmos Beauty</h5>
+                        <h5 class="brand-name display-6"><a href="/">Cosmos Beauty</a></h5>
                     </div>
                     <div class="col-md-5 my-auto">
                         <form role="search">
@@ -32,7 +32,7 @@
                         <ul class="nav justify-content-end">
                             
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="{% url 'cart' %}">
                                     <i class="fa fa-shopping-cart"></i> Cart (0)
                                 </a>
                             </li>
@@ -42,24 +42,27 @@
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="fa fa-user"></i> Username
-                                </a>
                                 {% if user.is_authenticated %}
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-user mx-1"></i>{{ user.username }}
+                                </a>          
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a></li>
                                     <li><a class="dropdown-item" href="#"><i class="fa fa-list"></i> My Orders</a></li>
                                     <li><a class="dropdown-item" href="{% url 'wishlist' %}"><i class="fa fa-heart"></i> My Wishlist</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
                                     <li><a class="dropdown-item" href="{% url 'account_logout' %}"><i class="fa fa-sign-out"></i> Logout</a></li>
                                     </ul>
                                 {% else %}
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-user"></i>Username
+                                </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <!-- <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a></li> -->
                                     <li><a class="dropdown-item" href="#"><i class="fa fa-list"></i> My Orders</a></li>
                                     <!-- TASK POPUP TO LOGIN FIRST -->
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-heart"></i> My Wishlist</a></li>
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'wishlist' %}"><i class="fa fa-heart"></i> My Wishlist</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
                                     <li><a class="dropdown-item" href="{% url 'account_login' %}"><i class="fa fa-sign-out"></i> Login</a></li>
                                     </ul>
                                 {% endif %}
