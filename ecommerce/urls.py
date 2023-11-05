@@ -11,7 +11,7 @@ urlpatterns = [
     path('bathandbody/', views.BathAndbody.as_view(), name='bathandbody'),
     path('hair/', views.Hair.as_view(), name='hair'),
     path('specialoffers/', views.SpecialOffers.as_view(), name='specialoffers'),
-    path('wishlist/', views.WishList, name='wishlist'),
+    path('wishlist/', views.wishlist, name='wishlist'),
     path('add-to-wishlist/', views.AddToWishlist.as_view(), name='addtowishlist'),
     path('<slug:slug>/', views.ProductDetail.as_view(), name='product_detail'),
 

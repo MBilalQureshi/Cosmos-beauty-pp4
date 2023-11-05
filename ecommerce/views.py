@@ -80,12 +80,10 @@ class ProductDetail(generic.DetailView):
 
 
 @login_required(login_url='/accounts/login/')
-def WishList(request):
-        wishlist = Wishes.objects.filter(user=request.user)
-        # product = get_object_or_404(wishlist)
-
-        context = {'wishlist':wishlist}
-        return render(request, 'wishlist.html',context)
+def wishlist(request):
+    wishlist = Wishes.objects.filter(user=request.user)
+    context = {'wishlist':wishlist}
+    return render(request, 'wishlist.html',context)
 
 # only adding and removing from wishlist
 class AddToWishlist(generic.DetailView):
@@ -109,29 +107,7 @@ class AddToWishlist(generic.DetailView):
         else:
             return JsonResponse({'status', "Login to continue"})
         return redirect('/')
-# class WishList(generic.ListView):
-#     queryset = Wishes.objects.all().order_by('-created_on')
-#     # wishes = get_object_or_404(queryset)
-#     template_name = 'wishlist.html'
 
-    # def get(self, request, slug, *args, **kwargs):
-    #     queryset = Wishes.objects.filter(user=request.user)
-    #     wishes = get_object_or_404(queryset)
-    #     return render(
-    #         request,
-    #         "wishlist.html",
-    #         {
-    #             'wishes': wishes,
-    #         }
-    #     )
-# class WishList(View): 
-#     def post(self, request, slug, *args, **kwargs):
-#         if self.request.POST.get('action') == 'wish':
 
-#             id = int(self.request.POST.get('productId'))
-#             button = self.request.POST.get('button')
-#             product = Product.objects.get(id=id)
-
-#             print(id)
-#         else:
-#             print('fuck')
+# def cart(request):
+#     cart = CartItems.objects.filter
