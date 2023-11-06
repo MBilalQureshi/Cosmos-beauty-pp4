@@ -133,8 +133,11 @@ class AddToCart(View):
         if request.method == 'POST':
             prod_id = int(request.POST.get('productId'))
             prod_quantity = int(request.POST.get('productQuantity'))
-            prod_discount = float(request.POST.get('productQuantity'))
-            product_price = int(request.POST.get('productQuantity'))
+            if request.POST.get('discount') is not None:
+                prod_discount = float(request.POST.get('discount'))
+            else:
+                prod_discount = 0.0
+            product_price = float(request.POST.get('price'))
 
             self.session = request.session
             cart = self.session.get(settings.CART_SESSION_ID)
