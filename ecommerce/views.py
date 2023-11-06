@@ -74,18 +74,24 @@ class ProductDetail(generic.DetailView):
             discount = product.price-decimal.Decimal(discount)
 
         product_wish = False
+        add_to_cart = False
         if request.user.is_authenticated:
             if(Wishes.objects.filter(user=request.user, wish_id=product.id)):
-                print('exist')
                 product_wish = True
             else:
                 product_wish = False
+        if request.session.get('cart') is not None:
+            if str(product.id) in request.session.get('cart'):
+                add_to_cart = True
+            else:
+                add_to_cart = False
         return render(
             request,
             "product_detail.html",
             {
                 'product': product,
                 'product_wish': product_wish,
+                'add_to_cart':add_to_cart,
                 'discount':discount,
             },
         )
@@ -98,7 +104,7 @@ def wishlist(request):
     return render(request, 'wishlist.html',context)
 
 # only adding and removing from wishlist
-class AddToWishlist(generic.DetailView):
+class AddToWishlist(View):
     def post(self, request):
         if request.method == 'POST':
             if request.user.is_authenticated:
@@ -122,9 +128,18 @@ class AddToWishlist(generic.DetailView):
 
 # @login_required(login_url='/accounts/login/')
 def cart(request):
-    self.session = request.session
-    cart = self.session.get(settings.CART_SESSION_ID)
-    context = {'cart':cart}
+    if request.session.get('cart') is not None and request.session.get('cart'):
+        cart = request.session.get('cart')
+        ids = []
+        for detail in request.session.get('cart'):
+            ids += detail
+        product = list(Product.objects.filter(available=True).filter(stock__gt=0).filter(id__in=ids))
+        for p in product:
+            print(p.price)
+    else:
+        # TASK HANDLE EMPTY CART
+        cart = 'Nothing in cart'
+    context = {'product':product}
     return render(request, 'cart.html',context)
 
 
@@ -132,7 +147,7 @@ class AddToCart(View):
 
     def post(self, request):
         if request.method == 'POST':
-            prod_id = int(request.POST.get('productId'))
+            prod_id = str(request.POST.get('productId'))
             prod_quantity = int(request.POST.get('productQuantity'))
             if request.POST.get('discount') is not None:
                 prod_discount = float(request.POST.get('discount'))
@@ -146,9 +161,9 @@ class AddToCart(View):
             if not cart:
                 cart = self.session[settings.CART_SESSION_ID]={}
             self.cart = cart
-            prod_id = str(prod_id)
+            # prod_id = int(prod_id)
             if prod_id not in self.cart:
-                self.cart[int(prod_id)]={'quantity':prod_quantity, 'price':product_price, 'discount':prod_discount}
+                self.cart[prod_id]={'quantity':prod_quantity, 'price':product_price, 'discount':prod_discount}
             else:
                 del self.cart[prod_id]
             request.session.modified = True

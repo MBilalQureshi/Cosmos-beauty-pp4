@@ -44,7 +44,13 @@
                         </span>
                     </div>
                     
-                    <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg add-to-cart" value="{{ product.id }}" >Add to cart</button><br>
+                    
+                    <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg add-to-cart" value="{{ product.id }}" >{% if add_to_cart == True %}
+                        Remove from cart            
+                    {% else %}
+                        Add to cart
+                    {% endif %}
+                    </button><br>
                     
                     {% else %}
                     <!-- TASK design this later -->
