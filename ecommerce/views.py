@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import datetime
 from django.conf import settings
+import decimal
 
 class Home (generic.TemplateView):
     """
@@ -65,6 +66,12 @@ class ProductDetail(generic.DetailView):
         product = get_object_or_404(queryset)
         # check if product is added to wishlist
         # wish_id=product.id ??????????????
+
+        discount = 0
+        if product.discount_name.discount_percentage > 0:
+            discount = (float(product.discount_name.discount_percentage) * float(product.price)) / 100
+            discount = product.price-decimal.Decimal(discount)
+
         product_wish = False
         if request.user.is_authenticated:
             if(Wishes.objects.filter(user=request.user, wish_id=product.id)):
@@ -78,6 +85,7 @@ class ProductDetail(generic.DetailView):
             {
                 'product': product,
                 'product_wish': product_wish,
+                'discount':discount,
             },
         )
 

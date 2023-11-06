@@ -37,6 +37,7 @@ $(document).ready(function(){
         let productId = $(this).attr("value");
         let token = $('input[name=csrfmiddlewaretoken]').val();
         let productQuantity = $('.input-number').val();
+        let price = $('product-price').val();
         $.ajax({
             method: "POST",
             url:'/add-to-cart/',
@@ -44,6 +45,7 @@ $(document).ready(function(){
                 productId: productId,
                 csrfmiddlewaretoken: token,
                 productQuantity: productQuantity,
+                price:price,
             },
             // // success: function(json){},
             // // error: function(xhr, errmsg, err){}
