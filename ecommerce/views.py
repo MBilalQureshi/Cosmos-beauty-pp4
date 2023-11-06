@@ -133,51 +133,22 @@ class AddToCart(View):
         if request.method == 'POST':
             prod_id = int(request.POST.get('productId'))
             prod_quantity = int(request.POST.get('productQuantity'))
-            if request.user.is_authenticated:
-                product_check = Product.objects.get(id=prod_id)
-                
-                if(product_check):
-                    if(CartItems.objects.filter(user_info=request.user, product_info=prod_id)):
-                        # remove from wishlist
-                        cart_delete = get_object_or_404(CartItems, user_info=request.user, product_info_id=prod_id, quantity=prod_quantity)
-                        cart_delete.delete()
-                    else:
-                        # add to wish list
-                        CartItems.objects.create(user_info=request.user, product_info_id=prod_id, quantity=prod_quantity)
+            prod_discount = float(request.POST.get('productQuantity'))
+            product_price = int(request.POST.get('productQuantity'))
+
+            self.session = request.session
+            cart = self.session.get(settings.CART_SESSION_ID)
+            # empty cart saved in session
+            if not cart:
+                cart = self.session[settings.CART_SESSION_ID]={}
+            self.cart = cart
+            prod_id = str(prod_id)
+            if prod_id not in self.cart:
+                self.cart[int(prod_id)]={'quantity':prod_quantity, 'price':product_price, 'discount':prod_discount}
             else:
-
-
-                # request.session[prod_id].insert(0, prod_id)
-                # request.session.modified = True
-                # print(self.session)
-
-                # print('HELLO')
-                self.session = request.session
-                cart = self.session.get(settings.CART_SESSION_ID)
-                # empty cart saved in session
-                if not cart:
-                    print('cart empty')
-                    cart = self.session[settings.CART_SESSION_ID]={}
-                self.cart = cart
-                prod_id = str(prod_id)
-                if prod_id not in self.cart:
-                    print('no delete')
-                    self.cart[int(prod_id)]={'quantity':prod_quantity, 'price':str(3)}
-                else:
-                    print('delete')
-                    del self.cart[prod_id]
-                # self.session.save()
-                request.session.modified = True
-                print(self.cart)
-
-                # print(request.session.get(cart['4']['quantity']))
-                # session_id = request.session._get_or_create_session_key()
-                # response = HttpResponse('sessionID_set')
-                # tomorrow = datetime.datetime.now() + datetime.timedelta(days = 1)
-                # response.set_cookie('sessionid', session_id, expires=tomorrow)
-                # print(session_id)
-                
-                return redirect('/')
-
+                del self.cart[prod_id]
+            request.session.modified = True
+            print(self.cart)
+            return redirect('/')
         else:
             return redirect('/')

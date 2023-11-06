@@ -37,7 +37,11 @@ $(document).ready(function(){
         let productId = $(this).attr("value");
         let token = $('input[name=csrfmiddlewaretoken]').val();
         let productQuantity = $('.input-number').val();
-        let price = $('product-price').val();
+        console.log(productQuantity)
+        let price = $('.product-price').html();
+        console.log(price)
+        let discount = $('.product-discount').html();
+        console.log(discount)
         $.ajax({
             method: "POST",
             url:'/add-to-cart/',
@@ -46,6 +50,7 @@ $(document).ready(function(){
                 csrfmiddlewaretoken: token,
                 productQuantity: productQuantity,
                 price:price,
+                discount:discount,
             },
             // // success: function(json){},
             // // error: function(xhr, errmsg, err){}
