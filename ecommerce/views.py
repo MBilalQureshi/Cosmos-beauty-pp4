@@ -6,6 +6,7 @@ from django.http import JsonResponse
 import datetime
 from django.conf import settings
 import decimal
+from django.db.models import Q
 
 class Home (generic.TemplateView):
     """
@@ -55,7 +56,7 @@ class BathAndbody (generic.ListView):
 
 
 class SpecialOffers (generic.ListView):
-    queryset = Product.objects.filter(available=True).filter(stock__gt=0).filter(discount_name__gt=1).order_by('-created_on')
+    queryset = Product.objects.filter(available=True).filter(stock__gt=0).filter(~Q(discount_name = 2)).order_by('-created_on')
     template_name = 'products.html'
     paginate_by = 12
 
@@ -121,8 +122,8 @@ class AddToWishlist(generic.DetailView):
 
 # @login_required(login_url='/accounts/login/')
 def cart(request):
-    cart = CartItems.objects.filter(user_info=request.user)
-    # save cart data from session
+    self.session = request.session
+    cart = self.session.get(settings.CART_SESSION_ID)
     context = {'cart':cart}
     return render(request, 'cart.html',context)
 
