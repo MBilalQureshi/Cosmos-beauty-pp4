@@ -133,7 +133,6 @@ def cart(request):
         cart = request.session.get(settings.CART_SESSION_ID)
         request.session.cart = cart
         prod_id = str(request.POST.get('productId'))
-        # cart = request.session.get('cart')
         del request.session.cart[prod_id]
         request.session.modified = True
 

@@ -11,7 +11,7 @@
                 <div class="row">
                   {% if products %}
                     {% for product in products %}
-                    <div class="card mb-3">
+                    <div class="card mb-3 {{ product.id }}">
                         <div class="row g-0">
                           <div class="col-md-4">
                             <a href="{% url 'product_detail' product.slug %}">

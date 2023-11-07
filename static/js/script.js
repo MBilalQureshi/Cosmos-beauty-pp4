@@ -64,7 +64,7 @@ $(document).ready(function(){
     $('.product-remove').click(function(e){
         e.preventDefault();
         let productId = $(this).attr("value");
-        console.log(productId)
+        $(`.${productId}`).remove();
         let token = $('input[name=csrfmiddlewaretoken]').val();
         $.ajax({
             method: "POST",
