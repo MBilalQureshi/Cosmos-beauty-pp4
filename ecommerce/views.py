@@ -128,6 +128,15 @@ class AddToWishlist(View):
 
 # @login_required(login_url='/accounts/login/')
 def cart(request):
+    if request.method == 'POST':
+        # When in cart remove item from cart
+        cart = request.session.get(settings.CART_SESSION_ID)
+        request.session.cart = cart
+        prod_id = str(request.POST.get('productId'))
+        # cart = request.session.get('cart')
+        del request.session.cart[prod_id]
+        request.session.modified = True
+
     if request.session.get('cart') is not None and request.session.get('cart'):
         # cart = request.session.get('cart')
         ids = []
