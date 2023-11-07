@@ -29,7 +29,6 @@ $(document).ready(function(){
     // Add/remove from cart
     $('.add-to-cart').click(function(e){
         e.preventDefault();
-
         $(this).text(function(i, text){
             text = text.trim()
             return text == 'Add to cart' ? 'Remove from cart' : 'Add to cart'
@@ -76,6 +75,7 @@ $(document).ready(function(){
             // // success: function(json){},
             // // error: function(xhr, errmsg, err){}
             success: function (response){
+                window.location.reload()
                 // console.log(response)
                 // console.log(response.status)
             }

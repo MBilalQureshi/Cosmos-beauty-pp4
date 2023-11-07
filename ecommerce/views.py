@@ -136,11 +136,12 @@ def cart(request):
         del request.session.cart[prod_id]
         request.session.modified = True
         return redirect('/')
-
+    total = 0.00
+    ship_total = 5.00
     if request.session.get('cart') is not None and request.session.get('cart'):
         # cart = request.session.get('cart')
         ids = []
-        total = 0.00
+        
         for key,value in request.session.get('cart').items():
             # print("135", request.session.get('cart').items())
             total += value['prod_total']
@@ -155,7 +156,7 @@ def cart(request):
         # for p in products:
         #     print(p)
         total = round(total, 2)
-        ship_total = 5 + total 
+        ship_total = ship_total + total
     else:
         # TASK HANDLE EMPTY CART
         products = []
