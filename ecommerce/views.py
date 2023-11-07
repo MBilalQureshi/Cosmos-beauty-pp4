@@ -129,18 +129,25 @@ class AddToWishlist(View):
 # @login_required(login_url='/accounts/login/')
 def cart(request):
     if request.session.get('cart') is not None and request.session.get('cart'):
-        cart = request.session.get('cart')
+        # cart = request.session.get('cart')
         ids = []
-        for detail in request.session.get('cart'):
-            ids += detail
-        product = list(Product.objects.filter(available=True).filter(stock__gt=0).filter(id__in=ids))
-        for p in product:
-            print(p.price)
+        for key,value in request.session.get('cart').items():
+            # print("135", request.session.get('cart').items())
+            # print(f'Key: {key}, Value: {value}')
+            ids += key
+        products = Product.objects.filter(available=True).filter(stock__gt=0).filter(id__in=ids)
+        # for i in range(len(products)):
+        #     # products[i].append({'quantity':1})
+        #     products[i]["quantity"] = 3
+        # print(products)
+        # for p in products:
+        #     print(p)
     else:
         # TASK HANDLE EMPTY CART
+        products = []
         cart = 'Nothing in cart'
-    context = {'product':product}
-    return render(request, 'cart.html',context)
+    context = {'products':products}
+    return render(request, 'cart.html', context)
 
 
 class AddToCart(View):
@@ -169,5 +176,7 @@ class AddToCart(View):
             request.session.modified = True
             print(self.cart)
             return redirect('/')
+    #         request.session.clear()
+    # request.session.flush()
         else:
             return redirect('/')
