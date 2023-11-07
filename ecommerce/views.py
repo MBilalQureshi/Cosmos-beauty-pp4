@@ -135,13 +135,17 @@ def cart(request):
         prod_id = str(request.POST.get('productId'))
         del request.session.cart[prod_id]
         request.session.modified = True
+        return redirect('/')
 
     if request.session.get('cart') is not None and request.session.get('cart'):
         # cart = request.session.get('cart')
         ids = []
+        total = 0.00
         for key,value in request.session.get('cart').items():
             # print("135", request.session.get('cart').items())
-            # print(f'Key: {key}, Value: {value}')
+            total += value['prod_total']
+            print(f'Key: {key}, Value: {value}')
+
             ids += key
         products = Product.objects.filter(available=True).filter(stock__gt=0).filter(id__in=ids)
         # for i in range(len(products)):
@@ -150,11 +154,13 @@ def cart(request):
         # print(products)
         # for p in products:
         #     print(p)
+        total = round(total, 2)
+        ship_total = 5 + total 
     else:
         # TASK HANDLE EMPTY CART
         products = []
         cart = 'Nothing in cart'
-    context = {'products':products}
+    context = {'products':products, 'total':total, 'ship_total': ship_total,}
     return render(request, 'cart.html', context)
 
 
@@ -164,12 +170,13 @@ class AddToCart(View):
         if request.method == 'POST':
             prod_id = str(request.POST.get('productId'))
             prod_quantity = int(request.POST.get('productQuantity'))
+            product_price = float(request.POST.get('price'))
             if request.POST.get('discount') is not None:
                 prod_discount = float(request.POST.get('discount'))
+                prod_total = prod_discount * prod_quantity
             else:
                 prod_discount = 0.0
-            product_price = float(request.POST.get('price'))
-
+                prod_total = product_price * prod_quantity
             self.session = request.session
             cart = self.session.get(settings.CART_SESSION_ID)
             # empty cart saved in session
@@ -178,7 +185,7 @@ class AddToCart(View):
             self.cart = cart
             # prod_id = int(prod_id)
             if prod_id not in self.cart:
-                self.cart[prod_id]={'quantity':prod_quantity, 'price':product_price, 'discount':prod_discount}
+                self.cart[prod_id]={'quantity':prod_quantity, 'price':product_price, 'discount':prod_discount, 'prod_total':prod_total}
             else:
                 del self.cart[prod_id]
             request.session.modified = True
