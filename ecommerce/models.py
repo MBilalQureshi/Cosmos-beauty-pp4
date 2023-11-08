@@ -17,6 +17,9 @@ class Address(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        verbose_name_plural = 'Addresses'
+
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}"
 
@@ -95,7 +98,7 @@ class Product(models.Model):
         return self.name
 
 
-class CartItems(models.Model):
+class CartItem(models.Model):
     user_info = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_info")
     product_info = models.ForeignKey(Product, on_delete=models.PROTECT, related_name="user_product_info")
     # sessionId = 
@@ -115,7 +118,7 @@ class CartItems(models.Model):
         return f"{self.user_info.first_name} {self.user_info.last_name}"
 
 
-class ConfirmedOrderDetails(models.Model):
+class ConfirmedOrderDetail(models.Model):
     SHIPMENT_VIA = [
         (0, 'DHL'),
         (1, 'Hermes'),
@@ -143,9 +146,11 @@ class Wishes(models.Model):
     wish = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="user_wish")
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
+        
 
     class Meta:
         ordering = ['-created_on']
+        verbose_name_plural = 'Wishes'
 
     # def __str__(self):
     #     return f"{self.user_info.first_name} {self.user_info.last_name}"
