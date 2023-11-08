@@ -2,9 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 from django.core.validators import MinValueValidator, MaxValueValidator
-from cloudinary.models import CloudinaryField
 from autoslug import AutoSlugField
-
+from phone_field import PhoneField
 
 # Address modal
 class Address(models.Model):
@@ -13,8 +12,8 @@ class Address(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_address")
     city = models.CharField(max_length=250, null=False,blank=False)
     country = models.CharField(max_length=250, null=False,blank=False)
-    telephone = models.IntegerField(null=True, blank=True)
-    mobile = models.IntegerField(null=False, blank=False)
+    telephone = PhoneField(null=True, blank=True, unique=True)
+    mobile = PhoneField(max_length=14, null=False, blank=False, unique=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 

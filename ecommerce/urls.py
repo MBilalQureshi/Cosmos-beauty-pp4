@@ -1,5 +1,6 @@
 from . import views
 from django.urls import path
+from django.contrib.auth.decorators import login_required
 
 # app_name = 'products'
 urlpatterns = [
@@ -15,6 +16,6 @@ urlpatterns = [
     path('add-to-wishlist/', views.AddToWishlist.as_view(), name='addtowishlist'),
     path('cart/', views.cart, name='cart'),
     path('add-to-cart/', views.AddToCart.as_view(), name='addtocart'),
+    path('checkout/', login_required(views.Checkout.as_view()), name='checkout'),
     path('<slug:slug>/', views.ProductDetail.as_view(), name='product_detail'),
-
 ]

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}CosmosBeauty | Checkout{% endblock %}
+
+{% block content %}
+<form method="POST" action="add">
+    <!-- below is the django security measure that tell that data is our own and not from other web apps -->
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div>
+        <p>
+            <button type="submit">
+                Add Item
+            </button>
+        </p>
+    </div>
+</form>
+{% endblock %}

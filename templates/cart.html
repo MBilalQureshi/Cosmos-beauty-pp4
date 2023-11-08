@@ -54,12 +54,16 @@
                   </div>
                 </div>
                 {% endfor %}
-                <div class="h-100 d-flex justify-content-center">
+                <!-- TASK add spinner and disable continue button after removal of item for few seconds -->
+                <!-- <div class="spinner-border" role="status">
+                  <span class="visually-hidden">Loading...</span>
+                </div> -->
+                <div class="h-100 d-flex justify-content-center">           
                   <div>
                     <p><strong class="me-5">Subtotal: </strong>&euro; {{ total }}</p>
                     <p><strong class="me-5">Shipping: </strong>&euro; 5.00</p>
                     <p><strong class="me-5">Total(Incl. taxes): </strong>&euro;{{ ship_total }}</p>
-                    <a href="#" class="hvr-sweep-to-right btn btn-dark btn-lg w-100" >Continue</a>              
+                    <a href="{% url 'checkout' %}" class="hvr-sweep-to-right btn btn-dark btn-lg w-100" >Continue</a>              
                   </div>
                 </div>
                 {% else %}

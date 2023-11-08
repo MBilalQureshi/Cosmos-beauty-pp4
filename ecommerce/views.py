@@ -7,6 +7,8 @@ import datetime
 from django.conf import settings
 import decimal
 from django.db.models import Q
+from .forms import AddressForm
+
 
 class Home (generic.TemplateView):
     """
@@ -165,8 +167,8 @@ def cart(request):
     return render(request, 'cart.html', context)
 
 
-class AddToCart(View):
 
+class AddToCart(View):
     def post(self, request):
         if request.method == 'POST':
             prod_id = str(request.POST.get('productId'))
@@ -196,3 +198,46 @@ class AddToCart(View):
     # request.session.flush()
         else:
             return redirect('/')
+
+
+class Checkout(View):
+    def get(self, request):
+        print('plol')
+        if request.user.is_authenticated:
+            print('p2')
+            form = AddressForm(request.POST)
+            if form.is_valid():
+                form.save()
+            else:
+                print('invalid form')
+            form = AddressForm()
+        return render(
+            request,
+            "user_checkout.html",
+            {
+                'form': form,
+            },
+        )
+
+    def post(self, request):
+        print('p1')
+        queryset = Product.objects.filter(stock__gt=0).order_by('-created_on')
+        if request.user.is_authenticated:
+            print('p2')
+            form = AddressForm(request.POST)
+            if form.is_valid():
+                form.save()
+            else:
+                print('invalid form')
+            form = AddressForm()
+            # check if current user address, name, email exist show them in box and ask if need to edit also shipping method
+
+        return render(
+            request,
+            "user_checkout.html",
+            {
+                'form': form,
+            },
+        )
+
+    
