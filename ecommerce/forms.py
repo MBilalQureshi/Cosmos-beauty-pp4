@@ -1,6 +1,6 @@
 from allauth.account.forms import SignupForm
 from django import forms
-from .models import Address
+from .models import ShipmentDetail
 
 
 class CustomSignupForm(SignupForm):
@@ -16,8 +16,8 @@ class CustomSignupForm(SignupForm):
         return user
 
 
-class AddressForm(forms.ModelForm):
+class ShipmentDetailForm(forms.ModelForm):
     class Meta:
-        model = Address
-        fields = ('address_line_one', 'postal_code', 'city', 'country',
+        model = ShipmentDetail
+        fields = ('first_name','last_name','address_line_one', 'postal_code', 'city', 'country',
         'telephone', 'mobile')

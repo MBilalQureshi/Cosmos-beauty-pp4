@@ -1,13 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.views import generic, View
-from .models import Address, UserPayment, ProductCategories, ProductDiscount, Product, CartItem, ConfirmedOrderDetail, Wishes
+from .models import ShipmentDetail, UserPayment, ProductCategories, ProductDiscount, Product, CartItem, ConfirmedOrderDetail, Wishes
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import datetime
 from django.conf import settings
 import decimal
 from django.db.models import Q
-from .forms import AddressForm
+from .forms import ShipmentDetailForm
 
 
 class Home (generic.TemplateView):
@@ -205,12 +205,12 @@ class Checkout(View):
         print('plol')
         if request.user.is_authenticated:
             print('p2')
-            form = AddressForm(request.POST)
+            form = ShipmentDetailForm(request.POST)
             if form.is_valid():
                 form.save()
             else:
                 print('invalid form')
-            form = AddressForm()
+            form = ShipmentDetailForm()
         return render(
             request,
             "user_checkout.html",
@@ -224,12 +224,12 @@ class Checkout(View):
         queryset = Product.objects.filter(stock__gt=0).order_by('-created_on')
         if request.user.is_authenticated:
             print('p2')
-            form = AddressForm(request.POST)
+            form = ShipmentDetailForm(request.POST)
             if form.is_valid():
                 form.save()
             else:
                 print('invalid form')
-            form = AddressForm()
+            form = ShipmentDetailForm()
             # check if current user address, name, email exist show them in box and ask if need to edit also shipping method
 
         return render(

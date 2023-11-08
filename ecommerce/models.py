@@ -6,7 +6,9 @@ from autoslug import AutoSlugField
 from phone_field import PhoneField
 
 # Address modal
-class Address(models.Model):
+class ShipmentDetail(models.Model):
+    first_name = models.CharField(max_length=30,null=False, blank=False)
+    last_name = models.CharField(max_length=30, null=False, blank=False)
     address_line_one = models.CharField(max_length=300, null=False, blank=False)
     postal_code = models.IntegerField(null=False, blank=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_address")
@@ -16,9 +18,6 @@ class Address(models.Model):
     mobile = PhoneField(max_length=14, null=False, blank=False, unique=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-
-    class Meta:
-        verbose_name_plural = 'Addresses'
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}"
