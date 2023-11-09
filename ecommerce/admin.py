@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
-from .models import ShipmentDetail, UserPayment, ProductCategories, ProductDiscount, Product, CartItem, ConfirmedOrderDetail, Wishes
+from .models import ShipmentDetail, ProductCategories, ProductDiscount, Product, CartItem, ConfirmedOrderDetail, Wishes
 from django_summernote.admin import SummernoteModelAdmin
 # Register your models here.
 # admin.site.register(ShipmentDetail)
@@ -19,11 +19,11 @@ class ShipmentDetailAdmin(admin.ModelAdmin):
     list_filter = ('user', 'created_on')
 
 
-@admin.register(UserPayment)
-class UserPaymentAdmin(admin.ModelAdmin):
-    list_display = ('user', 'method', 'created_on', 'updated_on')
-    search_fields = ('user', 'method')
-    list_filter = ('user', 'created_on')
+# @admin.register(UserPayment)
+# class UserPaymentAdmin(admin.ModelAdmin):
+#     list_display = ('user', 'method', 'created_on', 'updated_on')
+#     search_fields = ('user', 'method')
+#     list_filter = ('user', 'created_on')
 
 
 @admin.register(ProductCategories)
@@ -58,9 +58,9 @@ class CartItemAdmin(admin.ModelAdmin):
 
 @admin.register(ConfirmedOrderDetail)
 class ConfirmedOrderDetailAdmin(admin.ModelAdmin):
-    list_display = ('user_info', 'total', 'shipment_via','user_payment', 'order_status','created_on')
-    search_fields = ('user_info', 'total', 'shipment_via','user_payment',)
-    list_filter = ('user_info', 'total', 'shipment_via','user_payment', 'created_on')
+    list_display = ('user_info', 'total', 'shipment_via', 'order_status','created_on')
+    search_fields = ('user_info', 'total', 'shipment_via',)
+    list_filter = ('user_info', 'total', 'shipment_via', 'created_on')
 
 @admin.register(Wishes)
 class WishesAdmin(admin.ModelAdmin):

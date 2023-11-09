@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.views import generic, View
-from .models import ShipmentDetail, UserPayment, ProductCategories, ProductDiscount, Product, CartItem, ConfirmedOrderDetail, Wishes
+from .models import ShipmentDetail, ProductCategories, ProductDiscount, Product, CartItem, ConfirmedOrderDetail, Wishes
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import datetime
@@ -202,15 +202,15 @@ class AddToCart(View):
 
 class Checkout(View):
     def get(self, request):
-        print('plol')
         if request.user.is_authenticated:
-            print('p2')
-            form = ShipmentDetailForm(request.POST)
-            if form.is_valid():
-                form.save()
+            # get user data if avalable
+            get_user_last_data = ShipmentDetail.objects.filter(user=request.user)
+            if get_user_last_data:
+                instance = get_object_or_404(get_user_last_data, user=request.user)
+                print(instance.first_name)
+                form = ShipmentDetailForm(instance = instance)
             else:
-                print('invalid form')
-            form = ShipmentDetailForm()
+                form = ShipmentDetailForm()
         return render(
             request,
             "user_checkout.html",
@@ -220,16 +220,27 @@ class Checkout(View):
         )
 
     def post(self, request):
-        print('p1')
-        queryset = Product.objects.filter(stock__gt=0).order_by('-created_on')
         if request.user.is_authenticated:
-            print('p2')
-            form = ShipmentDetailForm(request.POST)
-            if form.is_valid():
-                form.save()
+            get_user_last_data = ShipmentDetail.objects.filter(user=request.user)         
+            if get_user_last_data:
+                instance = get_object_or_404(ShipmentDetail, user=request.user)
+                print(1)
+                form = ShipmentDetailForm(request.POST,instance = instance)
+                if form.is_valid():
+                    fetch_user = form.save(commit=False)
+                    fetch_user.user = request.user
+                    form.save()
             else:
-                print('invalid form')
-            form = ShipmentDetailForm()
+                print(2)
+                form = ShipmentDetailForm(request.POST)
+                if form.is_valid():
+                    fetch_user = form.save(commit=False)
+                    fetch_user.user = request.user
+                    form.save()
+                else:
+                    print('invalid form')
+                
+            # form = ShipmentDetailForm()
             # check if current user address, name, email exist show them in box and ask if need to edit also shipping method
 
         return render(

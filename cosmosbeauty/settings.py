@@ -114,7 +114,8 @@ ACCOUNT_FORMS = {
     'signup': 'ecommerce.forms.CustomSignupForm',
 }
 
-
+# tell crispy to use bootstrap classes for formatting
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases

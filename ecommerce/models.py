@@ -7,42 +7,52 @@ from phone_field import PhoneField
 
 # Address modal
 class ShipmentDetail(models.Model):
+    """User Payment Modal"""
+    PAYMENT_METHOD_CHOICES = [
+        (0, "COD(Cash on delivery)"),
+        # (1, "Credit Card"),
+        # (2, "Debit Card"),
+        # (3, "Paypal"),
+        # (4, "Sofort by Klarna"),
+        # (5, "Google Pay"),
+    ]
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_address")
     first_name = models.CharField(max_length=30,null=False, blank=False)
     last_name = models.CharField(max_length=30, null=False, blank=False)
     address_line_one = models.CharField(max_length=300, null=False, blank=False)
     postal_code = models.IntegerField(null=False, blank=False)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_address")
     city = models.CharField(max_length=250, null=False,blank=False)
     country = models.CharField(max_length=250, null=False,blank=False)
-    telephone = PhoneField(null=True, blank=True, unique=True)
+    telephone = PhoneField(null=True, blank=True, unique=False)
     mobile = PhoneField(max_length=14, null=False, blank=False, unique=True)
-    created_on = models.DateTimeField(auto_now_add=True)
-    updated_on = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return f"{self.user.first_name} {self.user.last_name}"
-
-
-class UserPayment(models.Model):
-    """User Payment Modal"""
-    PAYMENT_METHOD_CHOICES = [
-        (0, "COD(Cash on delivery)"),
-        (1, "Credit Card"),
-        (2, "Debit Card"),
-        (3, "Paypal"),
-        (4, "Sofort by Klarna"),
-        (5, "Google Pay"),
-    ]
     method = models.IntegerField(choices=PAYMENT_METHOD_CHOICES, default=0)
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_payment")
-    acc_no = models.IntegerField(null=True, blank=True)
-    expiry = models.DateField(null=True, blank=True)
-    amount = models.IntegerField(null=False, blank=False,default=0)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f"{self.user.first_name} {self.user.last_name}"
+
+
+# class UserPayment(models.Model):
+#     """User Payment Modal"""
+#     PAYMENT_METHOD_CHOICES = [
+#         (0, "COD(Cash on delivery)"),
+#         (1, "Credit Card"),
+#         (2, "Debit Card"),
+#         (3, "Paypal"),
+#         (4, "Sofort by Klarna"),
+#         (5, "Google Pay"),
+#     ]
+#     method = models.IntegerField(choices=PAYMENT_METHOD_CHOICES, default=0)
+#     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="user_payment")
+#     acc_no = models.IntegerField(null=True, blank=True)
+#     expiry = models.DateField(null=True, blank=True)
+#     amount = models.IntegerField(null=False, blank=False,default=0)
+#     created_on = models.DateTimeField(auto_now_add=True)
+#     updated_on = models.DateTimeField(auto_now=True)
+
+#     def __str__(self):
+#         return f"{self.user.first_name} {self.user.last_name}"
 
 
 class ProductCategories(models.Model):
@@ -126,7 +136,7 @@ class ConfirmedOrderDetail(models.Model):
     user_info = models.ForeignKey(User, on_delete=models.PROTECT, related_name="user_confirmed_order")
     total = models.DecimalField(max_digits=6, decimal_places=2)
     shipment_via = models.IntegerField(choices=SHIPMENT_VIA, default=0)
-    user_payment = models.OneToOneField(UserPayment, on_delete=models.PROTECT, related_name="user_payment_method")
+    # user_payment = models.OneToOneField(UserPayment, on_delete=models.PROTECT, related_name="user_payment_method")
     order_status = models.CharField(max_length=50, default="Order Received")
     # slug = AutoSlugField(populate_from='user_info', unique=True)
     created_on = models.DateTimeField(auto_now_add=True)

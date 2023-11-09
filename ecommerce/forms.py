@@ -20,4 +20,15 @@ class ShipmentDetailForm(forms.ModelForm):
     class Meta:
         model = ShipmentDetail
         fields = ('first_name','last_name','address_line_one', 'postal_code', 'city', 'country',
-        'telephone', 'mobile')
+        'mobile','telephone','method')
+        # widget = {
+        #     'first_name': forms.TextInput(),
+        #     'last_name': forms.TextInput(),
+        #     'address_line_one': forms.TextInput(),
+        #     'postal_code': forms.NumberInput(),
+        #     'city': forms.TextInput(),
+        #     'country': forms.Textarea(),
+        #     'mobile': forms.NumberInput(),
+        #     'telephone': forms.NumberInput(),
+        #     'method': forms.ChoiceField(),
+        # }
