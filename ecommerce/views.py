@@ -210,6 +210,7 @@ class Checkout(View):
                 print(instance.first_name)
                 form = ShipmentDetailForm(instance = instance)
             else:
+                # set to empty form if data not available
                 form = ShipmentDetailForm()
         return render(
             request,
@@ -221,17 +222,17 @@ class Checkout(View):
 
     def post(self, request):
         if request.user.is_authenticated:
-            get_user_last_data = ShipmentDetail.objects.filter(user=request.user)         
+            get_user_last_data = ShipmentDetail.objects.filter(user=request.user)
             if get_user_last_data:
+                # update form
                 instance = get_object_or_404(ShipmentDetail, user=request.user)
-                print(1)
                 form = ShipmentDetailForm(request.POST,instance = instance)
                 if form.is_valid():
                     fetch_user = form.save(commit=False)
                     fetch_user.user = request.user
                     form.save()
             else:
-                print(2)
+                # First time add form
                 form = ShipmentDetailForm(request.POST)
                 if form.is_valid():
                     fetch_user = form.save(commit=False)
@@ -248,6 +249,19 @@ class Checkout(View):
             "user_checkout.html",
             {
                 'form': form,
+            },
+        )
+
+class OrderComplete (View):
+    def post(self,request):
+        # get session values and send to db
+        # clear session
+        queryset = Product.objects.filter(available=True).filter(stock__gt=0).order_by('-created_on')
+        return render(
+            request,
+            "order_complete.html",
+            {
+                'queryset': queryset,
             },
         )
 
