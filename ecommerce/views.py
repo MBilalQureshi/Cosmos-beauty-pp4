@@ -24,7 +24,7 @@ class Products (generic.ListView):
     # TASK: CHECK IF DICOUNT EXIST OR NOT
     queryset = Product.objects.filter(available=True).filter(stock__gt=0).order_by('-created_on')
     template_name = 'products.html'
-    paginate_by = 12
+    paginate_by = 5
 
 
 class Makeup (generic.ListView):
