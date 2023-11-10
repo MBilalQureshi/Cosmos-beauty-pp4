@@ -18,7 +18,7 @@
                 <p><small><strong>In Stock: </strong>{{ product.stock }}</small></p>
                 {% if product.discount_name.discount_percentage > 0 %}
                 <p><small><strong>{{ product.discount_name }}: </strong><span>{{ product.discount_name.discount_percentage }}</span>&percnt; off</small></p>
-                <p><small><strong>Discounted Price: </strong><span class="product-discount"><mark>{{ discount|floatformat:2 }}</mark></span><mark>&euro;</mark></small></p>
+                <p><small><strong>Discounted Price: </strong><mark><span class="product-discount">{{ discount|floatformat:2 }}</span>&euro;</mark></small></p>
                 {% endif %}
                 <p><small><strong>Price: </strong><span class="product-price">{{ product.price }}</span>&euro;</small></p>
                 

@@ -246,7 +246,7 @@ class Checkout(View):
 
         return render(
             request,
-            "user_checkout.html",
+            "order_complete.html",
             {
                 'form': form,
             },
@@ -264,5 +264,3 @@ class OrderComplete (View):
                 'queryset': queryset,
             },
         )
-
-    

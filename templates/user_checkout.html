@@ -2,7 +2,7 @@
 {% block title %}CosmosBeauty | Checkout{% endblock %}
 
 {% block content %}
-<form method="POST" action="{% url 'order_complete' %}">
+<form method="POST">
     <!-- below is the django security measure that tell that data is our own and not from other web apps -->
     {% csrf_token %}
     {{ form.as_p }}
