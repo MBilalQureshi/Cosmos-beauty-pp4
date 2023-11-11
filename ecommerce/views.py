@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.views import generic, View
-from .models import ShipmentDetail, ProductCategories, ProductDiscount, Product, CartItem, ConfirmedOrderDetail, Wishes
+from .models import ShipmentDetail, ProductCategories, ProductDiscount, Product, CartItem, ConfirmedOrderDetail, Wishes, UserBill
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import datetime
@@ -8,6 +8,7 @@ from django.conf import settings
 import decimal
 from django.db.models import Q
 from .forms import ShipmentDetailForm
+import random
 
 
 class Home (generic.TemplateView):
@@ -226,6 +227,8 @@ class Checkout(View):
                     fetch_user.user = request.user
                     form.save()
 
+
+
                     
             # form = ShipmentDetailForm()
             # check if current user address, name, email exist show them in box and ask if need to edit also shipping method
@@ -244,22 +247,10 @@ class Checkout(View):
             },
         )
 
-# class OrderComplete (View):
-#     def get(self,request):
-#         # get session values and send to db of current user
-#         # clear session
-#         queryset = Product.objects.filter(available=True).filter(stock__gt=0).order_by('-created_on')
-#         print('here')
-#         cart = request.session.get(settings.CART_SESSION_ID)
-#         request.session.cart = cart
-#         for key,value in request.session.get('cart').items():
-#             # print("135", request.session.get('cart').items())
-#             total += value['prod_total']
-#             print(f'Key: {key}, Value: {value}')
-#         return render(
-#             request,
-#             "order_compflete.html",
-#             {
-#                 'queryset': queryset,
-#             },
-#         )
+def create_new_ref_number():
+    not_unique = True
+    while not_unique:
+        unique_ref = random.randint(1000000000, 9999999999)
+        if not Transaction.objects.filter(Referrence_Number=unique_ref):
+            not_unique = False
+    return str(unique_ref)

@@ -109,7 +109,7 @@ class Product(models.Model):
 
 class CartItem(models.Model):
     user_info = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_info")
-    product_info = models.ForeignKey(Product, on_delete=models.PROTECT, related_name="user_product_info")
+    product_info = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="user_product_info")
     # sessionId = 
     quantity = models.PositiveIntegerField(blank=True, validators=[
         MinValueValidator(1),
@@ -127,27 +127,49 @@ class CartItem(models.Model):
         return f"{self.user_info.first_name} {self.user_info.last_name}"
 
 
-class ConfirmedOrderDetail(models.Model):
-    SHIPMENT_VIA = [
-        (0, 'DHL'),
-        (1, 'Hermes'),
-        (3, 'DPD')
-    ]
-    user_info = models.ForeignKey(User, on_delete=models.PROTECT, related_name="user_confirmed_order")
-    product_info = models.ForeignKey(Product, on_delete=models.PROTECT, related_name="user_bought_product")
-    # shipment_info = models.ForeignKey(Product, on_delete=models.PROTECT, related_name="user_shipment_info")
-    # quantity = models.PositiveIntegerField(default=1, null=False)
-    # same_order_value = 
+# Uni order id means that with user id only one order can be manged but if the ids in confirm order and user bill is same
+# multiple orders can be placed of same user
+class UserBill(models.Model):
+    user_info = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_bill_info")
+    shipment_info = models.ForeignKey(ShipmentDetail, on_delete=models.CASCADE, related_name="user_shipment_info")
     total = models.DecimalField(max_digits=6, decimal_places=2)
-    shipment_via = models.IntegerField(choices=SHIPMENT_VIA, default=0)
+    user_unique_order_no = models.CharField(
+           max_length = 10,
+           editable=False,
+           unique=True,
+      )
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['created_on']
+
+class ConfirmedOrderDetail(models.Model):
+    SHIPMENT_STAUS = [
+        (0, 'Order Received'),
+        (1, 'Order On way'),
+        (3, 'Order Delieverd')
+    ]
+    user_info = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_confirmed_order")
+    product_info = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="user_bought_product")
+    # shipment_info = models.ForeignKey(Product, on_delete=models.PROTECT, related_name="user_shipment_info")
+    quantity = models.PositiveIntegerField(default=1, null=False)
+    # same_order_value = 
+    # total = models.DecimalField(max_digits=6, decimal_places=2)
+    user_unique_order_no = models.CharField(
+           max_length = 10,
+           editable=False,
+           unique=True,
+      )
+    # shipment_via = models.IntegerField(choices=SHIPMENT_VIA, default=0)
     # user_payment = models.OneToOneField(UserPayment, on_delete=models.PROTECT, related_name="user_payment_method")
-    order_status = models.CharField(max_length=50, default="Order Received")
+    order_status = models.IntegerField(choices=SHIPMENT_STAUS, default=0)
     # slug = AutoSlugField(populate_from='user_info', unique=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
-        ordering = ['-created_on']
+        ordering = ['created_on']
 
     def __str__(self):
         return f"{self.user_info.first_name} {self.user_info.last_name}"
