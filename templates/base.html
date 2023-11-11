@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load menu_products %}v
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -88,21 +88,7 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'products' %}">All Products</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'makeup' %}">Makeup</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'skincare' %}">Skin Care</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'fragrence' %}">Fragrence</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'bathandbody' %}">Bath and Body</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'hair' %}">Hair</a>
-                        </li>
+                        {% show_products_menu %}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'specialoffers' %}">Sales and Offers</a>
                         </li>

@@ -134,6 +134,10 @@ class ConfirmedOrderDetail(models.Model):
         (3, 'DPD')
     ]
     user_info = models.ForeignKey(User, on_delete=models.PROTECT, related_name="user_confirmed_order")
+    product_info = models.ForeignKey(Product, on_delete=models.PROTECT, related_name="user_bought_product")
+    # shipment_info = models.ForeignKey(Product, on_delete=models.PROTECT, related_name="user_shipment_info")
+    # quantity = models.PositiveIntegerField(default=1, null=False)
+    # same_order_value = 
     total = models.DecimalField(max_digits=6, decimal_places=2)
     shipment_via = models.IntegerField(choices=SHIPMENT_VIA, default=0)
     # user_payment = models.OneToOneField(UserPayment, on_delete=models.PROTECT, related_name="user_payment_method")

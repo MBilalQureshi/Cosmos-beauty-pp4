@@ -27,34 +27,21 @@ class Products (generic.ListView):
     paginate_by = 5
 
 
-class Makeup (generic.ListView):
-    queryset = Product.objects.filter(available=True).filter(stock__gt=0).filter(product_category=2).order_by('-created_on')
+class ProductsCategory (generic.ListView):
+    """
+    Fetch products data from database and display on
+    products.html
+    """
+    # TASK: CHECK IF DICOUNT EXIST OR NOT
+    queryset = Product.objects.filter(available=True).filter(stock__gt=0).order_by('-created_on')
     template_name = 'products.html'
     paginate_by = 12
 
-
-class SkinCare (generic.ListView):
-    queryset = Product.objects.filter(available=True).filter(stock__gt=0).filter(product_category=4).order_by('-created_on')
-    template_name = 'products.html'
-    paginate_by = 12
-
-
-class Hair (generic.ListView):
-    queryset = Product.objects.filter(available=True).filter(stock__gt=0).filter(product_category=3).order_by('-created_on')
-    template_name = 'products.html'
-    paginate_by = 12
-
-
-class Fragrence (generic.ListView):
-    queryset = Product.objects.filter(available=True).filter(stock__gt=0).filter(product_category=5).order_by('-created_on')
-    template_name = 'products.html'
-    paginate_by = 12
-
-
-class BathAndbody (generic.ListView):
-    queryset = Product.objects.filter(available=True).filter(stock__gt=0).filter(product_category=6).order_by('-created_on')
-    template_name = 'products.html'
-    paginate_by = 12
+    def get_context_data(self, **kwargs):
+        category_param = self.kwargs.get("category")
+        category = ProductCategories.objects.get(category_name=category_param)
+        products =  Product.objects.filter(product_category=category).filter(available=True).filter(stock__gt=0).order_by('-created_on')
+        return {'product_list': products}
 
 
 class SpecialOffers (generic.ListView):
@@ -238,12 +225,17 @@ class Checkout(View):
                     fetch_user = form.save(commit=False)
                     fetch_user.user = request.user
                     form.save()
-                else:
-                    print('invalid form')
-                
+
+                    
             # form = ShipmentDetailForm()
             # check if current user address, name, email exist show them in box and ask if need to edit also shipping method
-
+            # cart = request.session.get(settings.CART_SESSION_ID)
+            # request.session.cart = cart
+            for key,value in request.session.get('cart').items():
+            # print("135", request.session.get('cart').items())
+                print(f'Key: {key}, Value: {value}')
+            
+        
         return render(
             request,
             "order_complete.html",
@@ -252,15 +244,22 @@ class Checkout(View):
             },
         )
 
-class OrderComplete (View):
-    def post(self,request):
-        # get session values and send to db
-        # clear session
-        queryset = Product.objects.filter(available=True).filter(stock__gt=0).order_by('-created_on')
-        return render(
-            request,
-            "order_complete.html",
-            {
-                'queryset': queryset,
-            },
-        )
+# class OrderComplete (View):
+#     def get(self,request):
+#         # get session values and send to db of current user
+#         # clear session
+#         queryset = Product.objects.filter(available=True).filter(stock__gt=0).order_by('-created_on')
+#         print('here')
+#         cart = request.session.get(settings.CART_SESSION_ID)
+#         request.session.cart = cart
+#         for key,value in request.session.get('cart').items():
+#             # print("135", request.session.get('cart').items())
+#             total += value['prod_total']
+#             print(f'Key: {key}, Value: {value}')
+#         return render(
+#             request,
+#             "order_compflete.html",
+#             {
+#                 'queryset': queryset,
+#             },
+#         )
