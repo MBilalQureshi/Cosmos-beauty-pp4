@@ -145,8 +145,8 @@ def cart(request):
         # print(products)
         # for p in products:
         #     print(p)
-        total = round(total, 2)
-        ship_total = ship_total + total
+        print(total)
+        ship_total = round(ship_total + total,2)
     else:
         # TASK HANDLE EMPTY CART
         products = []
@@ -228,15 +228,17 @@ class Checkout(View):
                     form.save()
 
 
-
+    
                     
             # form = ShipmentDetailForm()
             # check if current user address, name, email exist show them in box and ask if need to edit also shipping method
             # cart = request.session.get(settings.CART_SESSION_ID)
             # request.session.cart = cart
+
             for key,value in request.session.get('cart').items():
             # print("135", request.session.get('cart').items())
                 print(f'Key: {key}, Value: {value}')
+            
             
         
         return render(
