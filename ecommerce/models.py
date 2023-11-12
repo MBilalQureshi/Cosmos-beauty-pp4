@@ -155,11 +155,10 @@ class ConfirmedOrderDetail(models.Model):
     # shipment_info = models.ForeignKey(Product, on_delete=models.PROTECT, related_name="user_shipment_info")
     quantity = models.PositiveIntegerField(default=1, null=False)
     # same_order_value = 
-    # total = models.DecimalField(max_digits=6, decimal_places=2)
+    prod_total = models.DecimalField(max_digits=6, decimal_places=2)
     user_unique_order_no = models.CharField(
            max_length = 10,
            editable=False,
-           unique=True,
       )
     # shipment_via = models.IntegerField(choices=SHIPMENT_VIA, default=0)
     # user_payment = models.OneToOneField(UserPayment, on_delete=models.PROTECT, related_name="user_payment_method")

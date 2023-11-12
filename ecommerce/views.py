@@ -235,12 +235,22 @@ class Checkout(View):
             # cart = request.session.get(settings.CART_SESSION_ID)
             # request.session.cart = cart
 
+            overall_total = 0.00
+            invoice_no = create_new_ref_number()
+            print(invoice_no)
             for key,value in request.session.get('cart').items():
             # print("135", request.session.get('cart').items())
-                print(f'Key: {key}, Value: {value}')
+                # print(f'Key: {key}, Value: {value}')
+                overall_total += value['prod_total']
+                prod_id = Product.objects.get(id=key)
+                add_confirmed_order = ConfirmedOrderDetail(user_info=request.user, product_info=prod_id, quantity=value['quantity'],prod_total = value['prod_total'],user_unique_order_no=invoice_no)
+                add_confirmed_order.save()
             
-            
-        
+            overall_total = round(5.00 + overall_total,2)
+            user_shipment_id = ShipmentDetail.objects.get(user=request.user)
+            user_bill_ref = UserBill(user_info=request.user,shipment_info= user_shipment_id ,total=overall_total,user_unique_order_no=invoice_no)
+            user_bill_ref.save()
+            del request.session['cart']
         return render(
             request,
             "order_complete.html",
@@ -253,6 +263,6 @@ def create_new_ref_number():
     not_unique = True
     while not_unique:
         unique_ref = random.randint(1000000000, 9999999999)
-        if not Transaction.objects.filter(Referrence_Number=unique_ref):
+        if not ConfirmedOrderDetail.objects.filter(user_unique_order_no=unique_ref):
             not_unique = False
     return str(unique_ref)
