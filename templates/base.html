@@ -49,7 +49,7 @@
                                 </a>          
                                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <!-- <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a></li> -->
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-list"></i> My Orders</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'myorders' %}"><i class="fa fa-list"></i> My Orders</a></li>
                                     <li><a class="dropdown-item" href="{% url 'wishlist' %}"><i class="fa fa-heart"></i> My Wishlist</a></li>
                                     <li><a class="dropdown-item" href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
                                     <li><a class="dropdown-item" href="{% url 'account_logout' %}"><i class="fa fa-sign-out"></i> Logout</a></li>
@@ -60,7 +60,7 @@
                                 </a>
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <!-- <li><a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a></li> -->
-                                    <li><a class="dropdown-item" href="#"><i class="fa fa-list"></i> My Orders</a></li>
+                                    <li><a class="dropdown-item" href="{% url 'myorders' %}"><i class="fa fa-list"></i> My Orders</a></li>
                                     <!-- TASK POPUP TO LOGIN FIRST -->
                                     <li><a class="dropdown-item" href="{% url 'wishlist' %}"><i class="fa fa-heart"></i> My Wishlist</a></li>
                                     <li><a class="dropdown-item" href="{% url 'cart' %}"><i class="fa fa-shopping-cart"></i> My Cart</a></li>
@@ -140,7 +140,7 @@
                         <div class="footer-underline"></div>
                         <div class="mb-2">
                             <p>
-                                <i class="fa fa-map-marker"></i> #444, some main road, some area, some street, bangalore, india - 560077
+                                <i class="fa fa-map-marker"></i> #444, some main road, some area, some street - 560077
                             </p>
                         </div>
                         <div class="mb-2">

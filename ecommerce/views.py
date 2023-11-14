@@ -25,7 +25,7 @@ class Products (generic.ListView):
     # TASK: CHECK IF DICOUNT EXIST OR NOT
     queryset = Product.objects.filter(available=True).filter(stock__gt=0).order_by('-created_on')
     template_name = 'products.html'
-    paginate_by = 5
+    paginate_by = 12
 
 
 class ProductsCategory (generic.ListView):
@@ -238,6 +238,7 @@ class Checkout(View):
             overall_total = 0.00
             invoice_no = create_new_ref_number()
             print(invoice_no)
+            # TASK UPDATE THE QUANTITY IN PRODUCTS STOCK
             for key,value in request.session.get('cart').items():
             # print("135", request.session.get('cart').items())
                 # print(f'Key: {key}, Value: {value}')
@@ -259,10 +260,61 @@ class Checkout(View):
             },
         )
 
-def create_new_ref_number():
-    not_unique = True
-    while not_unique:
-        unique_ref = random.randint(1000000000, 9999999999)
-        if not ConfirmedOrderDetail.objects.filter(user_unique_order_no=unique_ref):
-            not_unique = False
-    return str(unique_ref)
+    def create_new_ref_number():
+        not_unique = True
+        while not_unique:
+            unique_ref = random.randint(1000000000, 9999999999)
+            if not ConfirmedOrderDetail.objects.filter(user_unique_order_no=unique_ref):
+                not_unique = False
+        return str(unique_ref)
+
+class MyOrders(View):
+
+    def get(self, request):
+        get_products ={}
+        if request.user.is_authenticated:
+            # get user invoices
+            get_invoice_list = UserBill.objects.filter(user_info=request.user).values_list('user_unique_order_no',flat = True)
+            if get_invoice_list:          
+                index = 0
+                for invoice_number in get_invoice_list:
+                    # print(invoice_number)
+                    # get products data based on invoice numbers
+                    get_products[index] = ConfirmedOrderDetail.objects.filter(user_unique_order_no = invoice_number).values_list('product_info','product_info__image','product_info__name','quantity','prod_total', 'product_info__stock')
+                    # print(get_products)
+                    # print(index)
+                    index += 1
+                # print(get_products)
+                # for key, value in get_products.items():
+                #     print(f"Key: {key} Value:{value}")
+                
+                # print(value)
+                # for product in value:
+                #     # product_name, quantity, price = product
+                #     print(f"  Product: {product_name}, Quantity: {quantity}, Price: {price}")
+                # for product in get_products:
+                #     product_name, quantity, price = product
+                    # print(f"Product: {product_name}, Quantity: {quantity}, Price: {price}")
+            # Logic to seperate oders
+            else:
+                # TASK handle below on front later
+                print("No invoices available")            
+            
+        return render(
+            request,
+            "my_orders.html",
+            {
+                'get_products':get_products,
+            },
+        )
+    def post(self,request):
+        return render(
+            request,
+            "my_orders.html",
+            {
+                
+            },
+        )
+    # queryset = Product.objects.filter(available=True).filter(stock__gt=0).order_by('-created_on')
+    # template_name = 'my_orders.html'
+    # paginate_by = 12

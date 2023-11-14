@@ -1,6 +1,6 @@
 from allauth.account.forms import SignupForm
 from django import forms
-from .models import ShipmentDetail
+from .models import ShipmentDetail, ConfirmedOrderDetail
 
 
 class CustomSignupForm(SignupForm):
@@ -32,3 +32,9 @@ class ShipmentDetailForm(forms.ModelForm):
         #     'telephone': forms.NumberInput(),
         #     'method': forms.ChoiceField(),
         # }
+
+
+# class ConfirmedOrderDetailForm(forms.ModelForm):
+#     class Meta:
+#         model = ConfirmedOrderDetail
+#         fields = ('product_info','quantity')
