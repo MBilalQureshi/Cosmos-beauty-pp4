@@ -280,7 +280,7 @@ class MyOrders(View):
                 for invoice_number in get_invoice_list:
                     # print(invoice_number)
                     # get products data based on invoice numbers
-                    get_products[index] = ConfirmedOrderDetail.objects.filter(user_unique_order_no = invoice_number).values_list('product_info','product_info__image','product_info__name','quantity','prod_total', 'product_info__stock')
+                    get_products[invoice_number] = ConfirmedOrderDetail.objects.filter(user_unique_order_no = invoice_number).values_list('product_info','product_info__image','product_info__name','quantity','prod_total', 'product_info__stock',)
                     # print(get_products)
                     # print(index)
                     index += 1
@@ -307,7 +307,8 @@ class MyOrders(View):
                 'get_products':get_products,
             },
         )
-    def post(self,request):
+    def post(self,request,):
+
         return render(
             request,
             "my_orders.html",
@@ -318,3 +319,10 @@ class MyOrders(View):
     # queryset = Product.objects.filter(available=True).filter(stock__gt=0).order_by('-created_on')
     # template_name = 'my_orders.html'
     # paginate_by = 12
+
+def delete_order(request, product_key):
+    order_detail = ConfirmedOrderDetail.objects.filter(user_unique_order_no=product_key)
+    user_bill = UserBill.objects.filter(user_unique_order_no=product_key)
+    order_detail.delete()
+    user_bill.delete()
+    return redirect('myorders')

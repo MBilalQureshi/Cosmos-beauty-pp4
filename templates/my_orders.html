@@ -45,7 +45,9 @@
             </table>
             <div>
                 <button>Add products to this oder</button>
-                <button>Cancel this oder</button>
+                <!-- TASK ASK IF SURE TO DELETE -->
+                <!-- tASK MANAGE PRODUCTS IN STOCK ON DELETE -->
+                <a href="/cancel-order/{{ product_key }}">Cancel this oder</a>
             </div>
             {% endfor %}    
             {% else %}
