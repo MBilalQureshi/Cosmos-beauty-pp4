@@ -20,6 +20,7 @@ urlpatterns = [
     path('checkout/', login_required(views.Checkout.as_view()), name='checkout'),
     path('my-orders/', views.MyOrders.as_view(), name='myorders'),
     path('cancel-order/<product_key>',views.delete_order,name='cancel-order'),
+    path('remove-product/<product_key>/<total>/<prod_id>',views.remove_product,name='removeproduct'),
     path('<slug:slug>/', views.ProductDetail.as_view(), name='product_detail'),
     
 ]

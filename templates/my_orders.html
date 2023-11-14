@@ -8,7 +8,6 @@
             {% if get_products %}
             {% for product_key,product_value in get_products.items %}
                 <h2>Order No: {{ product_key }}</h2>
-                <a href="#">Remove Order</a>
                 <table class="table">
                     <thead>
                       <tr>
@@ -18,7 +17,8 @@
                         <!-- TASK if user add same products make sure its max 10 in 1 order -->
                         <th scope="col">Quantity</th>
                         <th scope="col">Total</th>
-                        <th scope="col">Update/Remove Item</th>
+                        <th scope="col">Remove Item</th>
+                        <th scope="col">Update</th>
                       </tr>
                     </thead>
                 {% for product in product_value %}
@@ -37,14 +37,15 @@
                             <td><input type="number" id="quantity" name="quantity" min="1" max="10" value="{{ product.3 }}"></td>
                         </form>
                         <td>{{ product.4 }}</td>
-                        <td><button type="submit" form="quantity-update">Update</button> <button id="item-remove">Remove</button></td>
-                      </tr>
+                        <td><button type="submit" form="quantity-update">Update</button></td>
+                        <td><a href="/remove-product/{{ product_key }}/{{ product.4 }}/{{ product.0 }}">Remove</a></td>
+                    </tr>
                     </tbody>
                    
                 {% endfor %}
             </table>
             <div>
-                <button>Add products to this oder</button>
+                <!-- <button class="btn btn-default btn-number">Add products to this oder</button> -->
                 <!-- TASK ASK IF SURE TO DELETE -->
                 <!-- tASK MANAGE PRODUCTS IN STOCK ON DELETE -->
                 <a href="/cancel-order/{{ product_key }}">Cancel this oder</a>

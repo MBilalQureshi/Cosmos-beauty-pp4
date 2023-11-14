@@ -260,13 +260,13 @@ class Checkout(View):
             },
         )
 
-    def create_new_ref_number():
-        not_unique = True
-        while not_unique:
-            unique_ref = random.randint(1000000000, 9999999999)
-            if not ConfirmedOrderDetail.objects.filter(user_unique_order_no=unique_ref):
-                not_unique = False
-        return str(unique_ref)
+def create_new_ref_number():
+    not_unique = True
+    while not_unique:
+        unique_ref = random.randint(1000000000, 9999999999)
+        if not ConfirmedOrderDetail.objects.filter(user_unique_order_no=unique_ref):
+            not_unique = False
+    return str(unique_ref)
 
 class MyOrders(View):
 
@@ -321,8 +321,19 @@ class MyOrders(View):
     # paginate_by = 12
 
 def delete_order(request, product_key):
+    # Handle stock
     order_detail = ConfirmedOrderDetail.objects.filter(user_unique_order_no=product_key)
     user_bill = UserBill.objects.filter(user_unique_order_no=product_key)
     order_detail.delete()
     user_bill.delete()
+    return redirect('myorders')
+
+def remove_product(request, product_key, total, prod_id):
+    print('111')
+    # Handle stock
+    item = UserBill.objects.filter(user_unique_order_no=product_key).values_list('total', flat=True)
+    update_total = float(item[0]) - float(total)
+    update_user_bill = UserBill.objects.filter(user_unique_order_no=product_key).update(total = update_total)
+    order_detail = ConfirmedOrderDetail.objects.filter(user_unique_order_no=product_key).filter(product_info__id = prod_id)
+    order_detail.delete()
     return redirect('myorders')
