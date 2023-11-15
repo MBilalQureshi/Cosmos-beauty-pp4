@@ -1,7 +1,8 @@
 from allauth.account.forms import SignupForm
 from django import forms
 from .models import ShipmentDetail, ConfirmedOrderDetail
-
+from crispy_forms.helper import FormHelper
+from crispy_forms.layout import Layout, Field
 
 class CustomSignupForm(SignupForm):
 
@@ -20,7 +21,16 @@ class ShipmentDetailForm(forms.ModelForm):
     class Meta:
         model = ShipmentDetail
         fields = ('first_name','last_name','address_line_one', 'postal_code', 'city', 'country',
-        'mobile','telephone','method')
+        'mobile','telephone','method',)
+        widgets = {
+            'mobile': forms.NumberInput(attrs={
+                'type': 'number',
+            }),'telephone': forms.NumberInput(attrs={
+                'type': 'number',
+            }),'mobile': forms.NumberInput(attrs={
+                'type': 'number',
+            }),
+        }
         # widget = {
         #     'first_name': forms.TextInput(),
         #     'last_name': forms.TextInput(),
@@ -32,6 +42,22 @@ class ShipmentDetailForm(forms.ModelForm):
         #     'telephone': forms.NumberInput(),
         #     'method': forms.ChoiceField(),
         # }
+    # def __init__(self, *args, **kwargs):
+    #     super(ShipmentDetailForm, self).__init__(*args, **kwargs)
+    #     self.helper = FormHelper(self)
+    #     self.helper.layout = Layout(
+    #         # Field('first_name', css_class='display-3', placeholder='Enter First Name', label='Custom Label',title='Custom Label 1',label_class='custom-label-class'),
+    #         Field('first_name', css_class='', title='Custom Label 1', css_label_class='fs-1 fw-bold'),
+    #         Field('last_name', css_class='custom-class2', ),
+    #         Field('address_line_one', css_class='custom-class1',),
+    #         Field('postal_code', css_class='custom-class2', ),
+    #         Field('city', css_class='custom-class1', ),
+    #         Field('country', css_class='custom-class2', ),
+    #         Field('mobile', css_class='custom-class1', ),
+    #         Field('telephone', css_class='custom-class2',),
+    #         Field('method', css_class='custom-class2', ),
+    #         # Add more fields as needed
+    #     )
 
 
 class ConfirmedOrderDetailForm(forms.ModelForm):

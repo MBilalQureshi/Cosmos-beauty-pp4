@@ -84,6 +84,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'django_summernote',
     'crispy_forms',
+    'crispy_bootstrap5',
     'phone_field',
     'ecommerce',
 ]
@@ -125,7 +126,9 @@ ACCOUNT_FORMS = {
 }
 
 # tell crispy to use bootstrap classes for formatting
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
