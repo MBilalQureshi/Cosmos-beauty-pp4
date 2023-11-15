@@ -17,6 +17,15 @@ class Home (generic.TemplateView):
     """
     template_name = 'index.html'
 
+class ProductSearch(generic.ListView):
+    model = Product
+    template_name = 'products.html'
+    paginate_by = 12
+    def get_queryset(self):
+        query = self.request.GET.get('search-product')
+        print(query)
+        return Product.objects.filter(available=True).filter(stock__gt=0).filter(name__icontains=query).order_by('-created_on')
+        
 
 class Products (generic.ListView):
     """
@@ -231,7 +240,7 @@ class Checkout(View):
                     fetch_user = form.save(commit=False)
                     fetch_user.user = request.user
                     form.save()
-                    messages.success(request, 'Shipment details added successfully.')
+                    # messages.success(request, 'Shipment details added successfully.')
                 else:
                     messages.error(request, 'Error adding Shipment details.')
 
@@ -252,14 +261,14 @@ class Checkout(View):
             user_bill_ref = UserBill(user_info=request.user,shipment_info= user_shipment_id ,total=overall_total,user_unique_order_no=invoice_no)
             user_bill_ref.save()
             del request.session['cart']
-        # return render(
-        #     request,
-        #     "order_complete.html",
-        #     {
-        #         'form': form,
-        #     },
-        # )
-        return self.get(request)
+        return render(
+            request,
+            "order_complete.html",
+            {
+                'form': form,
+            },
+        )
+        # return self.get(request)
 
 def create_new_ref_number():
     not_unique = True

@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 # app_name = 'products'
 urlpatterns = [
     path('', views.Home.as_view(), name='home'),
+    path('search-products', views.ProductSearch.as_view(), name='search_products'),
     path('products/<str:category>', views.ProductsCategory.as_view(), name='products_category'),
     path('products/', views.Products.as_view(), name='products'),
     # path('makeup/', views.Makeup.as_view(), name='makeup'),

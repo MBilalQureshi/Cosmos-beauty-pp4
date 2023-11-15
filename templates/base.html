@@ -20,9 +20,10 @@
                         <h5 class="brand-name display-6"><a href="/">Cosmos Beauty</a></h5>
                     </div>
                     <div class="col-md-5 my-auto">
-                        <form role="search">
+                        <form method="get" action="{% url 'search_products' %}" role="search">
+                            {% csrf_token %}
                             <div class="input-group">
-                                <input type="search" placeholder="Search your product" class="form-control" />
+                                <input type="search" name="search-product" placeholder="Search your product" class="form-control" />
                                 <button class="btn bg-white" type="submit">
                                     <i class="fa fa-search"></i>
                                 </button>
@@ -34,12 +35,12 @@
                             
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'cart' %}">
-                                    <i class="fa fa-shopping-cart"></i> Cart (0)
+                                    <i class="fa fa-shopping-cart"></i> Cart
                                 </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="{% url 'wishlist' %}">
-                                    <i class="fa fa-heart"></i> Wishlist (0)
+                                    <i class="fa fa-heart"></i> Wishlist
                                 </a>
                             </li>
                             <li class="nav-item dropdown">
@@ -75,7 +76,7 @@
         </div>
         <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
-                <a class="navbar-brand d-block d-sm-block d-md-none d-lg-none" href="#">
+                <a class="navbar-brand d-block d-sm-block d-md-none d-lg-none" href="/">
                     Cosmos Beauty
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
