@@ -2,65 +2,64 @@
 {% block title %}CosmosBeauty | My Orders{% endblock %}
 
 {% block content %}
-<div class="container">
-    <div class="row">
-        <div class="col">
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
             {% if get_products %}
-            {% for product_key,product_value in get_products.items %}
-                <h2>Order No: {{ product_key }}</h2>
-                <table class="table">
-                    <thead>
-                      <tr>
-                        <!-- <th scope="col">#</th> -->
-                        <th scope="col">Image</th>
-                        <th scope="col">Name</th>
-                        <!-- TASK if user add same products make sure its max 10 in 1 order -->
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Total</th>
-                        <th scope="col">Remove Item</th>
-                        <th scope="col">Update</th>
-                      </tr>
-                    </thead>
-                {% for product in product_value %}
-                    <tbody>
-                      <tr>
-                        <td>
-                            {% if "placeholder" in product.1.url %}
-                            <img src="https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg" class="rounded-start p-3" alt="Placeholder Image" style="max-width: 100px; max-height: 100px;">
-                            {% else %}
-                            <img src="{{ product.1.url }}" class="rounded-start p-3 img-fluid" alt="Product image" style="max-width: 100px; max-height: 100px;">                           
-                            {% endif %}
-                        </td>
-                        <td>{{ product.2 }}</td>
-                        <form method="POST" id="quantity-update">
-                            {% csrf_token %}
-                            <td><input type="number" id="quantity" name="quantity" min="1" max="10" value="{{ product.3 }}"></td>
-                        </form>
-                        <td>{{ product.4 }}</td>
-                        <td><button type="submit" form="quantity-update">Update</button></td>
-                        <td><a href="/remove-product/{{ product_key }}/{{ product.4 }}/{{ product.0 }}">Remove</a></td>
-                    </tr>
-                    </tbody>
-                   
+                {% for product_key, product_data in get_products.items %}
+                    <h2 class="text-center mb-4">Order No: {{ product_key }}</h2>
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-center">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Image</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Quantity</th>
+                                    <th scope="col">Total</th>
+                                    <th scope="col">Remove Item</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for form_instance in product_data.form_instances %}
+                                    <tr>
+                                        <td>
+                                            {% if "placeholder" in form_instance.instance.product_info.image.url %}
+                                                <img src="https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg" class="rounded-start p-3" alt="Placeholder Image" style="max-width: 100px; max-height: 100px;">
+                                            {% else %}
+                                                <img src="{{ form_instance.instance.product_info.image.url }}" class="rounded-start p-3 img-fluid" alt="Product image" style="max-width: 100px; max-height: 100px;">
+                                            {% endif %}
+                                        </td>
+                                        <td>{{ form_instance.instance.product_info.name }}</td>
+                                        <td>
+                                            <form method="POST" class="d-flex flex-column align-items-center justify-content-center">
+                                                {% csrf_token %}
+                                                <input type="number" name="quantity" min="1" max="10" value="{{ form_instance.instance.quantity }}" class="form-control mx-2 mb-2">
+                                                <input type="hidden" name="product_instance_id" value="{{ form_instance.instance.id }}">
+                                                <button type="submit" class="hvr-sweep-to-right btn btn-dark btn-lg">Update</button>
+                                            </form>
+                                        </td>
+                                        <td>{{ form_instance.instance.prod_total }}</td>
+                                        <td>
+                                            {% if product_data.form_instances|length == 1 %}
+                                                <a href="/cancel-order/{{ product_key }}" class="hvr-sweep-to-right btn btn-dark btn-lg">Remove</a>
+                                            {% else %}
+                                            <a href="/remove-product/{{ product_key }}/{{ form_instance.instance.prod_total }}/{{ form_instance.instance.product_info.id }}" class="hvr-sweep-to-right btn btn-dark btn-lg">Remove</a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="/cancel-order/{{ product_key }}" class="hvr-sweep-to-right btn btn-dark btn-lg">Cancel this order</a>
+                    </div>
                 {% endfor %}
-            </table>
-            <div>
-                <!-- <button class="btn btn-default btn-number">Add products to this oder</button> -->
-                <!-- TASK ASK IF SURE TO DELETE -->
-                <!-- tASK MANAGE PRODUCTS IN STOCK ON DELETE -->
-                <a href="/cancel-order/{{ product_key }}">Cancel this oder</a>
-            </div>
-            {% endfor %}    
             {% else %}
-            <div>
-                <p>
-                    No orders available.
-                </p>
-            </div>
+                <div class="text-center">
+                    <p>No orders available.</p>
+                </div>
             {% endif %}
-            <!-- <div>
-                <a href="#" class="btn btn-default btn-number">Cancel this order</a>
-            </div> -->
         </div>
     </div>
 </div>

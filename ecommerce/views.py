@@ -7,8 +7,9 @@ import datetime
 from django.conf import settings
 import decimal
 from django.db.models import Q
-from .forms import ShipmentDetailForm
+from .forms import ShipmentDetailForm, ConfirmedOrderDetailForm
 import random
+from django.contrib import messages
 
 
 class Home (generic.TemplateView):
@@ -168,6 +169,7 @@ class AddToCart(View):
             else:
                 prod_discount = 0.0
                 prod_total = product_price * prod_quantity
+            prod_total = round(prod_total,2)
             self.session = request.session
             cart = self.session.get(settings.CART_SESSION_ID)
             # empty cart saved in session
@@ -195,7 +197,7 @@ class Checkout(View):
             get_user_last_data = ShipmentDetail.objects.filter(user=request.user)
             if get_user_last_data:
                 instance = get_object_or_404(get_user_last_data, user=request.user)
-                print(instance.first_name)
+                # print(instance.first_name)
                 form = ShipmentDetailForm(instance = instance)
             else:
                 # set to empty form if data not available
@@ -219,6 +221,9 @@ class Checkout(View):
                     fetch_user = form.save(commit=False)
                     fetch_user.user = request.user
                     form.save()
+                    messages.success(request, 'Shipment details updated successfully.')
+                else:
+                    messages.error(request, 'Error updating Shipment details.')
             else:
                 # First time add form
                 form = ShipmentDetailForm(request.POST)
@@ -226,14 +231,9 @@ class Checkout(View):
                     fetch_user = form.save(commit=False)
                     fetch_user.user = request.user
                     form.save()
-
-
-    
-                    
-            # form = ShipmentDetailForm()
-            # check if current user address, name, email exist show them in box and ask if need to edit also shipping method
-            # cart = request.session.get(settings.CART_SESSION_ID)
-            # request.session.cart = cart
+                    messages.success(request, 'Shipment details added successfully.')
+                else:
+                    messages.error(request, 'Error adding Shipment details.')
 
             overall_total = 0.00
             invoice_no = create_new_ref_number()
@@ -252,13 +252,14 @@ class Checkout(View):
             user_bill_ref = UserBill(user_info=request.user,shipment_info= user_shipment_id ,total=overall_total,user_unique_order_no=invoice_no)
             user_bill_ref.save()
             del request.session['cart']
-        return render(
-            request,
-            "order_complete.html",
-            {
-                'form': form,
-            },
-        )
+        # return render(
+        #     request,
+        #     "order_complete.html",
+        #     {
+        #         'form': form,
+        #     },
+        # )
+        return self.get(request)
 
 def create_new_ref_number():
     not_unique = True
@@ -269,56 +270,62 @@ def create_new_ref_number():
     return str(unique_ref)
 
 class MyOrders(View):
-
     def get(self, request):
-        get_products ={}
+        get_products = {}
+        form_instances = []
+
         if request.user.is_authenticated:
             # get user invoices
-            get_invoice_list = UserBill.objects.filter(user_info=request.user).values_list('user_unique_order_no',flat = True)
-            if get_invoice_list:          
-                index = 0
+            get_invoice_list = UserBill.objects.filter(user_info=request.user).values_list('user_unique_order_no', flat=True)
+
+            if get_invoice_list:
                 for invoice_number in get_invoice_list:
-                    # print(invoice_number)
                     # get products data based on invoice numbers
-                    get_products[invoice_number] = ConfirmedOrderDetail.objects.filter(user_unique_order_no = invoice_number).values_list('product_info','product_info__image','product_info__name','quantity','prod_total', 'product_info__stock',)
-                    # print(get_products)
-                    # print(index)
-                    index += 1
-                # print(get_products)
-                # for key, value in get_products.items():
-                #     print(f"Key: {key} Value:{value}")
-                
-                # print(value)
-                # for product in value:
-                #     # product_name, quantity, price = product
-                #     print(f"  Product: {product_name}, Quantity: {quantity}, Price: {price}")
-                # for product in get_products:
-                #     product_name, quantity, price = product
-                    # print(f"Product: {product_name}, Quantity: {quantity}, Price: {price}")
-            # Logic to seperate oders
-            else:
-                # TASK handle below on front later
-                print("No invoices available")            
-            
-        return render(
-            request,
-            "my_orders.html",
-            {
-                'get_products':get_products,
-            },
-        )
-    def post(self,request,):
+                    products_data = ConfirmedOrderDetail.objects.filter(user_unique_order_no=invoice_number).values_list('product_info', 'product_info__image', 'product_info__name', 'quantity', 'prod_total', 'product_info__stock',)
+                    
+                    form_instances_for_invoice = []  # Store form instances for each invoice
+                    
+                    for product_data in products_data:
+                        instance = get_object_or_404(ConfirmedOrderDetail, user_unique_order_no=invoice_number, product_info=product_data[0])
+                        form = ConfirmedOrderDetailForm(instance=instance)
+                        form_instances_for_invoice.append(form)
+
+                    # Store product data and form instances in the dictionary
+                    get_products[invoice_number] = {
+                        'product_info': products_data,
+                        'form_instances': form_instances_for_invoice,
+                    }
+
+                    # Extend the list of all form instances
+                    form_instances.extend(form_instances_for_invoice)
 
         return render(
             request,
             "my_orders.html",
             {
-                
+                'get_products': get_products,
+                'form_instances': form_instances,
             },
         )
-    # queryset = Product.objects.filter(available=True).filter(stock__gt=0).order_by('-created_on')
-    # template_name = 'my_orders.html'
-    # paginate_by = 12
+
+    def post(self, request):
+        if 'quantity' in request.POST:
+            quantity = request.POST['quantity']
+            product_id = request.POST['product_instance_id']    
+
+            instance = get_object_or_404(ConfirmedOrderDetail, id=product_id)
+            
+            form = ConfirmedOrderDetailForm(request.POST, instance=instance)
+            if form.is_valid():
+                form.save()
+                messages.success(request, 'Quantity updated successfully.')
+            else:
+                messages.error(request, 'Error updating quantity.')
+
+            return redirect('myorders')
+        else:
+            messages.error(request, 'Cannot update quantity.')
+        return self.get(request)
 
 def delete_order(request, product_key):
     # Handle stock
@@ -326,14 +333,15 @@ def delete_order(request, product_key):
     user_bill = UserBill.objects.filter(user_unique_order_no=product_key)
     order_detail.delete()
     user_bill.delete()
+    messages.success(request, 'Order cancelled successfully.')
     return redirect('myorders')
 
 def remove_product(request, product_key, total, prod_id):
-    print('111')
     # Handle stock
     item = UserBill.objects.filter(user_unique_order_no=product_key).values_list('total', flat=True)
     update_total = float(item[0]) - float(total)
     update_user_bill = UserBill.objects.filter(user_unique_order_no=product_key).update(total = update_total)
     order_detail = ConfirmedOrderDetail.objects.filter(user_unique_order_no=product_key).filter(product_info__id = prod_id)
     order_detail.delete()
+    messages.success(request, 'Product removed successfully.')
     return redirect('myorders')

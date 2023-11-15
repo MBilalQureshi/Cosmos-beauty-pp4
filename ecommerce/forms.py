@@ -34,7 +34,15 @@ class ShipmentDetailForm(forms.ModelForm):
         # }
 
 
-# class ConfirmedOrderDetailForm(forms.ModelForm):
-#     class Meta:
-#         model = ConfirmedOrderDetail
-#         fields = ('product_info','quantity')
+class ConfirmedOrderDetailForm(forms.ModelForm):
+    class Meta:
+        model = ConfirmedOrderDetail
+        fields = ('quantity',)
+        widgets = {
+            'quantity': forms.NumberInput(attrs={
+                'min': '1', 
+                'max': '10',
+                'type': 'number',
+                'step': '1',
+            }),
+        }
