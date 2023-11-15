@@ -23,9 +23,7 @@ class ProductSearch(generic.ListView):
     paginate_by = 12
     def get_queryset(self):
         query = self.request.GET.get('search-product')
-        print(query)
-        return Product.objects.filter(available=True).filter(stock__gt=0).filter(name__icontains=query).order_by('-created_on')
-        
+        return  Product.objects.filter(available=True).filter(stock__gt=0).filter(name__icontains=query).order_by('-created_on')
 
 class Products (generic.ListView):
     """
