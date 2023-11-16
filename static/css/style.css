@@ -65,6 +65,8 @@ body{
 }
 
 /* Carousel */
+
+
 .carousel-item{
     height: 32rem;
     background-color: hsl(0, 19%, 53%);
@@ -76,9 +78,6 @@ body{
     font-weight: bolder;
     font-family: 'Roboto', sans-serif;
     /* font-size: 3em; */
-}
-
-.carousel-item .container{
     position: absolute;
     left: 0;
     right: 0;
@@ -88,7 +87,6 @@ body{
 
 .overlay-image{
    position: absolute;
-   background-color: #B2533E;
    bottom: 0;
    left: 0;
    right: 0;
