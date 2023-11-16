@@ -6,8 +6,8 @@ from crispy_forms.layout import Layout, Field
 
 class CustomSignupForm(SignupForm):
 
-    first_name = forms.CharField(max_length=30, label='First Name')
-    last_name = forms.CharField(max_length=30, label='Last Name')
+    first_name = forms.CharField(max_length=30, label='First Name', widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
+    last_name = forms.CharField(max_length=30, label='Last Name', widget=forms.TextInput(attrs={'placeholder': 'First Name'}))
 
     def save(self, request):
         user = super(CustomSignupForm, self).save(request)
