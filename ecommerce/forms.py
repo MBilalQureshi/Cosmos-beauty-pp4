@@ -21,16 +21,7 @@ class ShipmentDetailForm(forms.ModelForm):
     class Meta:
         model = ShipmentDetail
         fields = ('first_name','last_name','address_line_one', 'postal_code', 'city', 'country',
-        'mobile','telephone','method',)
-        widgets = {
-            'mobile': forms.NumberInput(attrs={
-                'type': 'number',
-            }),'telephone': forms.NumberInput(attrs={
-                'type': 'number',
-            }),'mobile': forms.NumberInput(attrs={
-                'type': 'number',
-            }),
-        }
+        'mobile','method',)
         # widget = {
         #     'first_name': forms.TextInput(),
         #     'last_name': forms.TextInput(),
@@ -42,22 +33,21 @@ class ShipmentDetailForm(forms.ModelForm):
         #     'telephone': forms.NumberInput(),
         #     'method': forms.ChoiceField(),
         # }
-    # def __init__(self, *args, **kwargs):
-    #     super(ShipmentDetailForm, self).__init__(*args, **kwargs)
-    #     self.helper = FormHelper(self)
-    #     self.helper.layout = Layout(
-    #         # Field('first_name', css_class='display-3', placeholder='Enter First Name', label='Custom Label',title='Custom Label 1',label_class='custom-label-class'),
-    #         Field('first_name', css_class='', title='Custom Label 1', css_label_class='fs-1 fw-bold'),
-    #         Field('last_name', css_class='custom-class2', ),
-    #         Field('address_line_one', css_class='custom-class1',),
-    #         Field('postal_code', css_class='custom-class2', ),
-    #         Field('city', css_class='custom-class1', ),
-    #         Field('country', css_class='custom-class2', ),
-    #         Field('mobile', css_class='custom-class1', ),
-    #         Field('telephone', css_class='custom-class2',),
-    #         Field('method', css_class='custom-class2', ),
-    #         # Add more fields as needed
-    #     )
+    def __init__(self, *args, **kwargs):
+        super(ShipmentDetailForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper(self)
+        self.helper.form_show_labels = False
+        self.helper.layout = Layout(
+            # Field('first_name', css_class='display-3', placeholder='Enter First Name', label='Custom Label',title='Custom Label 1',label_class='custom-label-class'),
+            Field('first_name', css_class='fs-5',placeholder='Enter First Name', title='Enter First Name'),
+            Field('last_name', css_class='fs-5', placeholder='Enter Last Name',title='Enter Last Name'),
+            Field('address_line_one', css_class='fs-5', placeholder='Enter Address',title='Enter Address'),
+            Field('postal_code', css_class='fs-5', placeholder='Enter Postal Code',title='Enter Postal Code'),
+            Field('city', css_class='fs-5', placeholder='Enter City',title='Enter City'),
+            Field('country', css_class='fs-5', placeholder='Enter Country',title='Enter Country'),
+            Field('mobile', css_class='fs-5', placeholder='Enter Mobile Number',title='Enter Mobile Number'),
+            Field('method', css_class='fs-5', placeholder='Enter Payment method',title='Enter Payment method'),
+        )
 
 
 class ConfirmedOrderDetailForm(forms.ModelForm):

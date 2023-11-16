@@ -232,7 +232,18 @@ body{
     border: 0.4 px solid grey;
 }
 
-
+/* Shipping detail */
+.shipping-background {
+    background-image: url('/static/images/pexels-karolina-grabowska-4239013.webp');
+    background-size: cover;
+    background-position: center;
+    padding: 20px;
+    position: relative;
+    text-align: center;
+}
+.shipping-background:before {
+    position: absolute;
+}
   
 /* footer */
 .footer-area{

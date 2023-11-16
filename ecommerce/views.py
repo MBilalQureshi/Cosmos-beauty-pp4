@@ -231,6 +231,7 @@ class Checkout(View):
                     messages.success(request, 'Shipment details updated successfully.')
                 else:
                     messages.error(request, 'Error updating Shipment details.')
+                    return redirect('checkout')
             else:
                 # First time add form
                 form = ShipmentDetailForm(request.POST)
@@ -241,6 +242,7 @@ class Checkout(View):
                     # messages.success(request, 'Shipment details added successfully.')
                 else:
                     messages.error(request, 'Error adding Shipment details.')
+                    return redirect('checkout')
 
             overall_total = 0.00
             invoice_no = create_new_ref_number()

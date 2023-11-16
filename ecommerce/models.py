@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 from django.core.validators import MinValueValidator, MaxValueValidator
 from autoslug import AutoSlugField
-from phone_field import PhoneField
 
 # Address modal
 class ShipmentDetail(models.Model):
@@ -20,11 +19,10 @@ class ShipmentDetail(models.Model):
     first_name = models.CharField(max_length=30,null=False, blank=False)
     last_name = models.CharField(max_length=30, null=False, blank=False)
     address_line_one = models.CharField(max_length=300, null=False, blank=False)
-    postal_code = models.IntegerField(null=False, blank=False)
+    postal_code = models.PositiveIntegerField(null=False,blank=False)
     city = models.CharField(max_length=250, null=False,blank=False)
     country = models.CharField(max_length=250, null=False,blank=False)
-    telephone = PhoneField(null=True, blank=True, unique=False)
-    mobile = PhoneField(max_length=14, null=False, blank=False, unique=True)
+    mobile = models.PositiveIntegerField(unique=True,null=False,blank=False)
     method = models.IntegerField(choices=PAYMENT_METHOD_CHOICES, default=0)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
