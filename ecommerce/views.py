@@ -218,54 +218,60 @@ class Checkout(View):
         )
 
     def post(self, request):
-        if request.user.is_authenticated:
-            get_user_last_data = ShipmentDetail.objects.filter(user=request.user)
-            if get_user_last_data:
-                # update form
-                instance = get_object_or_404(ShipmentDetail, user=request.user)
-                form = ShipmentDetailForm(request.POST,instance = instance)
-                if form.is_valid():
-                    fetch_user = form.save(commit=False)
-                    fetch_user.user = request.user
-                    form.save()
-                    messages.success(request, 'Shipment details updated successfully.')
-                else:
-                    messages.error(request, 'Error updating Shipment details.')
-                    return redirect('checkout')
-            else:
-                # First time add form
-                form = ShipmentDetailForm(request.POST)
-                if form.is_valid():
-                    fetch_user = form.save(commit=False)
-                    fetch_user.user = request.user
-                    form.save()
-                    # messages.success(request, 'Shipment details added successfully.')
-                else:
-                    messages.error(request, 'Error adding Shipment details.')
-                    return redirect('checkout')
+        # if request.user.is_authenticated:
+        #     get_user_last_data = ShipmentDetail.objects.filter(user=request.user)
+        #     if get_user_last_data:
+        #         # update form
+        #         instance = get_object_or_404(ShipmentDetail, user=request.user)
+        #         form = ShipmentDetailForm(request.POST,instance = instance)
+        #         if form.is_valid():
+        #             fetch_user = form.save(commit=False)
+        #             fetch_user.user = request.user
+        #             form.save()
+        #             messages.success(request, 'Shipment details updated successfully.')
+        #         else:
+        #             messages.error(request, 'Error updating Shipment details.')
+        #             return redirect('checkout')
+        #     else:
+        #         # First time add form
+        #         form = ShipmentDetailForm(request.POST)
+        #         if form.is_valid():
+        #             fetch_user = form.save(commit=False)
+        #             fetch_user.user = request.user
+        #             form.save()
+        #             # messages.success(request, 'Shipment details added successfully.')
+        #         else:
+        #             messages.error(request, 'Error adding Shipment details.')
+        #             return redirect('checkout')
 
-            overall_total = 0.00
-            invoice_no = create_new_ref_number()
-            print(invoice_no)
-            # TASK UPDATE THE QUANTITY IN PRODUCTS STOCK
-            for key,value in request.session.get('cart').items():
-            # print("135", request.session.get('cart').items())
-                # print(f'Key: {key}, Value: {value}')
-                overall_total += value['prod_total']
-                prod_id = Product.objects.get(id=key)
-                add_confirmed_order = ConfirmedOrderDetail(user_info=request.user, product_info=prod_id, quantity=value['quantity'],prod_total = value['prod_total'],user_unique_order_no=invoice_no)
-                add_confirmed_order.save()
+        #     overall_total = 0.00
+        #     invoice_no = create_new_ref_number()
+        #     print(invoice_no)
+        #     # TASK UPDATE THE QUANTITY IN PRODUCTS STOCK
             
-            overall_total = round(5.00 + overall_total,2)
-            user_shipment_id = ShipmentDetail.objects.get(user=request.user)
-            user_bill_ref = UserBill(user_info=request.user,shipment_info= user_shipment_id ,total=overall_total,user_unique_order_no=invoice_no)
-            user_bill_ref.save()
-            del request.session['cart']
+        #     if not request.session.get('cart'):
+        #         messages.error(request, 'Order already submitted.')
+        #         return redirect('myorders')
+        #     else:
+        #         for key,value in request.session.get('cart').items():
+        #         # print("135", request.session.get('cart').items())
+        #             # print(f'Key: {key}, Value: {value}')
+        #             overall_total += value['prod_total']
+        #             prod_id = Product.objects.get(id=key)
+        #             add_confirmed_order = ConfirmedOrderDetail(user_info=request.user, product_info=prod_id, quantity=value['quantity'],prod_total = value['prod_total'],user_unique_order_no=invoice_no)
+        #             add_confirmed_order.save()
+            
+        #     overall_total = round(5.00 + overall_total,2)
+        #     user_shipment_id = ShipmentDetail.objects.get(user=request.user)
+        #     user_bill_ref = UserBill(user_info=request.user,shipment_info= user_shipment_id ,total=overall_total,user_unique_order_no=invoice_no)
+        #     user_bill_ref.save()
+        #     del request.session['cart']
+            
         return render(
             request,
             "order_complete.html",
             {
-                'form': form,
+                # 'form': form,
             },
         )
         # return self.get(request)

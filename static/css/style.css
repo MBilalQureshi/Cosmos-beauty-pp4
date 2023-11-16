@@ -240,11 +240,39 @@ body{
     padding: 20px;
     position: relative;
     text-align: center;
+    border-radius: 20px;
+    overflow: hidden; 
 }
+
 .shipping-background:before {
     position: absolute;
 }
-  
+
+/* Order Complete */
+.jumbotron {
+    background-image: url('/static/images/dhl.webp');
+    background-size: cover;
+    color: #fff;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+}
+.jumbotron div {
+    color: #fff;
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 20px;
+}
+
+.button-width {
+    width: 35%;
+}
+@media (max-width: 531px) {
+    .button-width {
+        width: 100%;
+    }
+}
 /* footer */
 .footer-area{
     padding: 40px 0px;
