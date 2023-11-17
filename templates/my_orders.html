@@ -17,7 +17,6 @@
                                     <th scope="col">Quantity</th>
                                     <th scope="col">Total</th>
                                     <th scope="col">Remove Item</th>
-                                    <th scope="col">Add items</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -46,9 +45,6 @@
                                             {% else %}
                                                 <a href="/remove-product/{{ product_key }}/{{ form_instance.instance.prod_total }}/{{ form_instance.instance.product_info.id }}" class="hvr-sweep-to-right btn btn-dark btn-lg">Remove</a>
                                             {% endif %}
-                                        </td>
-                                        <td>
-                                            <a href="/cancel-order/{{ product_key }}" class="hvr-sweep-to-right btn btn-dark btn-lg">Add Item</a>
                                         </td>
                                     </tr>
                                 {% endfor %}
