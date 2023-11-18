@@ -10,7 +10,14 @@ body{
     border: 0;
     background-color: #F3F3F3;
     font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
+main{
+    flex: 1;
+}
+
 /* nav */
 .main-navbar{
     font-family: 'Oswald', sans-serif;
