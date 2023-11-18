@@ -186,6 +186,10 @@ body{
     transform: scale(1.2);
   }
 
+.btn{
+    border-radius: 0px;
+}
+
 /* Sweep To Right */
 .hvr-sweep-to-right {
     display: inline-block;
@@ -233,7 +237,8 @@ body{
 
 /* Shipping detail */
 .shipping-background {
-    background-image: url('/static/images/pexels-karolina-grabowska-4239013.webp');
+    /* background-image: url('/static/images/pexels-karolina-grabowska-4239013.webp'); */
+    background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     padding: 20px;
@@ -249,7 +254,8 @@ body{
 
 /* Order Complete */
 .jumbotron {
-    background-image: url('/static/images/dhl.webp');
+    /* background-image: url('/static/images/dhl.webp'); */
+    background-repeat: no-repeat;
     background-size: cover;
     color: #fff;
     text-align: center;

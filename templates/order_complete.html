@@ -1,19 +1,20 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}CosmosBeauty | Order Complete{% endblock %}
 
 {% block content %}
 <div class="container my-3">
-    <div class="jumbotron">
+    <div class="jumbotron" style="background-image: url('{% static 'images/dhl.webp' %}')">
         <div>
             <h1 class="display-4">Congratulations! Order Placed Successfully.</h1>
             <p class="lead">Note that currently we are only using COD (cash on delivery), so kindly keep payment ready on DHL courier arrival. Thank you.</p>
             <hr class="my-4">
             <p>You will receive your order in 3 to 5 days.</p>
             <hr class="my-4">
-            <a class="btn btn-light btn-lg mb-2 button-width" href="{% url 'myorders' %}" role="button">View orders list</a><br>
-            <a class="btn btn-light btn-lg mb-2 button-width" href="{% url 'specialoffers' %}" role="button">See whats on sale</a><br>
-            <a class="btn btn-light btn-lg mb-2 button-width" href="{% url 'wishlist' %}" role="button">Go to wishlist</a><br>
-            <a class="btn btn-light btn-lg mb-2 button-width" href="{% url 'home' %}" role="button">Home</a>
+            <a class="btn btn-light btn-lg mb-2 button-width hvr-sweep-to-right btn btn-dark btn-lg" href="{% url 'myorders' %}" role="button">View orders list</a><br>
+            <a class="btn btn-light btn-lg mb-2 button-width hvr-sweep-to-right btn btn-dark btn-lg" href="{% url 'specialoffers' %}" role="button">See whats on sale</a><br>
+            <a class="btn btn-light btn-lg mb-2 button-width hvr-sweep-to-right btn btn-dark btn-lg" href="{% url 'wishlist' %}" role="button">Go to wishlist</a><br>
+            <a class="btn btn-light btn-lg mb-2 button-width hvr-sweep-to-right btn btn-dark btn-lg" href="{% url 'home' %}" role="button">Home</a>
         </div>
     </div>
 </div>
