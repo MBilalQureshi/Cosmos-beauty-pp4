@@ -9,12 +9,11 @@ body{
     padding: 0;
     border: 0;
     background-color: #F3F3F3;
-    /* font-size: 16px; */
-    /* @include font-size(4rem); */
-    /* background-color: #B5CB99; */
+    font-family: 'Roboto', sans-serif;
 }
 /* nav */
 .main-navbar{
+    font-family: 'Oswald', sans-serif;
     border-bottom: 1px solid #ccc;
 }
 .main-navbar .top-navbar{
@@ -23,13 +22,11 @@ body{
     padding-bottom: 10px;
 }
 .main-navbar .top-navbar .brand-name{
-    font-family: 'Oswald', sans-serif;
-    /* font-size: 2em; */
     color: #fff;
 }
 .main-navbar .top-navbar .nav-link{
     color: #fff;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 500;
 }
 .main-navbar .top-navbar .dropdown-menu{
@@ -39,13 +36,13 @@ body{
 .main-navbar .top-navbar .dropdown-menu .dropdown-item{
     padding: 8px 16px;
     border-bottom: 1px solid #ccc;
-    font-size: 14px;
+    font-size: 16px;
 }
 .main-navbar .top-navbar .dropdown-menu .dropdown-item i{
     width: 20px;
     text-align: center;
     color: #2874f0;
-    font-size: 14px;
+    font-size: 16px;
 }
 .main-navbar .navbar{
     padding: 0px;
@@ -54,12 +51,12 @@ body{
 .main-navbar .navbar .nav-item .nav-link{
     padding: 8px 20px;
     color: #000;
-    font-size: 15px;
+    font-size: 17px;
 }
 
 @media only screen and (max-width: 600px) {
     .main-navbar .top-navbar .nav-link{
-        font-size: 12px;
+        font-size: 14px;
         padding: 8px 10px;
     }
 }
@@ -76,7 +73,7 @@ body{
 .carousel-item .container{
     color: #ffffff;
     font-weight: bolder;
-    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
     /* font-size: 3em; */
     position: absolute;
     left: 0;
@@ -114,7 +111,7 @@ body{
 }
 
 #free-gift-banner p{
-    font-family: 'Ubuntu', sans-serif;
+    /* font-family: 'Ubuntu', sans-serif; */
     /* font-size: 1.8em; */
     color: #fff;
 }
@@ -134,11 +131,11 @@ body{
 
 /* News letter Subscription */
 #news-letter-text{
-    font-family: 'Ubuntu', sans-serif;
+    /* font-family: 'Ubuntu', sans-serif; */
 }
 /* Products page */
 #product-card, #product-img{
-    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
     box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
 }
 #product-card:hover{
@@ -167,6 +164,7 @@ body{
 
 .btn{
     border-radius: 0px;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 /* Sweep To Right */
@@ -262,12 +260,13 @@ body{
     padding: 40px 0px;
     background-color: #186F65;
     color: #fff;
+    font-family: 'Oswald', sans-serif;
 }
 .footer-area a{
     text-decoration: none;
 }
 .footer-area .footer-heading{
-    font-size: 24px;
+    font-size: 26px;
     color: #fff;
 }
 .footer-area .footer-underline{
