@@ -6,7 +6,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <title>{% block title %}Cosmos Beauty{% endblock %}</title>
@@ -129,45 +128,42 @@
                         <h4 class="footer-heading">Cosmos Beauty</h4>
                         <div class="footer-underline"></div>
                         <p>
-                            Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                            Our mission is to provide the best products to our customers. there are more than 10000+ statisfied customers and still counting. Be part of Cosmos Beauty.
                         </p>
                     </div>
                     <div class="col-md-3">
                         <h4 class="footer-heading">Quick Links</h4>
                         <div class="footer-underline"></div>
-                        <div class="mb-2"><a href="" class="text-white">Home</a></div>
-                        <div class="mb-2"><a href="" class="text-white">About Us</a></div>
-                        <div class="mb-2"><a href="" class="text-white">Contact Us</a></div>
-                        <div class="mb-2"><a href="" class="text-white">Blogs</a></div>
-                        <div class="mb-2"><a href="" class="text-white">Sitemaps</a></div>
+                        <div class="mb-2"><a href="/" class="text-white">Home</a></div>
+                        <div class="mb-2"><a href="{% url 'products' %}" class="text-white">Products</a></div>
+                        <div class="mb-2"><a href="{% url 'specialoffers' %}" class="text-white">Sales and offers</a></div>
+                        <div class="mb-2"><a href="{% url 'wishlist' %}" class="text-white">Wishlist</a></div>
+                        <div class="mb-2"><a href="{% url 'myorders' %}" class="text-white">My orders</a></div>
                     </div>
                     <div class="col-md-3">
-                        <h4 class="footer-heading">Shop Now</h4>
+                        <h4 class="footer-heading">Our Other Projects</h4>
                         <div class="footer-underline"></div>
-                        <div class="mb-2"><a href="" class="text-white">Collections</a></div>
-                        <div class="mb-2"><a href="" class="text-white">Trending Products</a></div>
-                        <div class="mb-2"><a href="" class="text-white">New Arrivals Products</a></div>
-                        <div class="mb-2"><a href="" class="text-white">Featured Products</a></div>
-                        <div class="mb-2"><a href="" class="text-white">Cart</a></div>
+                        <div class="mb-2"><a href="https://github.com/MBilalQureshi/html-css-project" class="text-white">Hot Bowl Cuisine</a></div>
+                        <div class="mb-2"><a href="https://github.com/MBilalQureshi/iq-quiz-game-js" class="text-white">IQ quiz game</a></div>
+                        <div class="mb-2"><a href="https://github.com/MBilalQureshi/hangman" class="text-white">Hangman</a></div>
                     </div>
                     <div class="col-md-3">
                         <h4 class="footer-heading">Reach Us</h4>
                         <div class="footer-underline"></div>
                         <div class="mb-2">
                             <p>
-                                <i class="fa fa-map-marker"></i> #444, some main road, some area, some street - 560077
+                                <i class="fa fa-map-marker"></i> Imaginary Street 55, 12345, Berlin - Germany
                             </p>
                         </div>
                         <div class="mb-2">
-                            <a href="" class="text-white">
-                                <i class="fa fa-phone"></i> +91 888-XXX-XXXX
-                            </a>
+                            <p class="text-white">
+                                <i class="fa fa-phone"></i> +49 111-222-3333
+                            </p>
                         </div>
                         <div class="mb-2">
-                            <a href="" class="text-white">
+                            <p class="text-white">
                                 <i class="fa fa-envelope"></i> CosmosBeautyt@gmail.com
-                            </a>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -182,10 +178,10 @@
                     <div class="col-md-4">
                         <div class="social-media">
                             Get Connected:
-                            <a href=""><i class="fa fa-facebook"></i></a>
-                            <a href=""><i class="fa fa-twitter"></i></a>
-                            <a href=""><i class="fa fa-instagram"></i></a>
-                            <a href=""><i class="fa fa-youtube"></i></a>
+                            <a href="https://www.linkedin.com/in/muhammad-bilal-91a1869a/"><i class="fa-brands fa-linkedin"></i></a>
+                            <a href="https://github.com/MBilalQureshi?tab=repositories"><i class="fa-brands fa-github"></i></a>
+                            <a href="https://www.facebook.com/"><i class="fa-brands fa-facebook"></i></a>
+                            <a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>
