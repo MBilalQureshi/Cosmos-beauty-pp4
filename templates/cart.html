@@ -48,16 +48,12 @@
                         <br>
                         {% endif %}
                         {% endfor %}
-                        <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg product-remove" value="{{ product.id }}" >Remove from cart</button>  
+                        <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg product-remove" value="{{ product.id }}" >Remove from cart</button>
                       </div>
                     </div>
                   </div>
                 </div>
                 {% endfor %}
-                <!-- TASK add spinner and disable continue button after removal of item for few seconds -->
-                <!-- <div class="spinner-border" role="status">
-                  <span class="visually-hidden">Loading...</span>
-                </div> -->
                 <div class="h-100 d-flex justify-content-center">           
                   <div>
                     <p><strong class="me-5">Subtotal: </strong>&euro; {{ total }}</p>

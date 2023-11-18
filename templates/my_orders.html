@@ -4,12 +4,13 @@
 {% block content %}
 <div class="container my-5">
     <div class="row justify-content-center">
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             {% if get_products %}
                 {% for product_key, product_data in get_products.items %}
-                    <h2 class="text-center mb-4">Order No: {{ product_key }}</h2>
-                    <div class="table-responsive">
-                        <table class="table table-bordered text-center">
+                <div class="card mb-4">
+                    <h2 class="text-center mt-3"><strong>Invoice no: {{ product_key }}</strong></h2>
+                    <div class="table-responsive mb-1">
+                        <table class="table table-hover text-center">
                             <thead>
                                 <tr>
                                     <th scope="col">Image</th>
@@ -51,8 +52,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="text-center mt-3">
+                    <div class="text-center mb-3">
                         <a href="/cancel-order/{{ product_key }}" class="hvr-sweep-to-right btn btn-dark btn-lg">Cancel this order</a>
+                    </div>
                     </div>
                 {% endfor %}
             {% else %}
