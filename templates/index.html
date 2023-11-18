@@ -15,8 +15,8 @@
             <div class="overlay-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.2)) ,url('{% static 'images/pexels-valeria-boltneva-965989.jpg' %}')"></div>
             <div class="container display-5">
                 <h2>Fragrances</h2>
-                <p>Get every Fragrances you wish for</p>
-                <a href="{% url 'products' %}" class="btn btn-lg btn-dark hvr-grow">View Fragrances</a>
+                <p>Fragrances are now also available</p>
+                <a href="{% url 'products_category' 'Fragrence' %}" class="btn btn-lg btn-dark hvr-sweep-to-right">View Fragrances</a>
             </div>
         </div>
         <div class="carousel-item" data-bs-interval="3000">
@@ -25,7 +25,7 @@
             <div class="container display-5">               
                 <h2>Anything, Anywhere you want</h2>
                 <p>View our latest products!</p>
-                <a href="{% url 'myorders' %}" class="btn btn-lg btn-dark hvr-grow">View Products List</a>
+                <a href="{% url 'products' %}" class="btn btn-lg btn-dark hvr-sweep-to-right">View Products List</a>
             </div>
         </div>
         <div class="carousel-item" data-bs-interval="3000">
@@ -34,7 +34,7 @@
             <div class="container display-5">
                 <h2>Makup products</h2>
                 <p>Cosmetics are now also available</p>
-                <a href="{% url 'products_category' 'Makeup' %}" class="btn btn-lg btn-dark hvr-grow">View Cosmetics</a>
+                <a href="{% url 'products_category' 'Makeup' %}" class="btn btn-lg btn-dark hvr-sweep-to-right">View Cosmetics</a>
             </div>
         </div>
     </div>
@@ -75,7 +75,7 @@
         <div class="col-md-6 mx-auto text-center">
             <input type="email" class="form-control" placeholder="E-Mail" aria-label="Recipient's email" aria-describedby="button-email">
             <div class="mt-2 mb-2" id="button-email">
-                <button class="btn btn-lg btn-dark hvr-grow" type="button">Let's go</button>
+                <button class="btn btn-lg btn-dark hvr-sweep-to-right" type="button">Let's go</button>
             </div>
         </div>
     </div>
