@@ -69,8 +69,6 @@ main{
 }
 
 /* Carousel */
-
-
 .carousel-item{
     height: 32rem;
     background-color: hsl(0, 19%, 53%);
@@ -109,28 +107,15 @@ main{
 }
 
 .banner{
-    /* position: relative; */
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    /* height: 8rem; */
     background-color: rgba(9, 9, 12, 0.788);
 }
 
 #free-gift-banner p{
-    /* font-family: 'Ubuntu', sans-serif; */
-    /* font-size: 1.8em; */
     color: #fff;
 }
-
-/* small{
-    color: #000000;
-} */
-/* @media screen and (max-width: 625px) {
-    #main-banner-text{
-        font-size: 16px;
-    }
-} */
 
 #free-gift-banner .display-6{
     line-height: 1.6;
@@ -140,6 +125,7 @@ main{
 #news-letter-text{
     /* font-family: 'Ubuntu', sans-serif; */
 }
+
 /* Products page */
 #product-card, #product-img{
     /* font-family: 'Roboto', sans-serif; */
@@ -221,7 +207,6 @@ main{
 
 /* Shipping detail */
 .shipping-background {
-    /* background-image: url('/static/images/pexels-karolina-grabowska-4239013.webp'); */
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -238,7 +223,6 @@ main{
 
 /* Order Complete */
 .jumbotron {
-    /* background-image: url('/static/images/dhl.webp'); */
     background-repeat: no-repeat;
     background-size: cover;
     color: #fff;
@@ -262,6 +246,7 @@ main{
         width: 100%;
     }
 }
+
 /* footer */
 .footer-area{
     padding: 40px 0px;
