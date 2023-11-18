@@ -6,6 +6,7 @@
 <!-- Looping -->
 <div class="container mt-4 mr-1">
   <div class="row mb-4">
+    <h2>Wishlist</h2>  
     {% if wishlist %}
       {% for item in wishlist %}
       <!-- col-12 col-sm-6 col-md-4 col-lg-3 h-100 w-auto -->
@@ -31,7 +32,7 @@
     {% endfor %}
   {% else %}
       <!-- TASK Style this later -->
-      <p>Sorry, no items in wishlist.</p>
+      <p>You have no products in wishlist.</p>
   {% endif %}    
   </div>
 </div>
