@@ -70,10 +70,12 @@ $(document).ready(function(){
         });
     });
 
-    $('.product-remove').click(function(e){
+    $('.product-remove').click(function(e){    
         e.preventDefault();
+        console.log(12232)
         let productId = $(this).attr("value");
         $(`.${productId}`).remove();
+        $('#continue-btn').css('display', 'none');
         let token = $('input[name=csrfmiddlewaretoken]').val();
         $.ajax({
             method: "POST",
@@ -85,6 +87,8 @@ $(document).ready(function(){
             // // success: function(json){},
             // // error: function(xhr, errmsg, err){}
             success: function (response){
+                // $('#continue-btn').prop('disabled', false);
+                
                 window.location.reload()
                 // console.log(response)
                 // console.log(response.status)

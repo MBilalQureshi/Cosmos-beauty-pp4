@@ -159,7 +159,7 @@ def cart(request):
         # TASK HANDLE EMPTY CART
         products = []
         cart = 'Nothing in cart'
-    context = {'products':products, 'total':total, 'ship_total': ship_total,}
+    context = {'products':products, 'total':round(total,2), 'ship_total': ship_total,}
     return render(request, 'cart.html', context)
 
 
