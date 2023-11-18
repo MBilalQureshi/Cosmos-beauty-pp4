@@ -1,4 +1,3 @@
-import datetime
 from django import template
 from ecommerce.models import ProductCategories
 

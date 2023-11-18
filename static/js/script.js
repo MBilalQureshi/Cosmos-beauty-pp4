@@ -45,7 +45,7 @@ $(document).ready(function(){
         });
         let productId = $(this).attr("value");
         let token = $('input[name=csrfmiddlewaretoken]').val();
-        let productQuantity = $('.input-number').val();
+        let productQuantity = parseInt($('.input-number').val());
         console.log(productQuantity)
         let price = $('.product-price').html();
         console.log(price)
@@ -135,15 +135,16 @@ $(document).ready(function(){
     $('.input-number').focusin(function(){
        $(this).data('oldValue', $(this).val());
     });
+
     $('.input-number').change(function() {
         
         minValue =  parseInt($(this).attr('min'));
         maxValue =  parseInt($(this).attr('max'));
         valueCurrent = parseInt($(this).val());
-        
+        console.log(valueCurrent + 'asdasd')
         let name = $(this).attr('name');
+
         if(valueCurrent >= minValue) {
-            console.log(1)
             $(".btn-number[data-type='minus'][data-field='"+name+"']").removeAttr('disabled')
         } else {
             // console.log(1)
@@ -152,7 +153,6 @@ $(document).ready(function(){
             $(this).val($(this).data('oldValue'));
         }
         if(valueCurrent <= maxValue) {
-            console.log(2)
             $(".btn-number[data-type='plus'][data-field='"+name+"']").removeAttr('disabled')
         } else {
             // alert('Sorry, the maximum value was reached');
