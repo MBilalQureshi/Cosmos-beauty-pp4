@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
 from django.views import generic, View
-from .models import ShipmentDetail, ProductCategories, ProductDiscount, Product, CartItem, ConfirmedOrderDetail, Wishes, UserBill
+from .models import ShipmentDetail, ProductCategories, ProductDiscount, Product, ConfirmedOrderDetail, Wishes, UserBill
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 import datetime

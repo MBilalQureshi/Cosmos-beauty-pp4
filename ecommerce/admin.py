@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.models import User
-from .models import ShipmentDetail, ProductCategories, ProductDiscount, Product, CartItem, ConfirmedOrderDetail, Wishes, UserBill
+from .models import ShipmentDetail, ProductCategories, ProductDiscount, Product, ConfirmedOrderDetail, Wishes, UserBill
 from django_summernote.admin import SummernoteModelAdmin
 # Register your models here.
 # admin.site.register(ShipmentDetail)
@@ -49,11 +49,11 @@ class ProductAdmin(SummernoteModelAdmin):
     # prepopulated_fields = {'slug': ('name',)}
 
 
-@admin.register(CartItem)
-class CartItemAdmin(admin.ModelAdmin):
-    list_display = ('user_info', 'product_info', 'quantity','created_on')
-    search_fields = ('user_info', 'product_info')
-    list_filter = ('user_info', 'created_on', 'updated_on')
+# @admin.register(CartItem)
+# class CartItemAdmin(admin.ModelAdmin):
+#     list_display = ('user_info', 'product_info', 'quantity','created_on')
+#     search_fields = ('user_info', 'product_info')
+#     list_filter = ('user_info', 'created_on', 'updated_on')
 
 
 @admin.register(ConfirmedOrderDetail)

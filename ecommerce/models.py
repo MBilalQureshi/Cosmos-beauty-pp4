@@ -105,24 +105,24 @@ class Product(models.Model):
         return self.name
 
 
-class CartItem(models.Model):
-    user_info = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_info")
-    product_info = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="user_product_info")
-    # sessionId = 
-    quantity = models.PositiveIntegerField(blank=True, validators=[
-        MinValueValidator(1),
-        MaxValueValidator(10)
-    ])
-    # TASK SEE LATER IF EXTRA INFO NEEDE BASIC INTENTION WAS FROM FRANGRENCE ML
-    extra_info = models.CharField(max_length=250, blank=True, default=False)
-    created_on = models.DateTimeField(auto_now_add=True)
-    updated_on = models.DateTimeField(auto_now=True)
+# class CartItem(models.Model):
+#     user_info = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_info")
+#     product_info = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="user_product_info")
+#     # sessionId = 
+#     quantity = models.PositiveIntegerField(blank=True, validators=[
+#         MinValueValidator(1),
+#         MaxValueValidator(10)
+#     ])
+#     # TASK SEE LATER IF EXTRA INFO NEEDE BASIC INTENTION WAS FROM FRANGRENCE ML
+#     extra_info = models.CharField(max_length=250, blank=True, default=False)
+#     created_on = models.DateTimeField(auto_now_add=True)
+#     updated_on = models.DateTimeField(auto_now=True)
 
-    class Meta:
-        ordering = ['-created_on']
+#     class Meta:
+#         ordering = ['-created_on']
 
-    def __str__(self):
-        return f"{self.user_info.first_name} {self.user_info.last_name}"
+#     def __str__(self):
+#         return f"{self.user_info.first_name} {self.user_info.last_name}"
 
 
 # Uni order id means that with user id only one order can be manged but if the ids in confirm order and user bill is same
@@ -151,7 +151,10 @@ class ConfirmedOrderDetail(models.Model):
     user_info = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_confirmed_order")
     product_info = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="user_bought_product")
     # shipment_info = models.ForeignKey(Product, on_delete=models.PROTECT, related_name="user_shipment_info")
-    quantity = models.PositiveIntegerField(default=1, null=False)
+    quantity = quantity = models.PositiveIntegerField(null=False,blank=False,default=1, validators=[
+        MinValueValidator(1),
+        MaxValueValidator(10)
+    ])
     # same_order_value = 
     prod_total = models.DecimalField(max_digits=6, decimal_places=2)
     user_unique_order_no = models.CharField(
