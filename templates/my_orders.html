@@ -43,7 +43,7 @@
                                         <td>{{ form_instance.instance.prod_total }}</td>
                                         <td>
                                             {% if product_data.form_instances|length == 1 %}
-                                                <a href="/cancel-order/{{ product_key }}" class="hvr-sweep-to-right btn btn-dark btn-lg">Remove</a>
+                                            <button class="hvr-sweep-to-right btn btn-dark btn-lg" data-bs-toggle="modal" data-bs-target="#item-{{ product_key }}">Remove</button>
                                             {% else %}
                                                 <a href="/remove-product/{{ product_key }}/{{ form_instance.instance.prod_total }}/{{ form_instance.instance.product_info.id }}" class="hvr-sweep-to-right btn btn-dark btn-lg">Remove</a>
                                             {% endif %}
@@ -54,8 +54,27 @@
                         </table>
                     </div>
                     <div class="text-center mb-3">
-                        <a href="/cancel-order/{{ product_key }}" class="hvr-sweep-to-right btn btn-dark btn-lg">Cancel this order</a>
+                        <button class="hvr-sweep-to-right btn btn-dark btn-lg" data-bs-toggle="modal" data-bs-target="#item-{{ product_key }}">Cancel this order</button>
                     </div>
+                    </div>
+
+                    <!-- Cancel order Modal -->
+                    <div class="modal fade" id="item-{{ product_key }}" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm Order Cancellation</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to cancel this order?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg" data-bs-dismiss="modal">Close</button>
+                                    <a href="/cancel-order/{{ product_key }}"  class="hvr-sweep-to-right btn btn-dark btn-lg">Cancel order</a>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 {% endfor %}
             {% else %}
