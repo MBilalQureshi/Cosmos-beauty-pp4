@@ -9,7 +9,7 @@ import decimal
 from django.db.models import Q
 from .forms import ShipmentDetailForm, ConfirmedOrderDetailForm
 import random
-from django.contrib import messages
+# from django.contrib import messages
 
 
 class Home (generic.TemplateView):
@@ -228,9 +228,9 @@ class Checkout(View):
                     fetch_user = form.save(commit=False)
                     fetch_user.user = request.user
                     form.save()
-                    messages.success(request, 'Shipment details updated successfully.')
+                    # messages.success(request, 'Shipment details updated successfully.')
                 else:
-                    messages.error(request, 'Error updating Shipment details.')
+                    # messages.error(request, 'Error updating Shipment details.')
                     return redirect('checkout')
             else:
                 # First time add form
@@ -241,7 +241,7 @@ class Checkout(View):
                     form.save()
                     # messages.success(request, 'Shipment details added successfully.')
                 else:
-                    messages.error(request, 'Error adding Shipment details.')
+                    # messages.error(request, 'Error adding Shipment details.')
                     return redirect('checkout')
 
             overall_total = 0.00
@@ -250,7 +250,7 @@ class Checkout(View):
             # TASK UPDATE THE QUANTITY IN PRODUCTS STOCK
             
             if not request.session.get('cart'):
-                messages.error(request, 'Order already submitted.')
+                # messages.error(request, 'Order already submitted.')
                 return redirect('myorders')
             else:
                 for key,value in request.session.get('cart').items():
@@ -333,13 +333,13 @@ class MyOrders(View):
             form = ConfirmedOrderDetailForm(request.POST, instance=instance)
             if form.is_valid():
                 form.save()
-                messages.success(request, 'Quantity updated successfully.')
-            else:
-                messages.error(request, 'Error updating quantity.')
+                # messages.success(request, 'Quantity updated successfully.')
+            # else:
+                # messages.error(request, 'Error updating quantity.')
 
             return redirect('myorders')
-        else:
-            messages.error(request, 'Cannot update quantity.')
+        # else:
+            # messages.error(request, 'Cannot update quantity.')
         return self.get(request)
 
 def delete_order(request, product_key):
@@ -348,7 +348,7 @@ def delete_order(request, product_key):
     user_bill = UserBill.objects.filter(user_unique_order_no=product_key)
     order_detail.delete()
     user_bill.delete()
-    messages.success(request, 'Order cancelled successfully.')
+    # messages.success(request, 'Order cancelled successfully.')
     return redirect('myorders')
 
 def remove_product(request, product_key, total, prod_id):
@@ -358,5 +358,5 @@ def remove_product(request, product_key, total, prod_id):
     update_user_bill = UserBill.objects.filter(user_unique_order_no=product_key).update(total = update_total)
     order_detail = ConfirmedOrderDetail.objects.filter(user_unique_order_no=product_key).filter(product_info__id = prod_id)
     order_detail.delete()
-    messages.success(request, 'Product removed successfully.')
+    # messages.success(request, 'Product removed successfully.')
     return redirect('myorders')

@@ -1,14 +1,14 @@
 $(document).ready(function(){
 
     // remove messages in 3 seconds
-    setTimeout(function(){
-        let messages = document.getElementById("msg");
+    // setTimeout(function(){
+    //     let messages = document.getElementById("msg");
 
-        if (messages) {
-            let alert = new bootstrap.Alert(messages);
-            alert.close();
-        }
-    },3000);
+    //     if (messages) {
+    //         let alert = new bootstrap.Alert(messages);
+    //         alert.close();
+    //     }
+    // },3000);
 
     // Add/remove from wishlist
     $('.add-to-wishlist').click(function(e){
