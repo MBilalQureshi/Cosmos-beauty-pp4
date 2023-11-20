@@ -64,20 +64,42 @@
     </div>
 </div>
 
-<!-- Newsletter subscribe -->
-<div class="container">
+<!-- Our Team -->
+<div class="my-4">
+<div class="container tag">
     <div class="row">
-        <div id="news-letter-text" class="text-center">
-            <p class="fs-5">Subscribe to our news letter and get <s>5%</s>,<mark class="fs-4"> 10% discount<mark></p>
+        <div class="col-sm-12 col-md-6 text-center">
+            <img src=" {% static 'images/man.webp' %} " alt="Man in suit" class="img-fluid lead-img">
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6 mx-auto text-center">
-            <input type="email" class="form-control" placeholder="E-Mail" aria-label="Recipient's email" aria-describedby="button-email">
-            <div class="mt-2 mb-2" id="button-email">
-                <button class="btn btn-lg btn-dark hvr-sweep-to-right" type="button">Let's go</button>
-            </div>
+        <div class="col-sm-12 col-md-6 text-vertical-center">
+            <h2>Ross Perot</h2>
+            <blockquote>"Spend a lot of time talking to customers face-to-face. You’d be amazed how many companies don’t listen to their customers." - <cite>Ross Perot</cite> </blockquote>
         </div>
     </div>
 </div>
+<div class="container tag">
+    <div class="row">
+        <div class="col-sm-12 col-md-6 order-1 order-sm-1 order-md-0 text-md-end text-vertical-center">
+            <h2>Ayesha Sattar</h2>
+            <blockquote>"Excellent customer service is the number one job in any company! It is the personality of the company and the reason customers come back. Without customers there is no company!" - <cite>Ayesha Sattar</cite> </blockquote>
+        </div>
+        <div class="col-sm-12 col-md-6 text-center order-0 order-sm-0 order-md-1">
+            <img src="{% static 'images/woman.webp' %}" alt="Woman working on laptop and listening to phone" class="img-fluid lead-img">
+        </div>
+    </div>
+</div>
+
+<div class="container tag">
+    <div class="row">
+        <div class="col-sm-12 col-md-6 text-center">
+            <img src="{% static 'images/man2.webp' %}" alt="Man in suit" class="img-fluid lead-img">
+        </div>
+        <div class="col-sm-12 col-md-6 text-vertical-center">
+            <h2>Connor J. Wilson(CEO)</h2>
+            <blockquote>"The key is when a customer walks away, thinking, 'Wow, I love doing business with them, and I want to tell others about the experience.'" - <cite>Shep Hyken (Connor J. Wilson)</cite> </blockquote>
+        </div>
+    </div>
+</div>
+</div>
+
 {% endblock content %}

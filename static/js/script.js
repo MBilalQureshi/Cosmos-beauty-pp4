@@ -11,6 +11,22 @@ $(document).ready(function(){
     // },3000);
 
     // Add/remove from wishlist
+    $(document).on("scroll", function() {
+        var pageTop = $(document).scrollTop();
+        var pageBottom = pageTop + $(window).height();
+        var tags = $(".tag");
+    
+        tags.each(function() {
+            var tag = $(this);
+            if (tag.position().top < pageBottom) {
+                tag.addClass("visible");
+            } else {
+                tag.removeClass("visible");
+            }
+        });
+    });
+      
+
     $('.add-to-wishlist').click(function(e){
         e.preventDefault();
 

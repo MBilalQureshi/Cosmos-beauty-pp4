@@ -120,7 +120,26 @@ main{
 #free-gift-banner .display-6{
     line-height: 1.6;
 }
-
+.tag {
+    opacity: 0;
+    transform: translate(0, 10vh);
+    transition: all 1s;
+}
+.tag.visible {
+    opacity: 1;
+    transform: translate(0, 0);
+}
+.lead-img{
+    width:150px;
+    height: 150px;
+    border-radius: 50%;
+}
+.text-vertical-center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+  
 /* Products page */
 #product-card, #product-img{
     /* font-family: 'Roboto', sans-serif; */
