@@ -5,17 +5,19 @@
 
 {% block content %}
 <div class="container my-3">
-    <div class="card p-3 border-dark text-center">
-        <h2>Shipment Details</h2>
-    </div>
     <form method="POST" style="background-image: url('{% static 'images/pexels-karolina-grabowska-4239013.webp' %}')" class="mt-3 shipping-background">
         {% csrf_token %}
         <div class="row justify-content-center">
-            <div class="col-12 col-md-8 col-lg-6">
+            <div class="col-10 col-md-8 col-lg-6 card">
+                <div class="m-4">
+                    <div class="container d-flex align-items-center justify-content-center">
+                    <h2>Shipment Details</h2>
+                     </div>
                 {% crispy form %}
-                <button type="submit" class="hvr-sweep-to-right btn btn-dark btn-lg">
+                <button type="submit" class="hvr-sweep-to-right btn btn-dark btn-lg" style="width: 100%;">
                     Finish Order
                 </button>
+            </div>
             </div>
         </div>
     </form>

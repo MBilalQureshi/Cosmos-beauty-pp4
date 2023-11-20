@@ -207,9 +207,9 @@ main{
     background-position: center;
     padding: 20px;
     position: relative;
-    text-align: center;
     border-radius: 20px;
-    overflow: hidden; 
+    overflow: hidden;
+    background-attachment: fixed;
 }
 
 .shipping-background:before {
