@@ -1,6 +1,6 @@
 $(document).ready(function(){
     /**
-     * Add / remove products to wishlist AJAX handler.
+     * Add / remove products to wishlist using AJAX.
      * Concept of AJAX handling is learned from
      * 
      */
@@ -26,7 +26,7 @@ $(document).ready(function(){
 
 
     /**
-     * Add / remove products to cart AJAX handler.
+     * Add / remove products to cart using AJAX.
      */
     $('.add-to-cart').click(function(e){
         e.preventDefault();
