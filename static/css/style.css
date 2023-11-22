@@ -1,8 +1,5 @@
+/* Google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Oswald&family=Roboto&family=Ubuntu&display=swap');
-
-/* font-family: 'Oswald', sans-serif;
-font-family: 'Roboto', sans-serif;
-font-family: 'Ubuntu', sans-serif; */
 
 body{
     margin: 0;
@@ -14,8 +11,16 @@ body{
     flex-direction: column;
     min-height: 100vh;
 }
+
+/* Main content */
 main{
     flex: 1;
+}
+
+/* Buttons */
+.btn{
+    border-radius: 0px;
+    font-family: 'Ubuntu', sans-serif;
 }
 
 /* nav */
@@ -68,7 +73,7 @@ main{
     }
 }
 
-/* Carousel */
+/* Carousel on home */
 .carousel-item{
     height: 32rem;
     background-color: hsl(0, 19%, 53%);
@@ -78,8 +83,6 @@ main{
 .carousel-item .container{
     color: #ffffff;
     font-weight: bolder;
-    /* font-family: 'Roboto', sans-serif; */
-    /* font-size: 3em; */
     position: absolute;
     left: 0;
     right: 0;
@@ -93,14 +96,13 @@ main{
    left: 0;
    right: 0;
    top: 0;
-   /* opacity: 0.6; */
    background-position: center;
    background-size: cover;
    background-repeat: no-repeat;
    background-blend-mode:hard-light;
 }
 
-/* Free gift banner */
+/* Sale banner on home */
 #brand-hash-tag, a{
     text-decoration: none;
     color: #ffffff;
@@ -120,6 +122,8 @@ main{
 #free-gift-banner .display-6{
     line-height: 1.6;
 }
+
+/* Animation and human images on home */
 .tag {
     opacity: 0;
     transform: translate(0, 10vh);
@@ -139,42 +143,30 @@ main{
     flex-direction: column;
     justify-content: center;
 }
-  
+
 /* Products page */
 #product-card, #product-img{
-    /* font-family: 'Roboto', sans-serif; */
     box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
 }
 #product-card:hover{
     box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 
-/* TASK ZOOM IN PRODUCTS ON HOVER */
-
 /* product details */
-
-/* Image hover zoom */
-/* [1] The container */
 .img-hover-zoom {
-    overflow: hidden; /* [1.2] Hide the overflowing of child elements */
-  }
+    overflow: hidden;
+}
   
-  /* [2] Transition property for smooth transformation of images */
-  .img-hover-zoom img {
+.img-hover-zoom img {
     transition: transform .5s ease;
-  }
+}
   
-  /* [3] Finally, transforming the image when container gets hovered */
-  .img-hover-zoom:hover img {
-    transform: scale(1.2);
-  }
 
-.btn{
-    border-radius: 0px;
-    font-family: 'Ubuntu', sans-serif;
+.img-hover-zoom:hover img {
+    transform: scale(1.2);
 }
 
-/* Sweep To Right */
+/* Sweep To Right button effect */
 .hvr-sweep-to-right {
     display: inline-block;
     vertical-align: middle;
@@ -216,7 +208,7 @@ main{
 }
 
 .btn-number{
-    border: 0.4 px solid grey;
+    border: 0.4px solid grey;
 }
 
 /* Shipping detail */
@@ -235,7 +227,7 @@ main{
     position: absolute;
 }
 
-/* Order Complete */
+/* Order Complete page */
 .jumbotron {
     background-repeat: no-repeat;
     background-size: cover;
