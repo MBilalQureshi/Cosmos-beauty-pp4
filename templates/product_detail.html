@@ -6,12 +6,24 @@
 <div class="container-gutter my-5 mx-4">
     <div class="row d-flex justify-content-center">
         <div id="product-img" class="col-md-6 col-xl-4 img-hover-zoom d-flex justify-content-center">
-            {% if "placeholder" in product.image.url %}
-            <img src="https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg"
-                class="img-fluid rounded d-flex" alt="Product image">
-            {% else %}
-            <img src="{{ product.image.url }}" class="img-fluid rounded" alt="Product image">
-            {% endif %}
+            
+            <div class="d-none d-sm-block">
+                {% if "placeholder" in product.image.url %}
+                <img src="https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg"
+                    class="rounded d-flex" alt="Product image">
+                {% else %}
+                <img src="{{ product.image.url }}" class="rounded" alt="Product image">
+                {% endif %}
+            </div>
+            <div class="d-sm-none">
+                {% if "placeholder" in product.image.url %}
+                <img src="https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg"
+                    class="rounded d-flex img-fluid" alt="Product image">
+                {% else %}
+                <img src="{{ product.image.url }}" class="rounded img-fluid" alt="Product image">
+                {% endif %}
+            </div>
+            
         </div>
         <div class="col-12 col-md-6 col-lg-4 my-3">
             <h2 class="mb-3 display-6"><strong>{{ product.name }}</strong></h2>
@@ -20,8 +32,7 @@
             {% if product.discount_name.discount_percentage > 0 %}
             <p><small><strong>{{ product.discount_name }}:
                     </strong><span>{{ product.discount_name.discount_percentage }}</span>&percnt; off</small></p>
-            <p><small><strong>Discounted Price: </strong><mark><span
-                            class="product-discount">{{ discount|floatformat:2 }}</span>&euro;</mark></small></p>
+            <p><small><strong>Discounted Price: </strong><mark><span class="product-discount">{{ discount|floatformat:2 }}</span>&euro;</mark></small></p>
             {% endif %}
             <p><small><strong>Price: </strong><span class="product-price">{{ product.price }}</span>&euro;</small></p>
             <div class="d-grid">

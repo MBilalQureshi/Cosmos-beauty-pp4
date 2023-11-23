@@ -4,7 +4,10 @@ Cosmos Beauty is ecommerce web app which is designed not only for cosmetics prod
 
 User can add products to their wishlist to buy them later. They can easily add/remove products as per their need even buy 10 items at the same time. Once order is placed user can also cancel order, remove items and even update the quantity of products.
 
+![Site Mockup](docs/readme_images/site_mockup.png)
+
 The live site can be found here - [Cosmos Beauty](https://cosmos-beauty-133a3d7898aa.herokuapp.com/)
+
 
 ## Table of Contents
 
