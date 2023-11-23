@@ -3,80 +3,84 @@
 
 {% block content %}
 {% csrf_token %}
-<div class="container-gutter my-3 mx-4">
-    <div class="row">
-        <div id="product-img" class="col-md-5 offset-lg-2 col-lg-4 offset-xl-2 img-hover-zoom">
+<div class="container-gutter my-5 mx-4">
+    <div class="row d-flex justify-content-center">
+        <div id="product-img" class="col-md-6 col-xl-4 img-hover-zoom d-flex justify-content-center">
             {% if "placeholder" in product.image.url %}
-                <img src="https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg" class="img-fluid rounded" alt="Placeholder Image"> 
+            <img src="https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg"
+                class="img-fluid rounded d-flex" alt="Product image">
             {% else %}
-                <img src="{{ product.image.url }}" class="img-fluid rounded" alt="Product image">
+            <img src="{{ product.image.url }}" class="img-fluid rounded" alt="Product image">
             {% endif %}
         </div>
-        <div class="col-md-7 col-lg-4">
-                <h2  class="mb-3 display-6"><strong>{{ product.name }}</strong></h2>
-                <p><small><strong>Product Category: </strong> {{ product.product_category }}</small></p>
-                <p><small><strong>In Stock: </strong>{{ product.stock }}</small></p>
-                {% if product.discount_name.discount_percentage > 0 %}
-                <p><small><strong>{{ product.discount_name }}: </strong><span>{{ product.discount_name.discount_percentage }}</span>&percnt; off</small></p>
-                <p><small><strong>Discounted Price: </strong><mark><span class="product-discount">{{ discount|floatformat:2 }}</span>&euro;</mark></small></p>
-                {% endif %}
-                <p><small><strong>Price: </strong><span class="product-price">{{ product.price }}</span>&euro;</small></p>
-                
-                <div class="d-grid">
-                    <!-- TASK ADJUST ADD TO CART AND PRODUCT QUANTITY ON SAME LINE -->
-                    <div class="form-errors text-danger"></div>
-                    {% if product.stock > 0 %}
-                    <div class="input-group mb-3 w-auto p-3">        
-                        <span class="input-group-btn">
-                      <button type="button" class="btn btn-default btn-number me-1" data-type="minus" data-field="quant[1]">
-                          <span><i class="fa-solid fa-minus"></i></span>
+        <div class="col-12 col-md-6 col-lg-4 my-3">
+            <h2 class="mb-3 display-6"><strong>{{ product.name }}</strong></h2>
+            <p><small><strong>Product Category: </strong> {{ product.product_category }}</small></p>
+            <p><small><strong>In Stock: </strong>{{ product.stock }}</small></p>
+            {% if product.discount_name.discount_percentage > 0 %}
+            <p><small><strong>{{ product.discount_name }}:
+                    </strong><span>{{ product.discount_name.discount_percentage }}</span>&percnt; off</small></p>
+            <p><small><strong>Discounted Price: </strong><mark><span
+                            class="product-discount">{{ discount|floatformat:2 }}</span>&euro;</mark></small></p>
+            {% endif %}
+            <p><small><strong>Price: </strong><span class="product-price">{{ product.price }}</span>&euro;</small></p>
+            <div class="d-grid">
+                <div class="form-errors text-danger"></div>
+                {% if product.stock > 0 %}
+                <div class="input-group mb-3 w-auto p-3">
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default btn-number me-1" data-type="minus"
+                            data-field="quant[1]">
+                            <span><i class="fa-solid fa-minus"></i></span>
                         </button>
-                        </span>
-                        <!-- TASK add a modal later for max and min values -->
-                        {% if product.stock < 10 %}
-                            <input id = "form-quntity" type="number" name="quant[1]" class="form-control input-number" value="1" min="1" max="{{ product.stock }}">
-                        {% else %}
-                            <input id = "form-quntity" type="number" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
-                        {% endif %}
-                        <span class="input-group-btn">
-                      <button type="button" class="btn btn-default btn-number ms-1" data-type="plus" data-field="quant[1]">
-                          <span class="font-border"><i class="fa-solid fa-plus"></i></span>
+                    </span>
+                    {% if product.stock < 10 %}
+                    <input id="form-quntity" type="number" name="quant[1]" class="form-control input-number" value="1"
+                        min="1" max="{{ product.stock }}">
+                    {% else %}
+                    <input id="form-quntity" type="number" name="quant[1]" class="form-control input-number" value="1"
+                        min="1" max="10">
+                    {% endif %}
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default btn-number ms-1" data-type="plus"
+                            data-field="quant[1]">
+                            <span class="font-border"><i class="fa-solid fa-plus"></i></span>
                         </button>
-                        </span>
-                    </div>
-                    
-                    
-                    <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg add-to-cart" value="{{ product.id }}" >{% if add_to_cart == True %}
-                        Remove from cart            
-                    {% else %}
-                        Add to cart
-                    {% endif %}
-                    </button><br>
-                    
-                    {% else %}
-                    <!-- TASK design this later -->
-                    <p>Out of stock. Kindly come back later.</p>
-                    {% endif %}
-                    <!-- add to wish list if user is authenticated else signup popup -->
-                    <!-- <i class="fa-regular fa-heart"></i> -->
-                    {% if user.is_authenticated %}
-                        <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg add-to-wishlist" value="{{ product.id }}">
-                        {% if product_wish == True %}
-                            Remove from wishlist
-                        {% else %}
-                            Add to wishlist
-                        {% endif %}
-                        </button><br>
-                    {% else %}
-                    <a href="{% url 'account_login' %}" class="hvr-sweep-to-right btn btn-dark btn-lg">Add to wishlist</a><br>
-                    {% endif %}
-                    <a href="{% url 'cart' %}" class="hvr-sweep-to-right btn btn-dark btn-lg">Checkout</a>
+                    </span>
                 </div>
+                <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg add-to-cart"
+                    value="{{ product.id }}">{% if add_to_cart == True %}
+                    Remove from cart
+                    {% else %}
+                    Add to cart
+                    {% endif %}
+                </button><br>
+                {% else %}
+                <p><strong>Out of stock. Kindly come back later.</strong></p>
+                {% endif %}
+                {% if user.is_authenticated %}
+                <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg add-to-wishlist"
+                    value="{{ product.id }}">
+                    {% if product_wish == True %}
+                    Remove from wishlist
+                    {% else %}
+                    Add to wishlist
+                    {% endif %}
+                </button><br>
+                {% else %}
+                <a href="{% url 'account_login' %}" class="hvr-sweep-to-right btn btn-dark btn-lg">Add to
+                    wishlist</a><br>
+                {% endif %}
+                <a href="{% url 'cart' %}" class="hvr-sweep-to-right btn btn-dark btn-lg">Checkout</a>
+            </div>
         </div>
     </div>
-    <div class="row"><div class="col-md-12 offset-lg-3 col-lg-6 offset-xl-3 mt-4"><hr class="hr hr-blurry" /></div></div>
     <div class="row">
-        <!-- TASK add toggle collapse dropdown-->
+        <div class="col-md-12 offset-lg-3 col-lg-6 offset-xl-3 mt-4">
+            <hr class="hr hr-blurry" />
+        </div>
+    </div>
+    <div class="row">
         <div class="col-md-5 offset-lg-2 col-lg-8 offset-xl-2 px-0 mt-4">
             <div id="product-desc">
                 <h2 class="display-6"><strong>Product Description</strong></h2>
