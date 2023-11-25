@@ -123,16 +123,6 @@ main{
     line-height: 1.6;
 }
 
-/* Animation and human images on home */
-.tag {
-    opacity: 0;
-    transform: translate(0, 10vh);
-    transition: all 1s;
-}
-.tag.visible {
-    opacity: 1;
-    transform: translate(0, 0);
-}
 .lead-img{
     width:150px;
     height: 150px;

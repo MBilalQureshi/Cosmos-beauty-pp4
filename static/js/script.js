@@ -79,25 +79,6 @@ $(document).ready(function(){
 
 
     /**
-     * This ready to use animation code is taken from ''
-     * The effect can be seen above footer on home page.
-     */
-    $(document).on("scroll", function() {
-        let pageTop = $(document).scrollTop();
-        let pageBottom = pageTop + $(window).height();
-        let tags = $(".tag"); 
-        tags.each(function() {
-            let tag = $(this);
-            if (tag.position().top < pageBottom) {
-                tag.addClass("visible");
-            } else {
-                tag.removeClass("visible");
-            }
-        });
-    });
-
-
-    /**
      * This event removes warnings once user click on
      * quantity input field on product details page.
      */
