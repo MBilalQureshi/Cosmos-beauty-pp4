@@ -10,9 +10,10 @@
     <div class="col-12 col-md-8 col-lg-6">
       <div class="p-4 card mx-4">
         <div class="container d-flex align-items-center justify-content-center">
-        <h1>{% trans "Sign Up" %}</h1>
+          <h1>{% trans "Sign Up" %}</h1>
         </div>
-        <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}" class="text-reset fw-bolder">sign
+        <p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}"
+            class="text-reset fw-bolder">sign
             in</a>.{% endblocktrans %}</p>
 
         <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
@@ -21,7 +22,8 @@
           {% if redirect_field_value %}
           <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
           {% endif %}
-          <button type="submit" class="hvr-sweep-to-right btn btn-dark btn-lg" style="width: 100%;">{% trans "Sign Up" %} &raquo;</button>
+          <button type="submit" class="hvr-sweep-to-right btn btn-dark btn-lg"
+            style="width: 100%;">{% trans "Sign Up" %} &raquo;</button>
         </form>
       </div>
     </div>

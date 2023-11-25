@@ -8,7 +8,6 @@
   <div class="row mb-4">
     {% if product_list %}
     {% for product in product_list %}
-    <!-- col-12 col-sm-6 col-md-4 col-lg-3 h-100 w-auto -->
     <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-3">
       <a href="{% url 'product_detail' product.slug %}" aria-label="Product Detail Page">
         <div class="card h-100" id="product-card">
@@ -19,7 +18,6 @@
           <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }} image" aria-label="The image of {{ product.name }} with white background">
           {% endif %}
           <div class="card-body">
-            <!-- FIX TRUNCATE TEXT ... -->
             <h5 class="card-title fs-6 text-truncate" title='{{ product.name }}'><strong>{{ product.name }}</strong>
             </h5>
           </div>

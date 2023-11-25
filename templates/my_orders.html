@@ -5,80 +5,95 @@
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-12">
-            <h2>Your Orders</h2>  
+            <h1>Your Orders</h1>
             {% if get_products %}
-                {% for product_key, product_data in get_products.items %}
-                <div class="card mb-4">
-                    <h2 class="text-center mt-3"><strong>Invoice no: {{ product_key }}</strong></h2>
-                    <div class="table-responsive mb-1">
-                        <table class="table table-hover text-center">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Quantity</th>
-                                    <th scope="col">Total</th>
-                                    <th scope="col">Remove Item</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for form_instance in product_data.form_instances %}
-                                    <tr>
-                                        <td>
-                                            {% if "placeholder" in form_instance.instance.product_info.image.url %}
-                                                <img src="https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg" class="rounded-start p-3" alt="Placeholder Image" style="max-width: 100px; max-height: 100px;">
-                                            {% else %}
-                                                <img src="{{ form_instance.instance.product_info.image.url }}" class="rounded-start p-3 img-fluid" alt="Product image" style="max-width: 100px; max-height: 100px;">
-                                            {% endif %}
-                                        </td>
-                                        <td>{{ form_instance.instance.product_info.name }}</td>
-                                        <td>
-                                            <form method="POST" class="d-flex flex-column align-items-center justify-content-center">
-                                                {% csrf_token %}
-                                                <input type="number" name="quantity" min="1" max="10" value="{{ form_instance.instance.quantity }}" class="form-control mx-2 mb-2">
-                                                <input type="hidden" name="product_instance_id" value="{{ form_instance.instance.id }}">
-                                                <button type="submit" class="hvr-sweep-to-right btn btn-dark btn-lg">Update</button>
-                                            </form>
-                                        </td>
-                                        <td>{{ form_instance.instance.prod_total }}</td>
-                                        <td>
-                                            {% if product_data.form_instances|length == 1 %}
-                                            <button class="hvr-sweep-to-right btn btn-dark btn-lg" data-bs-toggle="modal" data-bs-target="#item-{{ product_key }}">Remove</button>
-                                            {% else %}
-                                                <a href="/remove-product/{{ product_key }}/{{ form_instance.instance.prod_total }}/{{ form_instance.instance.product_info.id }}" class="hvr-sweep-to-right btn btn-dark btn-lg">Remove</a>
-                                            {% endif %}
-                                        </td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="text-center mb-3">
-                        <button class="hvr-sweep-to-right btn btn-dark btn-lg" data-bs-toggle="modal" data-bs-target="#item-{{ product_key }}">Cancel this order</button>
-                    </div>
-                    </div>
+            {% for product_key, product_data in get_products.items %}
+            <div class="card mb-4">
+                <h2 class="text-center mt-3"><strong>Invoice no: {{ product_key }}</strong></h2>
+                <div class="table-responsive mb-1">
+                    <table class="table table-hover text-center">
+                        <thead>
+                            <tr>
+                                <th scope="col">Image</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Remove Item</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for form_instance in product_data.form_instances %}
+                            <tr>
+                                <td>
+                                    {% if "placeholder" in form_instance.instance.product_info.image.url %}
+                                    <img src="https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg"
+                                        class="rounded-start p-3" alt="Placeholder Image"
+                                        style="max-width: 100px; max-height: 100px;">
+                                    {% else %}
+                                    <img src="{{ form_instance.instance.product_info.image.url }}"
+                                        class="rounded-start p-3 img-fluid" alt="Product image"
+                                        style="max-width: 100px; max-height: 100px;">
+                                    {% endif %}
+                                </td>
+                                <td>{{ form_instance.instance.product_info.name }}</td>
+                                <td>
+                                    <form method="POST"
+                                        class="d-flex flex-column align-items-center justify-content-center">
+                                        {% csrf_token %}
+                                        <input type="number" name="quantity" min="1" max="10"
+                                            value="{{ form_instance.instance.quantity }}"
+                                            class="form-control mx-2 mb-2">
+                                        <input type="hidden" name="product_instance_id"
+                                            value="{{ form_instance.instance.id }}">
+                                        <button type="submit"
+                                            class="hvr-sweep-to-right btn btn-dark btn-lg">Update</button>
+                                    </form>
+                                </td>
+                                <td>&euro;{{ form_instance.instance.prod_total }}</td>
+                                <td>
+                                    {% if product_data.form_instances|length == 1 %}
+                                    <button class="hvr-sweep-to-right btn btn-dark btn-lg" data-bs-toggle="modal"
+                                        data-bs-target="#item-{{ product_key }}">Remove</button>
+                                    {% else %}
+                                    <a href="/remove-product/{{ product_key }}/{{ form_instance.instance.prod_total }}/{{ form_instance.instance.product_info.id }}"
+                                        class="hvr-sweep-to-right btn btn-dark btn-lg">Remove</a>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center mb-3">
+                    <button class="hvr-sweep-to-right btn btn-dark btn-lg" data-bs-toggle="modal"
+                        data-bs-target="#item-{{ product_key }}">Cancel this order</button>
+                </div>
+            </div>
 
-                    <!-- Cancel order Modal -->
-                    <div class="modal fade" id="item-{{ product_key }}" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm Order Cancellation</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    Are you sure you want to cancel this order?
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg" data-bs-dismiss="modal">Close</button>
-                                    <a href="/cancel-order/{{ product_key }}"  class="hvr-sweep-to-right btn btn-dark btn-lg">Cancel order</a>
-                                </div>
-                            </div>
+            <!-- Cancel order Modal -->
+            <div class="modal fade" id="item-{{ product_key }}" tabindex="-1"
+                aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm Order Cancellation</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to cancel this order?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg"
+                                data-bs-dismiss="modal">Close</button>
+                            <a href="/cancel-order/{{ product_key }}"
+                                class="hvr-sweep-to-right btn btn-dark btn-lg">Cancel order</a>
                         </div>
                     </div>
-                {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
             {% else %}
-                    <p>Currently no active orders.</p>
+            <p>Currently no active orders.</p>
             {% endif %}
         </div>
     </div>

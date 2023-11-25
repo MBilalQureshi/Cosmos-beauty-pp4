@@ -6,46 +6,55 @@
 <!-- Carousel -->
 <div id="hero-carousel" class="carousel slide carousel-fade carousel-light" data-bs-ride="carousel">
     <div class="carousel-indicators">
-        <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="0" class="active" aria-current="true"
+            aria-label="Slide 1"></button>
         <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
         <button type="button" data-bs-target="#hero-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
     </div>
     <div class="carousel-inner">
         <div class="carousel-item active" data-bs-interval="3000">
-            <div class="overlay-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.2)) ,url('{% static 'images/pexels-valeria-boltneva-965989.jpg' %}')"></div>
+            <div class="overlay-image"
+                style="background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.2)) ,url('{% static 'images/pexels-valeria-boltneva-965989.jpg' %}')">
+            </div>
             <div class="container display-5">
                 <h2>Fragrances</h2>
                 <p>Fragrances are now also available</p>
-                <a href="{% url 'products_category' 'Fragrence' %}" class="btn btn-lg btn-dark hvr-sweep-to-right">View Fragrances</a>
+                <a href="{% url 'products_category' 'Fragrence' %}" class="btn btn-lg btn-dark hvr-sweep-to-right">View
+                    Fragrances</a>
             </div>
         </div>
         <div class="carousel-item" data-bs-interval="3000">
-            <div class="overlay-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.2)) ,url('{% static 'images/pexels-pixabay-206299.webp' %}')"></div>
+            <div class="overlay-image"
+                style="background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.2)) ,url('{% static 'images/pexels-pixabay-206299.webp' %}')">
+            </div>
             <!-- <img src="{% static 'images/pexels-pixabay-206299.webp' %}" class="d-block w-100" alt="..."> -->
-            <div class="container display-5">               
+            <div class="container display-5">
                 <h2>Anything, Anywhere you want</h2>
                 <p>View our latest products!</p>
                 <a href="{% url 'products' %}" class="btn btn-lg btn-dark hvr-sweep-to-right">View Products List</a>
             </div>
         </div>
         <div class="carousel-item" data-bs-interval="3000">
-            <div class="overlay-image" style="background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.2)) ,url('{% static 'images/pexels-cottonbro-studio-4620874.webp' %}')"></div>
+            <div class="overlay-image"
+                style="background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.2)) ,url('{% static 'images/pexels-cottonbro-studio-4620874.webp' %}')">
+            </div>
             <!-- <img src="{% static 'images/pexels-zhugewala-2113855.webp' %}" class="d-block w-100" alt="..."> -->
             <div class="container display-5">
                 <h2>Makup products</h2>
                 <p>Cosmetics are now also available</p>
-                <a href="{% url 'products_category' 'Makeup' %}" class="btn btn-lg btn-dark hvr-sweep-to-right">View Cosmetics</a>
+                <a href="{% url 'products_category' 'Makeup' %}" class="btn btn-lg btn-dark hvr-sweep-to-right">View
+                    Cosmetics</a>
             </div>
         </div>
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#hero-carousel" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
-      </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#hero-carousel" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
-      </button>
+    </button>
     </a>
 </div>
 
@@ -54,9 +63,11 @@
     <div class="row">
         <div class="col-12">
             <a href="{% url 'specialoffers' %}">
-                <div class="banner my-4 shadow p-3 bg-white rounded" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{% static 'images/fire.webp' %}')">
+                <div class="banner my-4 shadow p-3 bg-white rounded"
+                    style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{% static 'images/fire.webp' %}')">
                     <div id="free-gift-banner" class="text-center">
-                        <p class="display-6 text-wrap" id="main-banner-text">Winter sale is now on! Click here now.</p><small>#CosmosBeauty</small>
+                        <p class="display-6 text-wrap" id="main-banner-text">Winter sale is now on! Click here now.</p>
+                        <small>#CosmosBeauty</small>
                     </div>
                 </div>
             </a>
@@ -66,40 +77,46 @@
 
 <!-- Our Team -->
 <div class="my-4">
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-6 text-center">
-            <img src=" {% static 'images/man.webp' %} " alt="Man in suit" class="img-fluid lead-img">
-        </div>
-        <div class="col-sm-12 col-md-6 text-vertical-center">
-            <h2>Ross Perot</h2>
-            <blockquote>"Spend a lot of time talking to customers face-to-face. You’d be amazed how many companies don’t listen to their customers." - <cite>Ross Perot</cite> </blockquote>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-6 order-1 order-sm-1 order-md-0 text-md-end text-vertical-center">
-            <h2>Ayesha Sattar</h2>
-            <blockquote>"Excellent customer service is the number one job in any company! It is the personality of the company and the reason customers come back. Without customers there is no company!" - <cite>Ayesha Sattar</cite> </blockquote>
-        </div>
-        <div class="col-sm-12 col-md-6 text-center order-0 order-sm-0 order-md-1">
-            <img src="{% static 'images/woman.webp' %}" alt="Woman working on laptop and listening to phone" class="img-fluid lead-img">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 text-center">
+                <img src=" {% static 'images/man.webp' %} " alt="Man in suit" class="img-fluid lead-img">
+            </div>
+            <div class="col-sm-12 col-md-6 text-vertical-center">
+                <h2>Ross Perot</h2>
+                <blockquote>"Spend a lot of time talking to customers face-to-face. You’d be amazed how many companies
+                    don’t listen to their customers." - <cite>Ross Perot</cite> </blockquote>
+            </div>
         </div>
     </div>
-</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 order-1 order-sm-1 order-md-0 text-md-end text-vertical-center">
+                <h2>Ayesha Sattar</h2>
+                <blockquote>"Excellent customer service is the number one job in any company! It is the personality of
+                    the company and the reason customers come back. Without customers there is no company!" -
+                    <cite>Ayesha Sattar</cite> </blockquote>
+            </div>
+            <div class="col-sm-12 col-md-6 text-center order-0 order-sm-0 order-md-1">
+                <img src="{% static 'images/woman.webp' %}" alt="Woman working on laptop and listening to phone"
+                    class="img-fluid lead-img">
+            </div>
+        </div>
+    </div>
 
-<div class="container">
-    <div class="row">
-        <div class="col-sm-12 col-md-6 text-center">
-            <img src="{% static 'images/man2.webp' %}" alt="Man in suit" class="img-fluid lead-img">
-        </div>
-        <div class="col-sm-12 col-md-6 text-vertical-center">
-            <h2>Connor J. Wilson(CEO)</h2>
-            <blockquote>"The key is when a customer walks away, thinking, 'Wow, I love doing business with them, and I want to tell others about the experience.'" - <cite>Shep Hyken (Connor J. Wilson)</cite> </blockquote>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 text-center">
+                <img src="{% static 'images/man2.webp' %}" alt="Man in suit" class="img-fluid lead-img">
+            </div>
+            <div class="col-sm-12 col-md-6 text-vertical-center">
+                <h2>Connor J. Wilson(CEO)</h2>
+                <blockquote>"The key is when a customer walks away, thinking, 'Wow, I love doing business with them, and
+                    I want to tell others about the experience.'" - <cite>Shep Hyken (Connor J. Wilson)</cite>
+                </blockquote>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 {% endblock content %}
