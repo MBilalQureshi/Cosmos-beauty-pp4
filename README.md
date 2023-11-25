@@ -18,20 +18,20 @@ A visitor on Cosmos Beauty is most probably someone above age 15 who loves tryin
 
 ### User Stories
 
-#### EPIC | User Profile
+#### User Profile
 - As a Site User, I can signup to my account to place orders , update product quantities, cancel orders, remove items from my orders and add/remove products from wishlist.
 - As a Site User, I can login to keep my account secure.
 - As a Site User, I can keep my personal data such as my orders and wishlist to my self.
 - As a Site User, I can login using my email as it's much easier than username.
 
-#### EPIC | User Navigation
+#### User Navigation
 - As a Site User, I can easily understand the purpose of the website by just one look and tell if it meets my expectations.
 - As a Site User, I can search for products using search bar even after typing incomplete product names.
 - As a Site User, I can navigate through the website without any struggle and find products I want.
 - As a Site User, I can view paginated list of products on web page so that I can select only product I want with more ease.
 - As a Site User, I can see the product detail by clicking the product.
 
-#### EPIC | Interaction with Product
+#### Interaction with Product
 - As a Site User, Once I select a product, I can add it to wishlist to buy it later.
 - As a Site User, I can add/remove products from cart.
 - As a Site User, I can read the details of the product.
@@ -40,43 +40,43 @@ A visitor on Cosmos Beauty is most probably someone above age 15 who loves tryin
 - As a Site User, I can see if item is on discount or not.
 - As a Site User, I can easily understand if a product id out of stock.
 
-#### EPIC | Cart Overview
+#### Cart Overview
 - As a Site User, I can take an overview of the cart final time before moving to shipping.
 - As a Site User, I can remove Items from cart.
 - As a Site User, I can see my total of one product based on quantity and discount.
 - As a Site User, I can see total of all products plus shipping cost before moving forward.
 
-#### EPIC | Shipping Details
+#### Shipping Details
 - As a Site User, I can add my perosnal data inside shipping details if it does not exist.
 - As a Site User, I can update my shipping details if they already exist.
 - As a Site User, I can keep my personal data in app and can use it again without an updating it.
 
-#### EPIC | Order Complete
+#### Order Complete
 - As a Site User, I want to know when my order is going to reach me.
 - As a Site User, I want option to view my placed order using My Order button or I can also use the nav bar for this purpose.
 - As a Site User, I still have the option to see whats on sale or go to home page or see wishlist.
 - As a Site User, I should always have the optio to place new orders after order completion.
 
-#### EPIC | My orders
+#### My orders
 - As a Site User, I can visit my orders to see all the orders placed by me.
 - As a Site User, I can can cancel the orders whihc I have placed.
 - As a Site User, I can update the quntity of the products inside my orders.
 - As a Site User, I can remove an Item from multiple products list.
 
-#### EPIC | Wishlist
+#### Wishlist
 - As a Site User, I can add items to wishlist.
 - As a Site User, I can view the products I have added to my wishlist once logged in.
 - As a Site User, I can remove items from my wishlist once bought.
 
-#### EPIC | Sales and offer
+#### Sales and offers
 - As a Site User, I can see easily which Items are on sale.
 - As a Site User, I want to how much percent discount is there on products.
 - As a Site User, Once I click the product I can see the updated discounted price of an item.
 
-#### EPIC | Product Categories
+#### Product Categories
 - As a Site User, If i want to see specific category of products I can easily navigate to it.
 
-#### EPIC | Search Products
+#### Search Products
 - As a Site User, I can search for products based on it name.
 - As a Site User, I can also serach for products which have specific charcters in them, for exapmple 'oo' should prind items conataing 'oo' in them.
 
