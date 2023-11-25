@@ -24,7 +24,7 @@ class ProductSearch(generic.ListView):
     """
     model = Product
     template_name = 'products.html'
-    paginate_by = 12
+    paginate_by = 8
 
     def get_queryset(self):
         query = self.request.GET.get('search-product')
@@ -41,7 +41,7 @@ class Products (generic.ListView):
     queryset = Product.objects.filter(available=True).filter(
         stock__gt=0).order_by('-created_on')
     template_name = 'products.html'
-    paginate_by = 12
+    paginate_by = 8
 
 
 class ProductsCategory (generic.ListView):
@@ -52,7 +52,7 @@ class ProductsCategory (generic.ListView):
     queryset = Product.objects.filter(available=True).filter(
         stock__gt=0).order_by('-created_on')
     template_name = 'products.html'
-    paginate_by = 12
+    paginate_by = 8
 
     def get_context_data(self, **kwargs):
         category_param = self.kwargs.get("category")
@@ -69,7 +69,7 @@ class SpecialOffers (generic.ListView):
     queryset = Product.objects.filter(available=True).filter(
         stock__gt=0).filter(~Q(discount_name=2)).order_by('-created_on')
     template_name = 'products.html'
-    paginate_by = 12
+    paginate_by = 8
 
 
 class ProductDetail(generic.DetailView):

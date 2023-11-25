@@ -132,6 +132,8 @@ Testing and results can be found [here](/TESTING.md)
 
 ### Database Security
 
+### Custom error pages:
+
 ## Features
 
 ### Header
@@ -224,10 +226,10 @@ With Forking one can make a copy of a repository and to view or make changes in 
 - [Crispy forms](https://django-crispy-forms.readthedocs.io/en/latest/install.html) for implementing it in our project.
 - [ChatGPT 3.5](https://chat.openai.com/) with following topics mentioned below.
 - [Bootstrap Counter Field](https://www.codeply.com/go/2VmBU7TanF/bootstrap-plus-minus-counter-input) is taken from here. Its used in product details. An alternate handler of input where no form is used. Depricated JS code is removed from this code and updated as per need.
-- [GeeksforGeeks](https://www.geeksforgeeks.org/python-extending-and-customizing-django-allauth/) for understanding the concept of making custom fields in allauth. In my case first and last name was added during sign up.
+- This geeks for geeks [link](https://www.geeksforgeeks.org/python-extending-and-customizing-django-allauth/) for understanding the concept of making custom fields in allauth. In my case first and last name was added during sign up.
 - [StackOverflow](https://stackoverflow.com/) with following topics mentioned below.
     - Fixing issue when [Email](https://stackoverflow.com/questions/27967319/django-allauth-email-login-always-wrong) was always considered invalid during login.
-    - Fixing git error: failed to push some refs to remote from [here](https://stackoverflow.com/questions/24114676/git-error-failed-to-push-some-refs-to-remote)
+    - Fixing git error: failed to push some refs to remote from [here](https://stackoverflow.com/questions/24114676/git-error-failed-to-push-some-refs-to-remote).
     - Concept of [gt__](https://stackoverflow.com/questions/10040143/and-dont-work-with-filter-in-django) in query.
     - Concept of [~Q](https://stackoverflow.com/questions/60408935/django-model-query-with-not-equal-exclusion) to negate in query.
     - Concept of [value|floatformat:"0"](https://stackoverflow.com/questions/4831306/need-to-convert-a-string-to-int-in-a-django-template) to filter to float format.
@@ -270,7 +272,6 @@ https://ca.iherb.com/pr/hair-food-heat-protection-blend-coconut-argan-oil-6-4-fl
     - [Youtube](https://www.youtube.com/watch?v=kD2vWOZFFcw).
 - Session from this [youtube](https://www.youtube.com/watch?v=UMKKQQcPH_A) video.
 - [Nice Job](https://get.nicejob.com/resources/120-helpful-customer-service-quotes-from-the-pro) quotes.
-- [CSS Fade-in Transition on Scroll](https://blog.hubspot.com/website/css-fade-in#text-transition) on home page.
 ### Acknowledgements
 - My Mentor Antonio Rodriguez for helpful feedbacks during project development.
 - Code Institute team for pointing in right direction.
