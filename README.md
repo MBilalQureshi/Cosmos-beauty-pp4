@@ -112,6 +112,47 @@ Following fonts are used on this web site.
 Sans-serif is acting as a backup font in case one of above mentioned fonts fail.
 
 #### Wireframes
+<details>
+<summary>Landing Page</summary>
+
+![Landing Page](docs/wireframes/home.png)
+</details>
+
+<details>
+<summary>Products and Wishlist Page</summary>
+
+![Product and wishlist Page](docs/wireframes/products.png)
+</details>
+
+<details>
+<summary>Product Detail Page</summary>
+
+![Product Detail Page](docs/wireframes/product_detail.png)
+</details>
+
+<details>
+<summary>Cart Page</summary>
+
+![Cart Page](docs/wireframes/cart.png)
+</details>
+
+<details>
+<summary>Shipping Details Page</summary>
+
+![Shipping details Page](docs/wireframes/shipping_detail.png)
+</details>
+
+<details>
+<summary>Order Complete Page</summary>
+
+![Order Complete Page](docs/wireframes/order_placed.png)
+</details>
+
+<details>
+<summary>My Orders Page</summary>
+
+![My Orders Page](docs/wireframes/my_orders.png)
+</details>
 
 ## Agile Methodology
 Github Projects was used to manage the development process using agile approach. Kindly see link to project board [here](https://github.com/users/MBilalQureshi/projects/5/views/1).

@@ -370,6 +370,7 @@ class MyOrders(View):
         if 'quantity' in request.POST:
             quantity = request.POST['quantity']
             product_id = request.POST['product_instance_id']
+            # IMPORTANT UPDATE PRICE AFTER CHANGING QUANTITY
             instance = get_object_or_404(ConfirmedOrderDetail, id=product_id)
             form = ConfirmedOrderDetailForm(request.POST, instance=instance)
             if form.is_valid():
