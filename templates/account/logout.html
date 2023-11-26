@@ -6,7 +6,7 @@
 {% block content %}
 <div class="container my-4">
   <div class="row">
-    <div class="col">
+    <div class="col-12 text-center">
       <h1>{% trans "Sign Out" %}</h1>
       <p>{% trans 'Are you sure you want to sign out?' %}</p>
       <form method="post" action="{% url 'account_logout' %}">
@@ -16,7 +16,6 @@
         {% endif %}
         <button class="hvr-sweep-to-right btn btn-dark btn-lg" type="submit">{% trans 'Sign Out' %}</button>
       </form>
-
     </div>
   </div>
 </div>
