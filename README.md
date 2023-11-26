@@ -160,6 +160,26 @@ Github Projects was used to manage the development process using agile approach.
 The user stories seen above are based on the items completed mentioned on the project board.
 
 ## Data Model
+I used session for cart items instead of storing it in database and once the order is placed only then the data from cart session is moved to Confirmed order Detail and User Bill model.
+
+Cart Session contains following items:
+- Product id
+- Product quantity
+- Product price based on qunatity
+- Product discount
+- Product total based on quantity
+
+The wishlist contains the products user wishes for and is stored inside Wishes modal.
+
+Products, its categories and discount on them is managed through Product, Product Categories and Product Discount.
+
+Before placing an order User shipment details are required which is managed in Shipment Details modal.
+
+The database schema is available below.
+
+![Database Schema](docs/readme_images/database_schema.jpg)
+
+The database schema is designed using [Drawio](https://app.diagrams.net/).
 
 ## Testing
 
@@ -168,12 +188,29 @@ Testing and results can be found [here](/TESTING.md)
 ## Security Features and Defensive Design
 
 ### User Authentication
+- Allauth is installed in project for signin / signup and login. Users can only place orders once they are logged in.
+- After certain points like once cart items are added or if user clicks wishlist. he/she must login before moving forward.
+- Shipment details are only accessable to those users who have entered their credentials and logged in. If the user is new, shipment detail form will be empty.
+- No user can see other users wishlist.
+- Users oders data are also limited to them and them only.
 
 ### Form Validation
+- Based on data entered, every form in project will validate it before moving forward. Charcters will only take characters and integers just integers.
+- The input field on product details page is not part of the form as its value was only stored in session, So to handle '-', '+' and input field it required manual validation that can be seen on product details html, it's js conetnt and css. See credits for more info. Deprecated code was removed and was updated as per need.
+- Submit buttom will not work unless all the fields are filled with proper data and warning signs will also appear if data is not walid or fields are empty.
+- CSRF (Cross-Site Request Forgery) tokens are used on all forms on web site.
 
 ### Database Security
+The database url and secret key are stored in env file. This prevents unwanted connections to database.
 
 ### Custom error pages:
+Custom pages were made incase the user tries to enter invalid urls or try to access forbidden pages. Custom pages were made for following request.
+- 400 Bad request
+- 403 Page forbidden
+- 404 Page not found
+- 500 Server error 
+
+Users are given options to redirect from these pages to valid ones in form of buttons.
 
 ## Features
 
