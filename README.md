@@ -340,6 +340,13 @@ https://stackoverflow.com/questions/59147127/django-how-to-auto-generate-a-uniqu
     - [bathandbodyworks](https://www.bathandbodyworks.com/p/woodlands-3-in-1-hair-face-andamp-body-wash-026702554.html?cgid=body-care#start=2)
     - [iherb](
 https://ca.iherb.com/pr/hair-food-heat-protection-blend-coconut-argan-oil-6-4-fl-oz-190-ml/114999?gad_source=1)
+    - [douglas](https://www.douglas.de/de/p/3000039681)
+    - [fnf](https://fnf.co.ke/product/creed-aventus-eau-de-parfum-100ml/)
+    - [douglas](https://www.douglas.de/de/p/3001044085?variant=455949)
+    - [avsfreeov](https://avsfreeov.life/product_details/81478479.html)
+    - []()
+    - []()
+
 - [Nav bar](https://www.fundaofwebit.com/ecommerce-template/ecommerce-navbar-design-using-html-css-bootstrap) is taken from here and modified later as per need.
 - [Footer](https://www.fundaofwebit.com/ecommerce-template/bootstrap-ecommerce-footer-template-in-html-css) is taken from here and modified later as per need.
 - [hover.css](https://ianlunn.github.io/Hover/) is used to apply hover effect to buttons and hyperlinks.

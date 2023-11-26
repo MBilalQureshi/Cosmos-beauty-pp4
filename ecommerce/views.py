@@ -160,7 +160,7 @@ def cart(request):
 
         for key, value in request.session.get('cart').items():
             total += value['prod_total']
-            ids += key
+            ids.append(str(key))
 
         products = Product.objects.filter(available=True).filter(
             stock__gt=0).filter(id__in=ids)
