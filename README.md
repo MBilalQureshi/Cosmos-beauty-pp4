@@ -4,7 +4,7 @@ Cosmos Beauty is ecommerce web app which is designed not only for cosmetics prod
 
 User can add products to their wishlist to buy them later. They can easily add/remove products as per their need even buy 10 items at the same time. Once order is placed user can also cancel order, remove items and even update the quantity of products.
 
-![Site Mockup](docs/readme_images/site_mockup.png)
+![Site Mockup](docs/readme_images/mockup.png)
 
 The live site can be found here - [Cosmos Beauty](https://cosmos-beauty-133a3d7898aa.herokuapp.com/)
 
@@ -215,27 +215,69 @@ Users are given options to redirect from these pages to valid ones in form of bu
 ## Features
 
 ### Header
+![header](docs/readme_images/features/Header.png)
+
+#### Logo
+- The Cosmos Beauty logo is written on most right top of header and it tells its-self what the website content going to be.
+- User can go to home page by clicking it.
+
+#### Search Bar
+The search bar is used to search for products based on full name or key word such as 'oo', this will fetch all products that contain 'oo' in them.
+
+#### Top Navigation bar
+This navigation bar contains the content related to the user. With it user can see items in wishlist, login/ logout and see cart items.
+
+#### Bottom Navigation bar
+This part of navigation contain links to all products, category based products, items on sale and home.
 
 ### Footer
+![footer](docs/readme_images/features/footer.png)
+#### Top footer
+This part of footer has four parts as following:
+- Mission statement of Cosmos Beauty.
+- Quick links to other parts of website.
+- Other projects (Not related to website).
+- Contact details and address.
+
+#### Bottom Footer
+This part of footer has connection links and all rights reserved text.
 
 ### Home Page
+![carousel](docs/readme_images/features/carousal.png)
+
+![sale_banner](docs/readme_images/features/sale_banner.png)
+
+![team](docs/readme_images/features/team.png)
 
 ### User Account Pages
 
+#### Sign Up
+![signup](docs/readme_images/features/signup.png)
+#### Sign in
+![signin](docs/readme_images/features/signin.png)
+#### Sign out
+![signout](docs/readme_images/features/signout.png)
+
 ### Browse Products
+![products](docs/readme_images/features/products.png)
 
 ### Products Detail
+![product detail](docs/readme_images/features/product_detail.png)
 
 ### Cart
+![cart](docs/readme_images/features/cart.png)
 
 ### Shipment Detail
+![shipment details](docs/readme_images/features/shipment_details.png)
 
 ### Order Complete
+![order complete](docs/readme_images/features/order_complete.png)
 
 ### My orders
+![My orders](docs/readme_images/features/mu_orders.png)
 
 ### Wishlist
-
+![Wishlist](docs/readme_images/features/wishlist.png)
 
 ## Libraries and Technologies Used
 ### Python Libraries
