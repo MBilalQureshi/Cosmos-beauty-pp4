@@ -11,7 +11,70 @@ The live site can be found here - [Cosmos Beauty](https://cosmos-beauty-133a3d78
 
 ## Table of Contents
 
+- [Cosmos Beauty](#cosmos-beauty)
+  * [Table of Contents](#table-of-contents)
+  * [User Experience (UX)](#user-experience--ux-)
+    + [User Stories](#user-stories)
+      - [User Profile](#user-profile)
+      - [User Navigation](#user-navigation)
+      - [Interaction with Product](#interaction-with-product)
+      - [Cart Overview](#cart-overview)
+      - [Shipping Details](#shipping-details)
+      - [Order Complete](#order-complete)
+      - [My orders](#my-orders)
+      - [Wishlist](#wishlist)
+      - [Sales and offers](#sales-and-offers)
+      - [Product Categories](#product-categories)
+      - [Search Products](#search-products)
+      - [User stories not yet implemented](#user-stories-not-yet-implemented)
+    + [Design](#design)
+      - [Colour Scheme](#colour-scheme)
+      - [Imagery](#imagery)
+      - [Fonts](#fonts)
+      - [Wireframes](#wireframes)
+  * [Agile Methodology](#agile-methodology)
+  * [Data Model](#data-model)
+  * [Testing](#testing)
+  * [Security Features and Defensive Design](#security-features-and-defensive-design)
+    + [User Authentication](#user-authentication)
+    + [Form Validation](#form-validation)
+    + [Database Security](#database-security)
+    + [Custom error pages:](#custom-error-pages-)
+  * [Features](#features)
+    + [Header](#header)
+      - [Logo](#logo)
+      - [Search Bar](#search-bar)
+      - [Top Navigation bar](#top-navigation-bar)
+      - [Bottom Navigation bar](#bottom-navigation-bar)
+    + [Footer](#footer)
+      - [Top footer](#top-footer)
+      - [Bottom Footer](#bottom-footer)
+    + [Home Page](#home-page)
+    + [User Account Pages](#user-account-pages)
+      - [Sign Up](#sign-up)
+      - [Sign in](#sign-in)
+      - [Sign out](#sign-out)
+    + [Browse Products](#browse-products)
+    + [Products Detail](#products-detail)
+    + [Cart](#cart)
+    + [Shipment Detail](#shipment-detail)
+    + [Order Complete](#order-complete-1)
+    + [My orders](#my-orders-1)
+    + [Wishlist](#wishlist-1)
+    + [Error Pages](#error-pages)
+  * [Libraries and Technologies Used](#libraries-and-technologies-used)
+  * [Languages](#languages)
+  * [Frameworks - Libraries - Programs Used](#frameworks---libraries---programs-used)
+  * [Deployment](#deployment)
+    + [Heroku](#heroku)
+    + [Forking the GitHub Repository](#forking-the-github-repository)
+    + [Making a Local Clone](#making-a-local-clone)
+  * [Credits](#credits)
+    + [Extra Help](#extra-help)
+    + [Acknowledgements](#acknowledgements)
+
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
 ## User Experience (UX)
 
 A visitor to Cosmos Beauty is most probably someone above age 15 who loves trying new beauty products or maybe buys the same product again or saves it to buy later when there is a discount going on that product.
@@ -437,7 +500,7 @@ With Forking one can make a copy of a repository and to view or make changes in 
 - [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/) with multiple concepts in designing the website.
 - [Allauth](https://docs.allauth.org/en/latest/introduction/index.html) for implementing it in our project.
 - [Crispy forms](https://django-crispy-forms.readthedocs.io/en/latest/install.html) for implementing it in our project.
-- [ChatGPT 3.5](https://chat.openai.com/) with following topics mentioned below.
+- [ChatGPT 3.5](https://chat.openai.com/) helped me with fixing a few bugs, kindly see bugs topic in testing.md file.
 - [Bootstrap Counter Field](https://www.codeply.com/go/2VmBU7TanF/bootstrap-plus-minus-counter-input) is taken from here. Its used in product details. An alternate handler of input where no form is used. Depricated JS code is removed from this code and updated as per need.
 - This geeks for geeks [link](https://www.geeksforgeeks.org/python-extending-and-customizing-django-allauth/) for understanding the concept of making custom fields in allauth. In my case first and last name was added during sign up.
 - [StackOverflow](https://stackoverflow.com/) with following topics mentioned below.
