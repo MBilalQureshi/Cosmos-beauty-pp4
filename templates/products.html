@@ -1,86 +1,85 @@
 {% extends "base.html" %}
 {% block title %}CosmosBeauty | All Products{% endblock %}
-
 {% block content %}
-
 <!-- Looping -->
 <div class="container mt-4 mr-1">
-  <h1>Products List</h1>
-  <div class="row mb-4">
-    {% if product_list %}
-    {% for product in product_list %}
-    <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-3">
-      <a href="{% url 'product_detail' product.slug %}" aria-label="Product Detail Page">
-        <div class="card h-100" id="product-card">
-          {% if "placeholder" in product.image.url %}
-          <img src="https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg" class="card-img-top"
-            alt="Placeholder Image" aria-label="Two makeup brushes with dark background">
-          {% else %}
-          <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }} image" aria-label="The image of {{ product.name }} with white background">
-          {% endif %}
-          <div class="card-body">
-            <h5 class="card-title fs-6 text-truncate" title='{{ product.name }}'><strong>{{ product.name }}</strong>
-            </h5>
-          </div>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item"><strong>Product in stock:</strong> {{ product.stock }}</li>
-            <li class="list-group-item"><strong>Price:</strong> {{ product.price }}&euro;</li>
-            {% if product.discount_name.discount_percentage > 0 %}
-            <li class="list-group-item"><strong>Discount:</strong> <mark>{{product.discount_name.discount_percentage }}%
-                off</mark></li>
-            {% endif %}
-          </ul>
+    <h1>Products List</h1>
+    <div class="row mb-4">
+        {% if product_list %}
+        {% for product in product_list %}
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-3">
+            <a href="{% url 'product_detail' product.slug %}" aria-label="Product Detail Page">
+                <div class="card h-100" id="product-card">
+                    {% if "placeholder" in product.image.url %}
+                    <img src="https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg" class="card-img-top"
+                        alt="Placeholder Image" aria-label="Two makeup brushes with dark background">
+                    {% else %}
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }} image" aria-label="The image of {{ product.name }} with white background">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title fs-6 text-truncate" title='{{ product.name }}'><strong>{{ product.name }}</strong>
+                        </h5>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item"><strong>Product in stock:</strong> {{ product.stock }}</li>
+                        <li class="list-group-item"><strong>Price:</strong> {{ product.price }}&euro;</li>
+                        {% if product.discount_name.discount_percentage > 0 %}
+                        <li class="list-group-item"><strong>Discount:</strong> <mark>{{product.discount_name.discount_percentage }}%
+                            off</mark>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </a>
         </div>
-      </a>
+        {% endfor %}
+        {% else %}
+        <p>Sorry, No items related to this search.</p>
+        {% endif %}
     </div>
-    {% endfor %}
-    {% else %}
-    <p>Sorry, No items related to this search.</p>
-    {% endif %}
-  </div>
 </div>
+
+<!-- Pagination -->
 {% if is_paginated %}
 <!-- This is taken from https://docs.djangoproject.com/en/4.2/topics/pagination/ and modified later -->
 <div class="container my-3">
-  <div class="row">
-    <div class="col-12 d-flex justify-content-center">
-      <nav aria-label="Page navigation">
-        <ul class="pagination">
-          {% if page_obj.has_previous %}
-          <li class="page-item">
-            <a class="page-link text-dark" href="?page=1" aria-label="First Page">
-              First
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link text-dark" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous Page">
-              Prev
-            </a>
-          </li>
-          {% endif %}
-          <li class="page-item disabled">
-            <span class="page-link text-dark">
-              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
-            </span>
-          </li>
-          {% if page_obj.has_next %}
-          <li class="page-item">
-            <a class="page-link text-dark" href="?page={{ page_obj.next_page_number }}" aria-label="Next Page">
-              Next
-            </a>
-          </li>
-          <li class="page-item">
-            <a class="page-link text-dark" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last Page">
-              Last
-            </a>
-          </li>
-          {% endif %}
-        </ul>
-      </nav>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link text-dark" href="?page=1" aria-label="First Page">
+                        First
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-dark" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous Page">
+                        Prev
+                        </a>
+                    </li>
+                    {% endif %}
+                    <li class="page-item disabled">
+                        <span class="page-link text-dark">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+                        </span>
+                    </li>
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link text-dark" href="?page={{ page_obj.next_page_number }}" aria-label="Next Page">
+                        Next
+                        </a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link text-dark" href="?page={{ page_obj.paginator.num_pages }}" aria-label="Last Page">
+                        Last
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
     </div>
-  </div>
 </div>
-
 {% endif %}
-
 {% endblock content %}

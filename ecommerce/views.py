@@ -111,14 +111,17 @@ class ProductDetail(generic.DetailView):
         )
 
 
-@login_required(login_url='/accounts/login/')
-def wishlist(request):
+# @login_required(login_url='/accounts/login/')
+class Wishlist(generic.ListView):
     """
     Display user products in wishlist once logged in
     """
-    wishlist = Wishes.objects.filter(user=request.user)
-    context = {'wishlist': wishlist}
-    return render(request, 'wishlist.html', context)
+    paginate_by = 8
+    template_name = 'wishlist.html'
+    context_object_name = 'wishlist'
+    
+    def get_queryset(self):
+        return Wishes.objects.filter(user=self.request.user)
 
 
 class AddToWishlist(View):
