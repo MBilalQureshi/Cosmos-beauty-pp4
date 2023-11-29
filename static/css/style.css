@@ -243,6 +243,20 @@ main{
     }
 }
 
+/* Remove arrow up and down from number fields on postal code and mobile numbers (SHIPPING DETAILS PAGE)
+* Credit: Solution by chatgpt.
+*/
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"] {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
 /* footer */
 .footer-area{
     padding: 40px 0px;

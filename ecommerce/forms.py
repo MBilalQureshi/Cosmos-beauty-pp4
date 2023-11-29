@@ -34,10 +34,10 @@ class ShipmentDetailForm(forms.ModelForm):
     are also added.
     """
     class Meta:
-        model = ShipmentDetail
-        fields = ('first_name', 'last_name', 'address_line_one',
-                  'postal_code', 'city', 'country', 'mobile', 'method')
-
+      model = ShipmentDetail
+      fields = ('first_name', 'last_name', 'address_line_one',
+            'postal_code', 'city', 'country', 'mobile', 'method')
+       
     def __init__(self, *args, **kwargs):
         super(ShipmentDetailForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)

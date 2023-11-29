@@ -29,12 +29,12 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cosmos-beauty-133a3d7898aa.herokuapp.com', '8000-mbilalqures-cosmosbeaut-t555x6i9jv7.ws-eu106.gitpod.io']
+ALLOWED_HOSTS = ['cosmos-beauty-133a3d7898aa.herokuapp.com', '8000-mbilalqures-cosmosbeaut-t555x6i9jv7.ws-us106.gitpod.io']
 
 # Site id = 1 means django can handle one db from many sites
 SITE_ID = 1
 
-CSRF_TRUSTED_ORIGINS = ['https://8000-mbilalqures-cosmosbeaut-t555x6i9jv7.ws-eu106.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ['https://8000-mbilalqures-cosmosbeaut-t555x6i9jv7.ws-us106.gitpod.io']
 
 # Redirect to home after login and logout
 LOGIN_REDIRECT_URL = '/'
