@@ -3,37 +3,37 @@
 
 {% block content %}
 {% csrf_token %}
+<!-- Product Details -->
 <div class="container-gutter my-5 mx-4">
     <div class="row d-flex justify-content-center">
         <div id="product-img" class="col-md-6 col-xl-4 img-hover-zoom d-flex justify-content-center">
-
             <div class="d-none d-sm-block">
                 {% if "placeholder" in product.image.url %}
-                <img src="https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg" class="rounded d-flex"
-                    alt="Product image">
+                <img src="https://res.cloudinary.com/dgdejjc6n/image/upload/v1701363761/image-backup_u5xvnv.webp" class="rounded d-flex"
+                alt="Placeholder Image with two makeup brushes with black background">
                 {% else %}
-                <img src="{{ product.image.url }}" class="rounded" alt="Product image">
+                <img src="{{ product.image.url }}" class="rounded" alt="The image of {{ product.name }} with white background">
                 {% endif %}
             </div>
             <div class="d-sm-none">
                 {% if "placeholder" in product.image.url %}
-                <img src="https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg"
-                    class="rounded d-flex img-fluid" alt="Product image">
+                <img src="https://res.cloudinary.com/dgdejjc6n/image/upload/v1701363761/image-backup_u5xvnv.webp"
+                    class="rounded d-flex img-fluid" alt="Placeholder Image with two makeup brushes with black background">
                 {% else %}
-                <img src="{{ product.image.url }}" class="rounded img-fluid" alt="Product image">
+                <img src="{{ product.image.url }}" class="rounded img-fluid" alt="The image of {{ product.name }} with white background">
                 {% endif %}
             </div>
-
         </div>
         <div class="col-12 col-md-6 col-lg-4 my-3">
-            <h2 class="mb-3 display-6"><strong>{{ product.name }}</strong></h2>
+            <h1 class="mb-3 display-6"><strong>{{ product.name }}</strong></h1>
             <p><small><strong>Product Category: </strong> {{ product.product_category }}</small></p>
             <p><small><strong>In Stock: </strong>{{ product.stock }}</small></p>
             {% if product.discount_name.discount_percentage > 0 %}
             <p><small><strong>{{ product.discount_name }}:
-                    </strong><span>{{ product.discount_name.discount_percentage }}</span>&percnt; off</small></p>
+                </strong><span>{{ product.discount_name.discount_percentage }}</span>&percnt; off</small>
+            </p>
             <p><small><strong>Discounted Price: </strong><mark><span
-                            class="product-discount">{{ discount|floatformat:2 }}</span>&euro;</mark></small></p>
+                class="product-discount">{{ discount|floatformat:2 }}</span>&euro;</mark></small></p>
             {% endif %}
             <p><small><strong>Price: </strong><span class="product-price">{{ product.price }}</span>&euro;</small></p>
             <div class="d-grid">
@@ -41,64 +41,68 @@
                 {% if product.stock > 0 %}
                 <div class="input-group mb-3 w-auto p-3">
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default btn-number me-1" data-type="minus"
-                            data-field="quant[1]">
-                            <span><i class="fa-solid fa-minus"></i></span>
-                        </button>
+                    <button type="button" class="btn btn-default btn-number me-1" data-type="minus"
+                        data-field="quant[1]" aria-label="Minus button to decrease products quantity">
+                    <span><i class="fa-solid fa-minus"></i></span>
+                    </button>
                     </span>
                     {% if product.stock < 10 %}
                     <input id="form-quntity" type="number" name="quant[1]" class="form-control input-number" value="1"
-                        min="1" max="{{ product.stock }}">
+                        min="1" max="{{ product.stock }}" aria-label="Get input from user in number">
                     {% else %}
                     <input id="form-quntity" type="number" name="quant[1]" class="form-control input-number" value="1"
-                        min="1" max="10">
+                        min="1" max="10" aria-label="Get input from user in number">
                     {% endif %}
                     <span class="input-group-btn">
-                        <button type="button" class="btn btn-default btn-number ms-1" data-type="plus"
-                            data-field="quant[1]">
-                            <span class="font-border"><i class="fa-solid fa-plus"></i></span>
-                        </button>
+                    <button type="button" class="btn btn-default btn-number ms-1" data-type="plus"
+                        data-field="quant[1]" aria-label="Minus button to decrease products quantity">
+                    <span class="font-border"><i class="fa-solid fa-plus"></i></span>
+                    </button>
                     </span>
                 </div>
-                <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg add-to-cart"
-                    value="{{ product.id }}">{% if add_to_cart == True %}
+                <div class="mb-4">
+                    <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg add-to-cart"
+                        value="{{ product.id }}" style="width: 100%;">{% if add_to_cart == True %}
                     Remove from cart
                     {% else %}
                     Add to cart
                     {% endif %}
-                </button><br>
+                    </button>
+                </div>
                 {% else %}
                 <p><strong>Out of stock. Kindly come back later.</strong></p>
                 {% endif %}
                 {% if user.is_authenticated %}
                 <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg add-to-wishlist"
-                    value="{{ product.id }}">
-                    {% if product_wish == True %}
-                    Remove from wishlist
-                    {% else %}
-                    Add to wishlist
-                    {% endif %}
-                </button><br>
+                    value="{{ product.id }}" style="width: 100%;">
+                {% if product_wish == True %}
+                Remove from wishlist
                 {% else %}
-                <a href="{% url 'account_login' %}" class="hvr-sweep-to-right btn btn-dark btn-lg">Add to
-                    wishlist</a><br>
+                Add to wishlist
                 {% endif %}
-                <a href="{% url 'cart' %}" class="hvr-sweep-to-right btn btn-dark btn-lg">Checkout</a>
+                </button>
+                {% else %}
+                <a href="{% url 'account_login' %}" class="hvr-sweep-to-right btn btn-dark btn-lg" style="width: 100%;">Add to
+                wishlist</a>
+                {% endif %}
+                <div class="mt-4">
+                    <a href="{% url 'cart' %}" class="hvr-sweep-to-right btn btn-dark btn-lg" style="width: 100%;">Checkout</a>
+                </div>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12 offset-lg-3 col-lg-6 offset-xl-3 mt-4">
-            <hr class="hr hr-blurry" />
+            <hr class="hr hr-blurry">
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-5 offset-lg-2 col-lg-8 offset-xl-2 px-0 mt-4">
-            <div id="product-desc">
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-10 mt-4">
+            <div id="product-desc" class="mx-auto">
                 <h2 class="display-6"><strong>Product Description</strong></h2>
                 <p class="display-6"><small>{{ product.description | safe }}</small></p>
             </div>
         </div>
-    </div>
+    </div>     
 </div>
 {% endblock %}

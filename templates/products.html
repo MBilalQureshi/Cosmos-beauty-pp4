@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 {% block title %}CosmosBeauty | All Products{% endblock %}
 {% block content %}
-<!-- Looping -->
+<!-- Products List -->
 <div class="container mt-4 mr-1">
     <h1>Products List</h1>
     <div class="row mb-4">
         {% if product_list %}
         {% for product in product_list %}
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-3">
-            <a href="{% url 'product_detail' product.slug %}" aria-label="Product Detail Page">
+            <a href="{% url 'product_detail' product.slug %}" role="link" aria-labelledby="{{ product.name }}">
                 <div class="card h-100" id="product-card">
                     {% if "placeholder" in product.image.url %}
-                    <img src="https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg" class="card-img-top"
-                        alt="Placeholder Image" aria-label="Two makeup brushes with dark background">
+                    <img src="https://res.cloudinary.com/dgdejjc6n/image/upload/v1701363761/image-backup_u5xvnv.webp" class="card-img-top"
+                        alt="Placeholder Image with two makeup brushes with black background">
                     {% else %}
-                    <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }} image" aria-label="The image of {{ product.name }} with white background">
+                    <img src="{{ product.image.url }}" class="card-img-top" alt="The image of {{ product.name }} with white background">
                     {% endif %}
                     <div class="card-body">
-                        <h5 class="card-title fs-6 text-truncate" title='{{ product.name }}'><strong>{{ product.name }}</strong>
-                        </h5>
+                        <h2 class="card-title fs-6 text-truncate" title='{{ product.name }}'><strong>{{ product.name }}</strong>
+                        </h2>
                     </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item"><strong>Product in stock:</strong> {{ product.stock }}</li>
@@ -38,7 +38,6 @@
         {% endif %}
     </div>
 </div>
-
 <!-- Pagination -->
 {% if is_paginated %}
 <!-- This is taken from https://docs.djangoproject.com/en/4.2/topics/pagination/ and modified later -->

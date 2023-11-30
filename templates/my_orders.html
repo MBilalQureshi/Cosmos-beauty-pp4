@@ -2,6 +2,7 @@
 {% block title %}CosmosBeauty | My Orders{% endblock %}
 
 {% block content %}
+<!-- My orders -->
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-12">
@@ -26,12 +27,12 @@
                             <tr>
                                 <td>
                                     {% if "placeholder" in form_instance.instance.product_info.image.url %}
-                                    <img src="https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg"
-                                        class="rounded-start p-3" alt="Placeholder Image"
+                                    <img src="https://res.cloudinary.com/dgdejjc6n/image/upload/v1701363761/image-backup_u5xvnv.webp"
+                                        class="rounded-start p-3" alt="Placeholder Image with two makeup brushes with black background"
                                         style="max-width: 100px; max-height: 100px;">
                                     {% else %}
                                     <img src="{{ form_instance.instance.product_info.image.url }}"
-                                        class="rounded-start p-3 img-fluid" alt="Product image"
+                                        class="rounded-start p-3 img-fluid" alt="The image of {{ form_instance.instance.product_info.name }} with white background"
                                         style="max-width: 100px; max-height: 100px;">
                                     {% endif %}
                                 </td>
@@ -42,7 +43,7 @@
                                         {% csrf_token %}
                                         <input type="number" name="quantity" min="1" max="10"
                                             value="{{ form_instance.instance.quantity }}"
-                                            class="form-control mx-2 mb-2">
+                                            class="form-control mx-2 mb-2" aria-label="Quantity set by user for this specific product">
                                         <input type="hidden" name="product_instance_id"
                                             value="{{ form_instance.instance.id }}">
                                         <button type="submit"
@@ -69,14 +70,13 @@
                         data-bs-target="#item-{{ product_key }}">Cancel this order</button>
                 </div>
             </div>
-
             <!-- Cancel order Modal -->
             <div class="modal fade" id="item-{{ product_key }}" tabindex="-1"
                 aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm Order Cancellation</h5>
+                            <h3 class="modal-title" id="deleteConfirmationModalLabel">Confirm Order Cancellation</h3>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">

@@ -3,69 +3,70 @@
 
 {% block content %}
 {% csrf_token %}
-    <div class="container my-5">
-        <div class="row">
-            <div class="col-12">
-                <h1>Shopping Cart</h1>  
-                {% if products %}
-                {% for product in products %}        
-                <div class="card mb-3 {{ product.id }}">
-                  <div class="row g-0">
+<!-- Cart -->
+<div class="container my-5">
+    <div class="row">
+        <div class="col-12">
+            <h1>Shopping Cart</h1>
+            {% if products %}
+            {% for product in products %}        
+            <div class="card mb-3 {{ product.id }}">
+                <div class="row g-0">
                     <div class="col-md-2">
-                      <a href="{% url 'product_detail' product.slug %}">
+                        <a href="{% url 'product_detail' product.slug %}">
                         {% if "placeholder" in product.image.url %}
-                          <img src="https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg" class="rounded-start p-3" alt="Placeholder Image"style="max-width: 200px; max-height: 200px;">
+                        <img src="https://res.cloudinary.com/dgdejjc6n/image/upload/v1701363761/image-backup_u5xvnv.webp" class="rounded-start p-3" alt="Placeholder Image with two makeup brushes with black background" style="max-width: 200px; max-height: 200px;">
                         {% else %}
-                          <img src="{{ product.image.url }}" class="rounded-start p-3 img-fluid" alt="Product image" >                           
+                        <img src="{{ product.image.url }}" class="rounded-start p-3 img-fluid" alt="The image of {{ product.name }} with white background">                           
                         {% endif %}
                         </a>
                     </div>
                     <div class="col-md-10">
-                      <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        {% for key,value in request.session.cart.items %}
-                        {% if product.id|floatformat:"0" ==  key  %}
-                        <div class="table-responsive-sm">
-                        <table class="table table-hover">
-                          <thead>
-                            <tr>
-                              <th scope="col">Quantity</th>
-                              <th scope="col">Price</th>
-                              <th scope="col">Sale Price</th>
-                              <th scope="col">Total</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <td>{{ value.quantity }}</td>
-                              <td>&euro;{{ value.price }}</td>
-                              <td>&euro;{{ value.discount }}</td>
-                              <td>&euro;{{ value.prod_total }}</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                        <br>
-                        {% endif %}
-                        {% endfor %}
-                        <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg product-remove" value="{{ product.id }}" >Remove from cart</button>
-                      </div>
+                        <div class="card-body">
+                            <h2 class="card-title">{{ product.name }}</h2>
+                            {% for key,value in request.session.cart.items %}
+                            {% if product.id|floatformat:"0" ==  key  %}
+                            <div class="table-responsive-sm">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Quantity</th>
+                                            <th scope="col">Price</th>
+                                            <th scope="col">Sale Price</th>
+                                            <th scope="col">Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{ value.quantity }}</td>
+                                            <td>&euro;{{ value.price }}</td>
+                                            <td>&euro;{{ value.discount }}</td>
+                                            <td>&euro;{{ value.prod_total }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <br>
+                            {% endif %}
+                            {% endfor %}
+                            <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg product-remove" value="{{ product.id }}" >Remove from cart</button>
+                        </div>
                     </div>
-                  </div>
                 </div>
-                {% endfor %}
-                <div class="d-flex justify-content-center">           
-                  <div>
+            </div>
+            {% endfor %}
+            <div class="d-flex justify-content-center">
+                <div>
                     <p><strong class="me-5">Subtotal: </strong>&euro;{{ total }}</p>
                     <p><strong class="me-5">Shipping: </strong>&euro;5.00</p>
                     <p><strong class="me-5">Total(Incl. taxes): </strong>&euro;{{ ship_total }}</p>
                     <a href="{% url 'checkout' %}" id="continue-btn" class="hvr-sweep-to-right btn btn-dark btn-lg w-100" >Continue</a>
-                  </div>
                 </div>
-                {% else %}
-                <p>Cart is currently empty.</p>
-                {% endif %}
             </div>
+            {% else %}
+            <p>Cart is currently empty.</p>
+            {% endif %}
         </div>
     </div>
+</div>
 {% endblock %}
