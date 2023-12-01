@@ -2,7 +2,8 @@ $(document).ready(function(){
     /**
      * Add / remove products to wishlist using AJAX.
      * Concept of AJAX handling is learned from
-     * 
+     * 1. https://docs.djangoproject.com/en/3.2/ref/csrf/#ajax
+     * 2. https://www.youtube.com/watch?v=kD2vWOZFFcw
      */
     $('.add-to-wishlist').click(function(e){
         e.preventDefault();
@@ -92,9 +93,10 @@ $(document).ready(function(){
      * Below code till very end handles the quantity on products detail page.
      * This code is required as this input was not part of form
      * and input was handled by session later. So input handling
-     * was required. This ready to use code is taken from :
+     * was required. This ready to use code is taken from : 
+     * https://www.codeply.com/go/2VmBU7TanF/bootstrap-plus-minus-counter-input
      * depricated code was fixed and remaining code was updated
-     * as needed.
+     * as needed. 
      */
     $('.btn-number').click(function(e){
         e.preventDefault();

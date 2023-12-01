@@ -455,6 +455,7 @@ These pages have the same pattren except text and their main purpose is to give 
 - [Font Awesome](https://fontawesome.com/) is used for icons used in all over project.
 - [Grammerly](https://app.grammarly.com/) is used to proof read the README.md and testing.md.
 - [Gunicorn](https://gunicorn.org/) is a Python WSGI HTTP Server for our project.
+- [freeformatter](https://www.freeformatter.com/) is used to format html.
 
 
 ## Deployment
@@ -517,33 +518,44 @@ https://stackoverflow.com/questions/59147127/django-how-to-auto-generate-a-uniqu
     - Using [flat=true](https://stackoverflow.com/questions/48606087/getting-values-of-queryset-in-django) in query.
     - Concept of Submit button out of form from [here](https://stackoverflow.com/questions/7020659/submit-form-using-a-button-outside-the-form-tag)
 
-- [pexels](https://www.pexels.com/), following images mentined below.
-    - [Image 1](https://www.pexels.com/photo/wood-planks-in-yellow-flames-18734673/)
-    - [Image 2](https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg) as if the image from database dosen't load.
-    - [Image 3](https://www.pexels.com/photo/dhl-17840482/)
-    - [Image 4](https://www.pexels.com/photo/businessman-fashion-man-person-8937582/)
-    - [Image 5](https://www.pexels.com/photo/woman-in-a-hijab-using-a-laptop-and-a-smartphone-5206297/)
-    - [Image 6](https://www.pexels.com/photo/smiling-man-in-a-gray-suit-standing-with-arms-crossed-by-a-fence-13801629/)
-    - [Image 7](https://www.pexels.com/photo/assorted-cosmetic-lot-2536965/)
-    - [Image 8]()
+- [pexels](https://www.pexels.com/), following images mentioned below.
+  <details>
+  <summary>Images List by pexels</summary>
+
+  - [Image 1](https://www.pexels.com/photo/wood-planks-in-yellow-flames-18734673/)
+  - [Image 2](https://images.pexels.com/photos/1926620/pexels-photo-1926620.jpeg). This will be displayed incase image from cloudinary database dosen't work.
+  - [Image 3](https://www.pexels.com/photo/dhl-17840482/)
+  - [Image 4](https://www.pexels.com/photo/businessman-fashion-man-person-8937582/)
+  - [Image 5](https://www.pexels.com/photo/woman-in-a-hijab-using-a-laptop-and-a-smartphone-5206297/)
+  - [Image 6](https://www.pexels.com/photo/smiling-man-in-a-gray-suit-standing-with-arms-crossed-by-a-fence-13801629/)
+  - [Image 7](https://www.pexels.com/photo/assorted-cosmetic-lot-2536965/)
+  - [Image 8]()
+
+  </details>
+
 - Images and details for beauty products are taken from following website.
-    - [flickr](https://www.flickr.com/photos/ookikioo/314692754)
-    - [parfumdreams](https://en.parfumdreams.de/Anastasia-Beverly-Hills/Eyes/Eye-Shadow/Cosmos-Eyeshadow-Palette/index_123407.aspx)
-    - [douglas](https://www.douglas.de/de/p/5010975033)
-    - [douglas](https://www.douglas.de/de/p/3000000215?variant=708800)
-    - [meine-parfuemer](https://www.meine-parfuemerie-lux.de/Pflege/Koerper-Damen/Koerperpflege/Biotherm-Lait-Corporel-Anti-Dessechant-pflegende-Bodylotion.html)
-    - [douglas](https://www.douglas.de/de/p/3000027765)
-    - [parfumdreams](https://www.parfumdreams.de/Biotherm/Duefte/Eau-dEnergie/Body-Lotion/index_10923.aspx?affid=Google-PLA_DE&gad_source=1&gclid=CjwKCAiAxreqBhAxEiwAfGfndH15_lt43vWxre_J7Eljn4NFBrfoQ6Rym1W6jC0tUL2SQW3OsC2DExoCjn0QAvD_BwE)
-    - [douglas](https://www.douglas.de/de/p/3001016002?variant=876970&trac=DO_DE.01.01_Shopping.P_Shopping.Google.11406081296.114611656067.876970.online.PM&gad_source=1&gclid=CjwKCAiAxreqBhAxEiwAfGfndDkqn_tiM3EqmP50rF0DtUwKJocxZ8Szri09JhjcosPmR0rcy_PRGhoC_swQAvD_BwE)
-    - [bathandbodyworks](https://www.bathandbodyworks.com/p/woodlands-3-in-1-hair-face-andamp-body-wash-026702554.html?cgid=body-care#start=2)
-    - [iherb](
-https://ca.iherb.com/pr/hair-food-heat-protection-blend-coconut-argan-oil-6-4-fl-oz-190-ml/114999?gad_source=1)
-    - [douglas](https://www.douglas.de/de/p/3000039681)
-    - [fnf](https://fnf.co.ke/product/creed-aventus-eau-de-parfum-100ml/)
-    - [douglas](https://www.douglas.de/de/p/3001044085?variant=455949)
-    - [avsfreeov](https://avsfreeov.life/product_details/81478479.html)
-    - []()
-    - []()
+  <details>
+  <summary>Images List by pexels</summary>
+
+  - [flickr](https://www.flickr.com/photos/ookikioo/314692754)
+  - [parfumdreams](https://en.parfumdreams.de/Anastasia-Beverly-Hills/Eyes/Eye-Shadow/Cosmos-Eyeshadow-Palette/index_123407.aspx)
+  - [douglas](https://www.douglas.de/de/p/5010975033)
+  - [douglas](https://www.douglas.de/de/p/3000000215?variant=708800)
+  - [meine-parfuemer](https://www.meine-parfuemerie-lux.de/Pflege/Koerper-Damen/Koerperpflege/Biotherm-Lait-Corporel-Anti-Dessechant-pflegende-Bodylotion.html)
+  - [douglas](https://www.douglas.de/de/p/3000027765)
+  - [parfumdreams](https://www.parfumdreams.de/Biotherm/Duefte/Eau-dEnergie/Body-Lotion/index_10923.aspx?affid=Google-PLA_DE&gad_source=1&gclid=CjwKCAiAxreqBhAxEiwAfGfndH15_lt43vWxre_J7Eljn4NFBrfoQ6Rym1W6jC0tUL2SQW3OsC2DExoCjn0QAvD_BwE)
+  - [douglas](https://www.douglas.de/de/p/3001016002?variant=876970&trac=DO_DE.01.01_Shopping.P_Shopping.Google.11406081296.114611656067.876970.online.PM&gad_source=1&gclid=CjwKCAiAxreqBhAxEiwAfGfndDkqn_tiM3EqmP50rF0DtUwKJocxZ8Szri09JhjcosPmR0rcy_PRGhoC_swQAvD_BwE)
+  - [bathandbodyworks](https://www.bathandbodyworks.com/p/woodlands-3-in-1-hair-face-andamp-body-wash-026702554.html?cgid=body-care#start=2)
+  - [iherb](https://ca.iherb.com/pr/hair-food-heat-protection-blend-coconut-argan-oil-6-4-fl-oz-190-ml/114999?gad_source=1)
+  - [douglas](https://www.douglas.de/de/p/3000039681)
+  - [fnf](https://fnf.co.ke/product/creed-aventus-eau-de-parfum-100ml/)
+  - [douglas](https://www.douglas.de/de/p/3001044085?variant=455949)
+  - [avsfreeov](https://avsfreeov.life/product_details/81478479.html)
+  - []()
+  - []()
+  
+  </details>
+
 
 - [Nav bar](https://www.fundaofwebit.com/ecommerce-template/ecommerce-navbar-design-using-html-css-bootstrap) is taken from here and modified later as per need.
 - [Footer](https://www.fundaofwebit.com/ecommerce-template/bootstrap-ecommerce-footer-template-in-html-css) is taken from here and modified later as per need.

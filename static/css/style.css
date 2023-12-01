@@ -23,7 +23,7 @@ main{
     font-family: 'Ubuntu', sans-serif;
 }
 
-/* nav */
+/* nav is taken from https://www.fundaofwebit.com/ecommerce-template/ecommerce-navbar-design-using-html-css-bootstrap and modified later as per need */
 .main-navbar{
     font-family: 'Oswald', sans-serif;
     border-bottom: 1px solid #ccc;
@@ -135,14 +135,18 @@ main{
 }
 
 /* Products page */
-#product-card, #product-img img{
+
+/* Box shadow is taken from https://getcssscan.com/css-box-shadow-examples */
+.product-card, #product-img img{
     box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
 }
-#product-card:hover{
+.product-card:hover{
     box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
 
 /* product details */
+
+/* Zoom on image hover effect is taken from here https://w3bits.com/css-image-hover-zoom/ */
 .img-hover-zoom {
     overflow: hidden;
 }
@@ -156,7 +160,9 @@ main{
     transform: scale(1.2);
 }
 
-/* Sweep To Right button effect */
+/* Sweep To Right button effect 
+* Hover button effect is taken from https://ianlunn.github.io/Hover/ 
+*/
 .hvr-sweep-to-right {
     display: inline-block;
     vertical-align: middle;
@@ -241,20 +247,6 @@ main{
     .button-width {
         width: 100%;
     }
-}
-
-/* Remove arrow up and down from number fields on postal code and mobile numbers (SHIPPING DETAILS PAGE)
-* Credit: Solution by chatgpt.
-*/
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"] {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type="number"] {
-    -moz-appearance: textfield;
 }
 
 /* footer */

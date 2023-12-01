@@ -5,7 +5,7 @@
 <!-- My orders -->
 <div class="container my-5">
     <div class="row justify-content-center">
-        <div class="col-lg-12">
+        <div class="col-12">
             <h1>Your Orders</h1>
             {% if get_products %}
             {% for product_key, product_data in get_products.items %}
@@ -72,11 +72,11 @@
             </div>
             <!-- Cancel order Modal -->
             <div class="modal fade" id="item-{{ product_key }}" tabindex="-1"
-                aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                aria-labelledby="deleteConfirmationModalLabel-{{ product_key }}" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title" id="deleteConfirmationModalLabel">Confirm Order Cancellation</h3>
+                            <h3 class="modal-title" id="deleteConfirmationModalLabel-{{ product_key }}">Confirm Order Cancellation</h3>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
