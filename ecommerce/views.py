@@ -6,7 +6,7 @@ from django.http import JsonResponse
 import datetime
 from django.conf import settings
 import decimal
-from django.db.models import Q
+from django.db.models import Q, F
 from .forms import ShipmentDetailForm, ConfirmedOrderDetailForm
 import random
 
@@ -28,8 +28,7 @@ class ProductSearch(generic.ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('search-product')
-        return Product.objects.filter(available=True).filter(
-            stock__gt=0).filter(name__icontains=query).order_by('-created_on')
+        return Product.objects.filter(available=True).filter(name__icontains=query).order_by('-created_on')
 
 
 class Products (generic.ListView):
@@ -38,8 +37,7 @@ class Products (generic.ListView):
     products.html
     """
     # TASK: CHECK IF DICOUNT EXIST OR NOT
-    queryset = Product.objects.filter(available=True).filter(
-        stock__gt=0).order_by('-created_on')
+    queryset = Product.objects.filter(available=True).order_by('-created_on')
     template_name = 'products.html'
     paginate_by = 8
 
@@ -49,8 +47,7 @@ class ProductsCategory (generic.ListView):
     Display products based on categories
     """
     # TASK: CHECK IF DICOUNT EXIST OR NOT
-    queryset = Product.objects.filter(available=True).filter(
-        stock__gt=0).order_by('-created_on')
+    queryset = Product.objects.filter(available=True).order_by('-created_on')
     template_name = 'products.html'
     paginate_by = 8
 
@@ -77,7 +74,7 @@ class ProductDetail(generic.DetailView):
     Display product details
     """
     def get(self, request, slug, *args, **kwargs):
-        queryset = Product.objects.filter(stock__gt=0).filter(
+        queryset = Product.objects.filter(
             slug=slug).order_by('-created_on')
         product = get_object_or_404(queryset)
 
@@ -276,6 +273,7 @@ class Checkout(View):
                 for key, value in request.session.get('cart').items():
                     overall_total += value['prod_total']
                     prod_id = Product.objects.get(id=key)
+                    product_quantity_update = Product.objects.filter(id=key).update(stock=F('stock') - value['quantity'])
                     add_confirmed_order = ConfirmedOrderDetail(
                         user_info=request.user,
                         product_info=prod_id,
@@ -372,12 +370,23 @@ class MyOrders(View):
     def post(self, request):
         if 'quantity' in request.POST:
             quantity = request.POST['quantity']
-            product_id = request.POST['product_instance_id']
-            # IMPORTANT UPDATE PRICE AFTER CHANGING QUANTITY
-            instance = get_object_or_404(ConfirmedOrderDetail, id=product_id)
+            confirmed_product_id = request.POST['product_instance_id']
+            product_id = ConfirmedOrderDetail.objects.get(id=confirmed_product_id).product_info.id
+            product_total = Product.objects.get(id=product_id).discount_name.discount_percentage
+            discount = 0
+            queryset = Product.objects.filter(
+            id=product_id).order_by('-created_on')
+            product = get_object_or_404(queryset)
+            if product.discount_name.discount_percentage > 0:
+                discount = (float(product.discount_name.discount_percentage)
+                            * float(product.price)) / 100
+                discount = product.price-decimal.Decimal(discount)
+            new_total = float(quantity) * float(discount)
+            instance = get_object_or_404(ConfirmedOrderDetail, id=confirmed_product_id)
             form = ConfirmedOrderDetailForm(request.POST, instance=instance)
             if form.is_valid():
                 form.save()
+                ConfirmedOrderDetail.objects.filter(id=confirmed_product_id).update(prod_total = round(new_total, 2))
             return redirect('myorders')
         return self.get(request)
 

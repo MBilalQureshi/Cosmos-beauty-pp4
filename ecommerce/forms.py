@@ -10,21 +10,21 @@ class CustomSignupForm(SignupForm):
     First and last name in All auth signup form are added
     """
     first_name = forms.CharField(
-        max_length=16,
-        label='First Name',
-        widget=forms.TextInput(attrs={'placeholder': 'First Name'})
-        )
+      max_length=16,
+      label='First Name',
+      widget=forms.TextInput(attrs={'placeholder': 'First Name'})
+      )
     last_name = forms.CharField(
-        max_length=16, label='Last Name',
-        widget=forms.TextInput(attrs={'placeholder': 'Last Name'})
-        )
+      max_length=16, label='Last Name',
+      widget=forms.TextInput(attrs={'placeholder': 'Last Name'})
+      )
 
     def save(self, request):
-        user = super(CustomSignupForm, self).save(request)
-        user.first_name = self.cleaned_data['first_name']
-        user.last_name = self.cleaned_data['last_name']
-        user.save()
-        return user
+      user = super(CustomSignupForm, self).save(request)
+      user.first_name = self.cleaned_data['first_name']
+      user.last_name = self.cleaned_data['last_name']
+      user.save()
+      return user
 
 
 class ShipmentDetailForm(forms.ModelForm):
