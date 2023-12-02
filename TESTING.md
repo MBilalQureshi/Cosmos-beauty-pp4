@@ -112,17 +112,28 @@ The Cosmos Beauty is tested accross various devices provided by Chrome devtool. 
 - I confirmed all the products here are clickable and redirect user to product details page
 - I confirmed all the product categories and items on sale are visible here.
 - I confirmed products will also display the relavent information such as image, name and price.
+
 ## Product with category
 - I confirmed only specific category of products will be displayed here such as makeup or fregrances.
 - The items on sale are also visible but belonging only to that specific category.
 - I confirmed products will also display the relavent information such as image, name and price.
+
 ## Sales and offers
 - I confirmed that the items on sales are only displayed here.
 - I confirmed all the category items can be seen here.
 - I confirmed products will also display the relavent information such as image, name and price.
+
 ## Product Detail
+- I confirmed user can add/remove items from cart while on product details page.
+- I confirmed user can add products to wishlist from here.
+- I confirmed user can checkout meaning redirect to cart page from this page.
+- I confirmed user can view details of product along with its description.
 
 ## Cart
+- I confirmed user can remove items from cart.
+- I confirmed user can view relavent details of product from cart.
+- I confirmed user can view total from inside card.
+- I confirmed user can go to shipping details from cart.
 
 ## Shipping Details
 - I confirmed the fields will be empty for every new user.
@@ -130,14 +141,248 @@ The Cosmos Beauty is tested accross various devices provided by Chrome devtool. 
 - I confirmed user can update the shipment data each time he/she palaces an order.
 - I confirmed that the fields can't be set empty.
 - I confirmed the button here completes the order process.
+
 ## Order Complete
+- I confirmed user can see that order is placed successfully.
+- I confirmed user is shown time duration when he/she will get the order.
+- I confirmed if user goes back to shipping and click finish order, user will redirect to my orders as order is already placed.
+- I confirmed user is given clickable options to redirect from this page.
 
 ## My Orders
+- I confirmed user can see all the orders he/she had placed from my orders.
+- I confiremd user can update the quantity while being on my orders.
+- I confirmed user can cancel complete orders from here.
+- I confirmed user can remove items from my orders list
+- I confiremd user is given cancel order option if only one product exist in an order.
 
 ## Wishlist
 - I confirmed that only items user had added to wishlist are displayed here.
 - I confirmed products will also display the relavent information such as image, name and price.
 # Bugs
 
-### Fixed Bugs
+### Fixed Bugs and Issues
+1. Content Overflow
 
+On smallest screen size on order complete page the content inside h1 tag was overflowed from its container.
+- **Fix** This was fixed by removing unnecessary class Display-4 from h1 tag.
+
+2. Buttons Merging
+
+On firefox, all three buttons on product details were attached with no margin between them.
+- **Fix** This was caused by br tags used after buttons. br tags were removed and content was moved inside divs with proper margin on top and bottoms.
+
+3. Login with email always wrong
+
+The email login was always considerd wrong.
+- **Fix** After setting ACCOUNT_AUTHENTICATION_METHOD = 'email', I needed to set this as well inside setting.py
+```css
+    AUTHENTICATION_BACKENDS = (
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend"
+    )
+```
+
+4. Zipping variable to loop togther
+
+I had a situation at my orders view where I had to loop through one list and dict at the same time I used multiple ways to achieve this but was not able to do this including zipping the varaibles together. This was needed as one order can have multiple products, and one order could have only one product.
+This was the code that I wrote initilally 
+```
+def get(self, request):
+        get_products ={}
+        form = []
+        if request.user.is_authenticated:
+            get_invoice_list = UserBill.objects.filter(user_info=request.user).values_list('user_unique_order_no',flat = True)           
+            if get_invoice_list:
+                for invoice_number in get_invoice_list:
+                    get_products[invoice_number] = ConfirmedOrderDetail.objects.filter(user_unique_order_no = invoice_number).values_list('product_info','product_info__image','product_info__name','quantity','prod_total', 'product_info__stock',)
+                        # print(x[0])
+                        instance = get_object_or_404(ConfirmedOrderDetail,user_unique_order_no = invoice_number,product_info = x[0])
+                        form.append(ConfirmedOrderDetailForm(instance = instance)) 
+            else:
+                print("No invoices available")         
+        return render(
+            request,
+            "my_orders.html",
+            {
+                'form':form,
+                'get_products':get_products,
+            },
+        )
+```
+And inside html
+```
+{% for product_key,product_value in get_products.items %}
+    {% for product in product_value %}
+     
+    {% endfor %}
+{% endfor %}
+```
+I tried following options to zip my data
+
+1. The zipped data always gives errors and was not able to loop through the data on html side.
+```
+def view(request):
+    #code
+    my_list = ['a', 'b', 'c']
+    my_dict = {'a': '1', 'b': '2', 'c': '3'}
+    my_zipped_data = list(zip(my_list, my_dict.keys(), my_dict.values()))
+    return render(request, 'my_orders.html', {'zipped_data': zipped_data})
+    #code
+```
+and inside html
+```
+{% for list_item, (key, value) in my_zipped_data %}
+    {{ list_item }}: {% if key %}{{ key }} - {{ value }}{% endif %}
+{% endfor %}
+```
+2. However it was told on stackoverflow, i was not able to use |zip:my_dict.items.
+```
+def view(request):
+    #code
+    my_list = ['a', 'b', 'c']
+    my_dict = {'a': '1', 'b': '2', 'c': '3'}
+    my_zipped_data = list(zip(my_list, my_dict.keys(), my_dict.values()))
+    return render(request, 'my_orders.html', {'my_list': my_list, 'my_dict': my_dict})
+    #code
+```
+and inside html
+```
+{% for list_item, (key, value) in my_list|zip:my_dict.items %}
+    {{ list_item }}: {{ key }} , {{ value }}
+{% endfor %}
+```
+- **Fix**
+ChatGpt solution
+inside View I had to add this code to merge dict and list together inside view and set get_products and form_instances.
+```
+form_instances_for_invoice = []  # Store form instances for each invoice
+for product_data in products_data:
+    instance = get_object_or_404(ConfirmedOrderDetail, user_unique_order_no=invoice_number, product_info=product_data[0])
+    form = ConfirmedOrderDetailForm(instance=instance)
+    form_instances_for_invoice.append(form)
+
+# Store product data and form instances in the dictionary
+get_products[invoice_number] = {
+    'product_info': products_data,
+    'form_instances': form_instances_for_invoice,
+}
+
+# Extend the list of all form instances
+form_instances.extend(form_instances_for_invoice)
+```
+inside html
+```
+{% for product_key, product_data in get_products.items %}
+    {% for form_instance in product_data.form_instances %}
+    - 
+    {% endfor %}
+{% endfor %}
+```
+
+5. Allauth, Custom fields
+
+Initially, the plan was to ask user for first and last name but all auth didn't provide any field for that. as per discusion with CI tutor I had to make a custom field.
+**Fix**
+I added custom First and last name by adding
+```
+first_name = forms.CharField(
+    max_length=16,
+    label='First Name',
+    widget=forms.TextInput(attrs={'placeholder': 'First Name'})
+)
+```
+And in same way last name.
+
+Altough, it's purpose was to ask user first and last name, so that it did't had to do it in shipment details. But this can to my attention later that First and last name are also required during shipping as the person whom the items are being shipped to name could be different than account holder. I'll give check box option in future to ask user to use same first and last name as account during shipping.
+
+6. Gitpush head error
+
+There was this git error: failed to push some refs to remote. It was caused when I added template for issues in project. This caused adding this to git with a commit. Back on my project it was alwaya one step behind now than last commit.
+
+This cost me one time lost of my actual work on project due to invalid commit I did on gitpod.
+
+**Fix**
+There was actaullay a simple solution to this which is 
+```
+git pull --rebase
+git push
+```
+
+7. Negate and minus/plus inside query
+
+There was sitaiation when I had to negate and minus from total inside query.
+
+**Fix**
+This could be easily done ~Q for negating and ~F for minus plus operations inside query.
+
+8. Out of stock products not appearing
+
+The products that were out of stock not appearing on the page, instaed I was getting 404 page not found.
+
+**Fix**
+The issue was that the I accidently applied stock__gt=0 on multiple views which caused this. I just removed its filter and out of stocks products started appearing.
+
+9. Products categories redundency
+
+Initially I had multiple urls and view for all the products and categories which look really redundent and I talked about this with my Mentor **Antonio Rodriguez**.
+**Fix**
+My mentor taught me the way where i can remove this redundency and fixed this code.
+- The redundent url of product categories were removed.
+- menu_products.html was created for looping through categories.
+- Above html file added to base.html.
+- Add menuproducts.py file inside template tags.
+- Finally update ProductsCategory view and remove redundent category views.
+
+10. Search bar bug
+
+The searching was only working for key words like 'oo' but if i wrote 'Hair food', it finds no result for it.
+**Fix**
+Inside the view for searching instead of contain, by using icontain fixed this bug.
+
+11. The footer sticking to bottom
+
+The footer was not sticking to bootom so I used bootstrap class for it to stick to bottom but unfortunately, It only sticks its till the main content size. Meaning the space after the footer was still blank.
+**Fix**
+I asked chatgpt, it gave the simple solution which is:
+```
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+main{
+    flex: 1;
+}
+```
+This always pushed the footer without breaking the main content.
+
+12. Team images on home page text confusion
+
+As per discussion with my Mentor the images are too far from their text and gives the impression like the person below is saying those quotes.
+**Fix**
+I updated the bootstrap classes and moved the images closest to its relavent text for larger screens and give proper margin below them to avoid this confusion.
+
+13. Cart data storage
+
+Initially I wanted to store the cart data inside the database, but as i progressed through project it seems very impractical to go to DB again and again for product removal and addition.
+**Fix**
+After some R&D, it was obvious that the cart data should only be stored in session and once the order is placed its data should be moved to the database.
+
+14. Quantity input product details page
+
+The quantity handler here is not part of form so I had to manage the quantity input and + - signs my self using JS but it turns out very tricky. I had lot of bugs handling it.
+**Fix**
+I found already built in code for this mentioned in credits as well, I just had to make some changes fix depricated code and I was able to make it work to handle quantity and store it in session.
+
+15. My orders total
+
+The total was not updating at all even if the quantity is updated.
+**Fix**
+The total was not handled and I saw it during the testing and fixed it so that it could be seen on the page.
+
+16. 
+
+## Unfixed bugs
+- No known unfixed bugs.
+
+Return back to the [README.md](/README.md) file.

@@ -1,9 +1,7 @@
-from django.shortcuts import render, get_object_or_404, redirect, HttpResponse
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic, View
 from .models import *
 from django.contrib.auth.decorators import login_required
-from django.http import JsonResponse
-import datetime
 from django.conf import settings
 import decimal
 from django.db.models import Q, F
@@ -28,7 +26,8 @@ class ProductSearch(generic.ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('search-product')
-        return Product.objects.filter(available=True).filter(name__icontains=query).order_by('-created_on')
+        return Product.objects.filter(available=True).filter(
+            name__icontains=query).order_by('-created_on')
 
 
 class Products (generic.ListView):
@@ -55,7 +54,7 @@ class ProductsCategory (generic.ListView):
         category_param = self.kwargs.get("category")
         category = ProductCategories.objects.get(category_name=category_param)
         products = Product.objects.filter(product_category=category).filter(
-            available=True).filter(stock__gt=0).order_by('-created_on')
+            available=True).order_by('-created_on')
         return {'product_list': products}
 
 
@@ -116,7 +115,7 @@ class Wishlist(generic.ListView):
     paginate_by = 8
     template_name = 'wishlist.html'
     context_object_name = 'wishlist'
-    
+
     def get_queryset(self):
         return Wishes.objects.filter(user=self.request.user)
 
@@ -240,7 +239,7 @@ class Checkout(View):
         """
         Update the Shipment detail modal form if needed else forward it as it
         is and add new order data to Confirmed Order Detail and user bill
-        modals vwith invoice number.
+        modals with invoice number.
         """
         if request.user.is_authenticated:
             get_user_last_data = ShipmentDetail.objects.filter(
@@ -264,7 +263,7 @@ class Checkout(View):
                     return redirect('checkout')
 
             overall_total = 0.00
-            invoice_no = create_new_ref_number()
+            invoice_no = generate_invoice_number()
             # TASK UPDATE THE QUANTITY IN PRODUCTS STOCK
 
             if not request.session.get('cart'):
@@ -273,7 +272,8 @@ class Checkout(View):
                 for key, value in request.session.get('cart').items():
                     overall_total += value['prod_total']
                     prod_id = Product.objects.get(id=key)
-                    product_quantity_update = Product.objects.filter(id=key).update(stock=F('stock') - value['quantity'])
+                    product_quantity_update = Product.objects.filter(
+                        id=key).update(stock=F('stock') - value['quantity'])
                     add_confirmed_order = ConfirmedOrderDetail(
                         user_info=request.user,
                         product_info=prod_id,
@@ -303,19 +303,19 @@ class Checkout(View):
         )
 
 
-def create_new_ref_number():
+def generate_invoice_number():
     """
     This function generate random invoice number based on
     the fact that it does't already exist in modal for new
     orders
     """
-    not_unique = True
-    while not_unique:
-        unique_ref = random.randint(1000000000, 9999999999)
+    is_not_unique = True
+    while is_not_unique:
+        invoice_no_ref = random.randint(1000000000, 9999999999)
         if not ConfirmedOrderDetail.objects.filter(
-             user_unique_order_no=unique_ref):
-            not_unique = False
-    return str(unique_ref)
+             user_unique_order_no=invoice_no_ref):
+            is_not_unique = False
+    return str(invoice_no_ref)
 
 
 class MyOrders(View):
@@ -324,7 +324,7 @@ class MyOrders(View):
     quantity of product based on need.
     Note: Parts of Get function is modified using chat gpt due to an issue
     where form and products data couldn't be zipped togther as list.
-    kindly see Testing.md for more details.
+    kindly see Testing.md bug#4 for more details.
     """
     def get(self, request):
         get_products = {}
@@ -371,22 +371,27 @@ class MyOrders(View):
         if 'quantity' in request.POST:
             quantity = request.POST['quantity']
             confirmed_product_id = request.POST['product_instance_id']
-            product_id = ConfirmedOrderDetail.objects.get(id=confirmed_product_id).product_info.id
-            product_total = Product.objects.get(id=product_id).discount_name.discount_percentage
+            product_id = ConfirmedOrderDetail.objects.get(
+                id=confirmed_product_id).product_info.id
+            product_total = Product.objects.get(
+                id=product_id).discount_name.discount_percentage
             discount = 0
             queryset = Product.objects.filter(
-            id=product_id).order_by('-created_on')
+                id=product_id).order_by('-created_on')
             product = get_object_or_404(queryset)
             if product.discount_name.discount_percentage > 0:
                 discount = (float(product.discount_name.discount_percentage)
                             * float(product.price)) / 100
                 discount = product.price-decimal.Decimal(discount)
             new_total = float(quantity) * float(discount)
-            instance = get_object_or_404(ConfirmedOrderDetail, id=confirmed_product_id)
+            instance = get_object_or_404(
+                ConfirmedOrderDetail, id=confirmed_product_id)
             form = ConfirmedOrderDetailForm(request.POST, instance=instance)
             if form.is_valid():
                 form.save()
-                ConfirmedOrderDetail.objects.filter(id=confirmed_product_id).update(prod_total = round(new_total, 2))
+                ConfirmedOrderDetail.objects.filter(
+                    id=confirmed_product_id).update(prod_total=round(
+                        new_total, 2))
             return redirect('myorders')
         return self.get(request)
 
@@ -395,7 +400,6 @@ def delete_order(request, product_key):
     """
     This view cancels the orders
     """
-    # Handle stock
     order_detail = ConfirmedOrderDetail.objects.filter(
         user_unique_order_no=product_key)
     user_bill = UserBill.objects.filter(user_unique_order_no=product_key)
@@ -408,7 +412,6 @@ def remove_product(request, product_key, total, prod_id):
     """
     This view remove products from orders
     """
-    # Handle stock
     item = UserBill.objects.filter(
         user_unique_order_no=product_key).values_list(
             'total', flat=True)

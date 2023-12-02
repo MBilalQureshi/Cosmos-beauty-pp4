@@ -362,6 +362,7 @@ This section tells about people of Cosmos Beauty and what they had to say about 
     - Discounted price (If on sale)
     - Number of items in stock
     - Product Category
+
 ### Cart
 ![cart](docs/readme_images/features/cart.png)
 The cart will contain all the items that user wants to buy.
@@ -382,7 +383,8 @@ The shipping details will contain a form for user to enter his/her shipping info
 2. User information already exist he/she just had to confirm information before placing order.
 3. User can update the information already available and place order once new data is entered.
 
-Stripe is currently not integrated in project so only COD(Cash on Delivery) option is given in method field.
+**NOTE 1** Stripe is currently not integrated in project so only COD(Cash on Delivery) option is given in method field. 
+**NOTE 2** **Create, Read and Update** can be done on this page.
 
 ### Order Complete
 ![order complete](docs/readme_images/features/order_complete.png)
@@ -391,7 +393,7 @@ Stripe is currently not integrated in project so only COD(Cash on Delivery) opti
 - Duration of when the package will arrive.
 - Options to what to do next once order is placed in form of buttons.
 
-At this point cart session is cleared, so if user goes back to shipping details page and clicks "Finish Order", he/she is redirected to "my orders page" as the order was already placed.
+**NOTE** At this point cart session is cleared, so if user goes back to shipping details page and clicks "Finish Order", he/she is redirected to "my orders page" as the order was already placed. Now orders lists are **created** inside database.
 
 ### My orders
 ![My orders](docs/readme_images/features/mu_orders.png)
@@ -406,6 +408,8 @@ At this point cart session is cleared, so if user goes back to shipping details 
     - Finally an option to cancel the order. Modal to cancel order will appear to ask the user if he/she is sure to cancel the order.
     - If there is only one product and user click remove, the cancel order modal will appear instead of just removing one item. Removing one and only item is equal to cancelling order.
 
+**NOTE** On real world application, there is no such thing as updating quantity once order is placed as per my understanding, updating quantity has therfore no effect on actual stocks inside Products table. Every action on this page has impact only on Confirmed order details and User Bill tables. The purpose of this page is only to show **Read, Update and delete**. My intenstions are to disable 'update', 'remove' options in future and give the user the option to cancel order only via E-mail.
+
 ### Wishlist
 ![Wishlist](docs/readme_images/features/wishlist.png)
 - Wishlist contains the items of user which he/she added to wishlist.
@@ -419,6 +423,7 @@ There are four custom pages to handle, the following request
 2. 403 Page forbidden
 3. 404 Page not found
 4. 500 Server Error
+
 These pages have the same pattren except text and their main purpose is to give user better experince on website.
 
 
@@ -500,23 +505,29 @@ With Forking one can make a copy of a repository and to view or make changes in 
 - [Django](https://docs.djangoproject.com/en/4.2/) for understanding many concepts during project development.
 - [Bootstrap](https://getbootstrap.com/docs/5.3/getting-started/introduction/) with multiple concepts in designing the website.
 - [Allauth](https://docs.allauth.org/en/latest/introduction/index.html) for implementing it in our project.
-- [Crispy forms](https://django-crispy-forms.readthedocs.io/en/latest/install.html) for implementing it in our project.
-- [ChatGPT 3.5](https://chat.openai.com/) helped me with fixing a few bugs, kindly see bugs topic in testing.md file.
+- [Crispy forms](https://django-crispy-forms.readthedocs.io/en/latest/install.html) for implementing it in our project and its other topics for handling forms.py to modify forms inside shipping detail.
+- [ChatGPT 3.5](https://chat.openai.com/) helped me with fixing a few issues, kindly see bugs and issues topic in testing.md file.
 - [Bootstrap Counter Field](https://www.codeply.com/go/2VmBU7TanF/bootstrap-plus-minus-counter-input) is taken from here. Its used in product details. An alternate handler of input where no form is used. Depricated JS code is removed from this code and updated as per need.
 - This geeks for geeks [link](https://www.geeksforgeeks.org/python-extending-and-customizing-django-allauth/) for understanding the concept of making custom fields in allauth. In my case first and last name was added during sign up.
 - [StackOverflow](https://stackoverflow.com/) with following topics mentioned below.
+  <details>
+  <summary>Stackoverflow links</summary>
+
     - Fixing issue when [Email](https://stackoverflow.com/questions/27967319/django-allauth-email-login-always-wrong) was always considered invalid during login.
     - Fixing git error: failed to push some refs to remote from [here](https://stackoverflow.com/questions/24114676/git-error-failed-to-push-some-refs-to-remote).
     - Concept of [gt__](https://stackoverflow.com/questions/10040143/and-dont-work-with-filter-in-django) in query.
     - Concept of [~Q](https://stackoverflow.com/questions/60408935/django-model-query-with-not-equal-exclusion) to negate in query.
     - Concept of [value|floatformat:"0"](https://stackoverflow.com/questions/4831306/need-to-convert-a-string-to-int-in-a-django-template) to filter to float format.
     - Generating random invoice number as mentioned [here](
-https://stackoverflow.com/questions/59147127/django-how-to-auto-generate-a-unique-number-string-for-a-model-attribute).
+  https://stackoverflow.com/questions/59147127/django-how-to-auto-generate-a-unique-number-string-for-a-model-attribute).
     - Reloading page on [AJAX](https://stackoverflow.com/questions/7881089/reload-the-page-after-ajax-success) success.
     - Concept of [login_required](https://stackoverflow.com/questions/6069070/how-to-use-permission-required-decorators-on-django-class-based-views) on class based views.
     - Setting user in form before submitting form as mentioned [here](https://stackoverflow.com/questions/46940623/how-to-do-i-automatically-set-the-user-field-to-current-user-in-django-modelform).
     - Using [flat=true](https://stackoverflow.com/questions/48606087/getting-values-of-queryset-in-django) in query.
     - Concept of Submit button out of form from [here](https://stackoverflow.com/questions/7020659/submit-form-using-a-button-outside-the-form-tag)
+    
+  </details>
+
 
 - [pexels](https://www.pexels.com/), following images mentioned below.
   <details>
@@ -535,7 +546,7 @@ https://stackoverflow.com/questions/59147127/django-how-to-auto-generate-a-uniqu
 
 - Images and details for beauty products are taken from following website.
   <details>
-  <summary>Images List by pexels</summary>
+  <summary>Products Images and description</summary>
 
   - [flickr](https://www.flickr.com/photos/ookikioo/314692754)
   - [parfumdreams](https://en.parfumdreams.de/Anastasia-Beverly-Hills/Eyes/Eye-Shadow/Cosmos-Eyeshadow-Palette/index_123407.aspx)
