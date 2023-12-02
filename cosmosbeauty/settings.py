@@ -27,7 +27,7 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 localhost = '8000-mbilalqures-cosmosbeaut-t555x6i9jv7.ws-us106.gitpod.io'
 ALLOWED_HOSTS = ['cosmos-beauty-133a3d7898aa.herokuapp.com', localhost]
 
