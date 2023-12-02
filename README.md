@@ -332,7 +332,7 @@ This section tells about the people of Cosmos Beauty and what they had to say ab
 
 - Django Allauth was installed and used for sign-in/ signup and signout.
 - UI was designed later for a better user experience.
-- After a bit of study on modern e-commerce web apps, messages were removed that were initially part of the application to provide a better user experience.
+- Instaed of alerts, toasts will be seen when user perform any action on the website. From sign-in to cancelling orders.
 
 ### Browse Products
 ![products](docs/readme_images/features/products.png)
@@ -525,7 +525,7 @@ With Forking one can make a copy of a repository and view or make changes in it 
     - Setting user in the form before submitting the form as mentioned [here](https://stackoverflow.com/questions/46940623/how-to-do-i-automatically-set-the-user-field-to-current-user-in-django-modelform).
     - Using [flat=true](https://stackoverflow.com/questions/48606087/getting-values-of-queryset-in-django) in query.
     - Concept of Submit button out of form from [here](https://stackoverflow.com/questions/7020659/submit-form-using-a-button-outside-the-form-tag)
-    
+    - [Page relaod](https://stackoverflow.com/questions/43043113/how-to-force-reloading-a-page-when-using-browser-back-button) for product details page when user clicks back button.
   </details>
 
 

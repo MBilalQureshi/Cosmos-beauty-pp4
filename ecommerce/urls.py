@@ -27,5 +27,5 @@ urlpatterns = [
          name='cancel-order'),
     path('remove-product/<product_key>/<total>/<prod_id>',
          views.remove_product, name='removeproduct'),
-    path('<slug:slug>/', views.ProductDetail.as_view(), name='product_detail'),
+    path('details/<slug:slug>/', views.ProductDetail.as_view(), name='product_detail'),
 ]

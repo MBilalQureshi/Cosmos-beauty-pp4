@@ -128,6 +128,21 @@
             </nav>
         </div>
 
+        <!-- Below is Code Institute's I Think Therefore I Blog project and bootstarp5 toast https://getbootstrap.com/docs/5.3/components/toasts/ merged-->
+        <div class="toast-container position-fixed top-0 end-0 p-3">
+            {% for message in messages %}
+            <div class="toast alert {{ message.tags }}" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="me-auto">Notification</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+                <div class="toast-body">
+                    {{ message | safe }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
         <!-- Main content -->
         <main>
             {% block content %}

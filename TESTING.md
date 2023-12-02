@@ -435,6 +435,13 @@ The total was not updating at all even if the quantity is updated.
 
 **Fix:** The total was not handled and I saw it during the testing and fixed my orders post view so that it could be seen on the page.
 
+## Product details buttons
+
+Product details page buttons are not maintaining state when user goes back from adding an item, go to cart and clicks back button.
+
+**Fix**
+This is fixed using js, the page will always reload when user comes to product details page so latest states of buttons can be recovered. Better solution is to us AJAX. I'll implement that in future releases.
+
 ## Unfixed bugs
 - No known unfixed bugs.
 

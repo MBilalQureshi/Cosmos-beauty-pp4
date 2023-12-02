@@ -7,6 +7,8 @@ import decimal
 from django.db.models import Q, F
 from .forms import ShipmentDetailForm, ConfirmedOrderDetailForm
 import random
+from django.contrib import messages
+from django.http import JsonResponse
 
 
 class Home (generic.TemplateView):
@@ -244,29 +246,35 @@ class Checkout(View):
         if request.user.is_authenticated:
             get_user_last_data = ShipmentDetail.objects.filter(
                 user=request.user)
-            if get_user_last_data:
-                instance = get_object_or_404(ShipmentDetail, user=request.user)
-                form = ShipmentDetailForm(request.POST, instance=instance)
-                if form.is_valid():
-                    fetch_user = form.save(commit=False)
-                    fetch_user.user = request.user
-                    form.save()
+            if request.session.get('cart'):
+                if get_user_last_data:
+                    instance = get_object_or_404(ShipmentDetail, user=request.user)
+                    form = ShipmentDetailForm(request.POST, instance=instance)
+                    if form.is_valid():
+                        fetch_user = form.save(commit=False)
+                        fetch_user.user = request.user
+                        messages.success(request, 'Shipment data set successfully')
+                        form.save()
+                    else:
+                        return redirect('checkout')
                 else:
-                    return redirect('checkout')
+                    form = ShipmentDetailForm(request.POST)
+                    if form.is_valid():
+                        fetch_user = form.save(commit=False)
+                        fetch_user.user = request.user
+                        messages.success(request, 'Shipment data added successfully')
+                        form.save()
+                    else:
+                        return redirect('checkout')
             else:
-                form = ShipmentDetailForm(request.POST)
-                if form.is_valid():
-                    fetch_user = form.save(commit=False)
-                    fetch_user.user = request.user
-                    form.save()
-                else:
-                    return redirect('checkout')
-
+                messages.success(self.request, 'Order Already placed')
+                return redirect('myorders')
             overall_total = 0.00
             invoice_no = generate_invoice_number()
             # TASK UPDATE THE QUANTITY IN PRODUCTS STOCK
 
             if not request.session.get('cart'):
+                messages.success(self.request, 'Order Already placed')
                 return redirect('myorders')
             else:
                 for key, value in request.session.get('cart').items():
@@ -292,6 +300,7 @@ class Checkout(View):
                 user_unique_order_no=invoice_no
                 )
             user_bill_ref.save()
+            messages.success(request, 'Order placed sucessfully')
             del request.session['cart']
 
         return render(
@@ -392,6 +401,7 @@ class MyOrders(View):
                 ConfirmedOrderDetail.objects.filter(
                     id=confirmed_product_id).update(prod_total=round(
                         new_total, 2))
+                messages.success(request, 'Quantity updated sucessfully')
             return redirect('myorders')
         return self.get(request)
 
@@ -405,6 +415,7 @@ def delete_order(request, product_key):
     user_bill = UserBill.objects.filter(user_unique_order_no=product_key)
     order_detail.delete()
     user_bill.delete()
+    messages.success(request, 'Order cancelled sucessfully')
     return redirect('myorders')
 
 
@@ -421,4 +432,5 @@ def remove_product(request, product_key, total, prod_id):
     order_detail = ConfirmedOrderDetail.objects.filter(
         user_unique_order_no=product_key).filter(product_info__id=prod_id)
     order_detail.delete()
+    messages.success(request, 'Item removed sucessfully')
     return redirect('myorders')

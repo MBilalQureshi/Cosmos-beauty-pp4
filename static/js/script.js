@@ -1,4 +1,35 @@
 $(document).ready(function(){
+
+    /**
+     * The product details page is being reloaded if user presses
+     * back from cart. This is beacuse sometimes. Buttons are not
+     * maintaing the states so requires a reload. Better solution
+     * is to handle with AJAX. I'll do it in future releases.
+     * https://stackoverflow.com/questions/43043113/how-to-force-reloading-a-page-when-using-browser-back-button
+     */
+    window.addEventListener("pageshow", function (event) {
+        var isDetailsPage = window.location.pathname.includes('/details');
+        var navigationEntries = performance.getEntriesByType('navigation');      
+        if (isDetailsPage && navigationEntries.length > 0 && navigationEntries[0].type === 'back_forward') {
+          window.location.reload();
+        }
+      });
+
+    /**
+     * This Bootstarp 5 code handles the toast appears on webpage.
+     * https://getbootstrap.com/docs/5.3/components/toasts/
+     */
+    let toasts = document.querySelectorAll('.toast');
+        if (toasts.length > 0) {
+            let toastContainer = new bootstrap.Toast(toasts[0], { autohide: false });
+            toasts.forEach(function (toast) {
+                toastContainer.show(toast);
+                setTimeout(function () {
+                    toastContainer.hide();
+                }, 3000);
+            });
+        }
+
     /**
      * Add / remove products to wishlist using AJAX.
      * Concept of AJAX handling is learned from
@@ -25,12 +56,18 @@ $(document).ready(function(){
         });
     });
 
-
     /**
      * Add / remove products to cart using AJAX.
      */
     $('.add-to-cart').click(function(e){
         e.preventDefault();
+        if (window.history && window.history.pushState) {
+            // Bind to the popstate event
+            $(window).on('popstate', function() {
+                // Reload the page
+                location.reload();
+            });
+        }
         $(this).text(function(i, text){
             text = text.trim();
             return text == 'Add to cart' ? 'Remove from cart' : 'Add to cart';
@@ -51,6 +88,7 @@ $(document).ready(function(){
                 discount:discount,
             },
             success: function (response){
+        
             }
         });
     });
