@@ -37,7 +37,6 @@ class Products (generic.ListView):
     Fetch products data from database and display on
     products.html
     """
-    # TASK: CHECK IF DICOUNT EXIST OR NOT
     queryset = Product.objects.filter(available=True).order_by('-created_on')
     template_name = 'products.html'
     paginate_by = 8
@@ -47,7 +46,6 @@ class ProductsCategory (generic.ListView):
     """
     Display products based on categories
     """
-    # TASK: CHECK IF DICOUNT EXIST OR NOT
     queryset = Product.objects.filter(available=True).order_by('-created_on')
     template_name = 'products.html'
     paginate_by = 8
@@ -109,7 +107,6 @@ class ProductDetail(generic.DetailView):
         )
 
 
-# @login_required(login_url='/accounts/login/')
 class Wishlist(generic.ListView):
     """
     Display user products in wishlist once logged in
@@ -271,7 +268,6 @@ class Checkout(View):
                 return redirect('myorders')
             overall_total = 0.00
             invoice_no = generate_invoice_number()
-            # TASK UPDATE THE QUANTITY IN PRODUCTS STOCK
 
             if not request.session.get('cart'):
                 messages.success(self.request, 'Order Already placed')
@@ -392,6 +388,8 @@ class MyOrders(View):
                 discount = (float(product.discount_name.discount_percentage)
                             * float(product.price)) / 100
                 discount = product.price-decimal.Decimal(discount)
+            else:
+                discount = product.price
             new_total = float(quantity) * float(discount)
             instance = get_object_or_404(
                 ConfirmedOrderDetail, id=confirmed_product_id)

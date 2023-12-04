@@ -1,3 +1,4 @@
+<!-- List of product categories -->
 {% for category_item in categories %}
     <li class="nav-item">
         <a class="nav-link" href="{% url 'products_category' category=category_item.category_name %}">{{category_item.category_name}}</a>

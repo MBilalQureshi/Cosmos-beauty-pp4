@@ -1,6 +1,5 @@
 /* Google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Oswald&family=Roboto&family=Ubuntu&display=swap');
-
 body{
     margin: 0;
     padding: 0;
@@ -11,18 +10,15 @@ body{
     flex-direction: column;
     min-height: 100vh;
 }
-
 /* Main content */
 main{
     flex: 1;
 }
-
 /* Buttons */
 .btn{
     border-radius: 0px;
     font-family: 'Ubuntu', sans-serif;
 }
-
 /* nav is taken from https://www.fundaofwebit.com/ecommerce-template/ecommerce-navbar-design-using-html-css-bootstrap and modified later as per need */
 .main-navbar{
     font-family: 'Oswald', sans-serif;
@@ -65,21 +61,18 @@ main{
     color: #000;
     font-size: 17px;
 }
-
 @media only screen and (max-width: 600px) {
     .main-navbar .top-navbar .nav-link{
         font-size: 14px;
         padding: 8px 10px;
-    }
+   }
 }
-
 /* Carousel on home */
 .carousel-item{
     height: 32rem;
     background-color: hsl(0, 19%, 53%);
     position: relative;
 }
-
 .carousel-item .container{
     color: #ffffff;
     font-weight: bolder;
@@ -89,40 +82,34 @@ main{
     bottom: 0;
     padding-bottom: 50px;
 }
-
 .overlay-image{
-   position: absolute;
-   bottom: 0;
-   left: 0;
-   right: 0;
-   top: 0;
-   background-position: center;
-   background-size: cover;
-   background-repeat: no-repeat;
-   background-blend-mode:hard-light;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-blend-mode:hard-light;
 }
-
 /* Sale banner on home */
 #brand-hash-tag, a{
     text-decoration: none;
     color: #ffffff;
 }
-
 .banner{
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     background-color: rgba(9, 9, 12, 0.788);
 }
-
 #free-gift-banner p{
     color: #fff;
 }
-
 #free-gift-banner .display-6{
     line-height: 1.6;
 }
-
 .lead-img{
     width:150px;
     height: 150px;
@@ -133,9 +120,7 @@ main{
     flex-direction: column;
     justify-content: center;
 }
-
 /* Products page */
-
 /* Box shadow is taken from https://getcssscan.com/css-box-shadow-examples */
 .product-card, #product-img img{
     box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
@@ -143,26 +128,18 @@ main{
 .product-card:hover{
     box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
 }
-
 /* product details */
-
 /* Zoom on image hover effect is taken from here https://w3bits.com/css-image-hover-zoom/ */
 .img-hover-zoom {
     overflow: hidden;
 }
-  
 .img-hover-zoom img {
     transition: transform .5s ease;
 }
-  
-
 .img-hover-zoom:hover img {
     transform: scale(1.2);
 }
-
-/* Sweep To Right button effect 
-* Hover button effect is taken from https://ianlunn.github.io/Hover/ 
-*/
+/* Sweep To Right button effect * Hover button effect is taken from https://ianlunn.github.io/Hover/ */
 .hvr-sweep-to-right {
     display: inline-block;
     vertical-align: middle;
@@ -174,7 +151,7 @@ main{
     transition-property: color;
     -webkit-transition-duration: 0.3s;
     transition-duration: 0.3s;
-  }
+}
 .hvr-sweep-to-right:before {
     content: "";
     position: absolute;
@@ -183,7 +160,8 @@ main{
     left: 0;
     right: 0;
     bottom: 0;
-    background: #000000;;
+    background: #000000;
+   ;
     -webkit-transform: scaleX(0);
     transform: scaleX(0);
     -webkit-transform-origin: 0 50%;
@@ -202,11 +180,9 @@ main{
     -webkit-transform: scaleX(1);
     transform: scaleX(1);
 }
-
 .btn-number{
     border: 0.4px solid grey;
 }
-
 /* Shipping detail */
 .shipping-background {
     background-repeat: no-repeat;
@@ -218,11 +194,9 @@ main{
     overflow: hidden;
     background-attachment: fixed;
 }
-
 .shipping-background:before {
     position: absolute;
 }
-
 /* Order Complete page */
 .jumbotron {
     background-repeat: no-repeat;
@@ -239,17 +213,15 @@ main{
     background-color: rgba(0, 0, 0, 0.7);
     border-radius: 20px;
 }
-
 .button-width {
     width: 35%;
 }
 @media (max-width: 531px) {
     .button-width {
         width: 100%;
-    }
+   }
 }
-
-/* footer */
+/* footer is taken from https://www.fundaofwebit.com/ecommerce-template/ecommerce-navbar-design-using-html-css-bootstrap and modified later as per need */
 .footer-area{
     padding: 40px 0px;
     background-color: #186F65;
