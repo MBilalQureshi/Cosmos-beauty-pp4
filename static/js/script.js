@@ -12,7 +12,6 @@ $(document).ready(function () {
         let isCart = window.location.pathname.includes('/cart')
         let navigationEntries = performance.getEntriesByType('navigation');
         if ((isDetailsPage || isCart) && navigationEntries.length > 0 && navigationEntries[0].type === 'back_forward') {
-            console.log('hello')
             window.location.reload();
         }
     });
@@ -84,7 +83,8 @@ $(document).ready(function () {
                 discount: discount,
             },
             success: function (response) {
-
+                if (response.success) {
+                }
             }
         });
     });

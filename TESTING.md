@@ -435,14 +435,87 @@ The total was not updating at all even if the quantity is updated.
 
 **Fix:** The total was not handled and I saw it during the testing and fixed my orders post view so that it could be seen on the page.
 
-## Product details buttons
+## Product detail buttons updation
 
-Product details page buttons was not maintaining state when user goes back from adding an item, go to cart and clicks back button.
+Product details page buttons was not maintaining state when user goes back from adding an item, go to cart and clicks back button. Better solution is to us AJAX and the code I tried is mentioned below which currently did not worked completely.
 
+Inside product_detail.html
+```
+<script>
+    let product_id = '{{ product.id|escapejs }}';
+</script>
+```
+
+View
+```
+def update_button_states(request):
+    product_id = request.GET.get('product_id')
+    user = request.user
+    product_wish = False
+    add_to_cart = False
+    # if request.user.is_authenticated:
+        # if Wishes.objects.filter(user=request.user, wish_id=product.id):
+        #     product_wish = True
+        # else:
+        #     product_wish = False
+    if request.session.get('cart') is not None:
+        if str(product_id) in request.session.get('cart'):
+            add_to_cart = True
+        else:
+            add_to_cart = False
+    
+    return JsonResponse({'add_to_cart': add_to_cart})
+```
+
+url
+```
+path('update_button_states/', views.update_button_states, name='update_button_states'),
+```
+AJAX
+```
+ function updateButtonStates() {
+        $.ajax({
+            url: '/update_button_states/',
+            type: 'GET',
+            data: { 'product_id': product_id },
+            success: function (data) {
+                // Update button states based on the response
+                if (data.product_wish) {
+                    // Product is in the wishlist
+                    // Update the wishlist button
+                    $('#wishlist-button').text('Remove from wishlist');
+                }
+    
+                if (data.add_to_cart == true) {
+                    // Product is in the cart
+                    // Update the cart button
+                    console.log('1')
+                    $('#cart-button').text('Remove from cart');
+                }
+                // else{
+                //     console.log('2')
+                //     $('#cart-button').text('Add to cart');
+                // }
+            }
+        });
+    }
+
+window.addEventListener('pageshow', function (event) {
+        let isDetailsPage = window.location.pathname.includes('/details');
+        let isCart = window.location.pathname.includes('/cart')
+        if (isDetailsPage || isCart) {
+            window.location.reload();
+            updateButtonStates();
+        }
+    })
+```    
 **Fix**
-This is fixed using js, the page will always reload when user comes to product details page so latest states of buttons can be recovered. Better solution is to us AJAX. I'll implement that in future releases.
+This is fixed using js, the page will always reload when user comes to product details page so latest states of buttons can be recovered.
+
+**Note** I tested reloading on product_detail and cart page when user goes back to these page and confirmed it on chrome devtool's various tablets and mobiles options as well. After deploying it to Heroku, I tested this functionality again and on my personal phone It was not working and the page was not reloading. I discussed it with one of the tutor and it was working on her side and as she advised this issue might be for some devices and i do have an old phone. But still I think it's better to mention this incase something like this reappears.
 
 ## Unfixed bugs
 - No known unfixed bugs.
+- Kindly read Note inside **Product detail buttons updation**.
 
 Return back to the [README.md](/README.md) file.
