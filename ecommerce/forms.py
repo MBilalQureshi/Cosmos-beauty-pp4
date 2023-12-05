@@ -41,7 +41,6 @@ class ShipmentDetailForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ShipmentDetailForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
-        # self.helper.form_show_labels = False
         self.helper.layout = Layout(
             Field('first_name', css_class='fs-5',
                   placeholder='Enter First Name', title='Enter First Name'),

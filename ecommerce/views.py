@@ -245,12 +245,14 @@ class Checkout(View):
                 user=request.user)
             if request.session.get('cart'):
                 if get_user_last_data:
-                    instance = get_object_or_404(ShipmentDetail, user=request.user)
+                    instance = get_object_or_404(ShipmentDetail,
+                                                 user=request.user)
                     form = ShipmentDetailForm(request.POST, instance=instance)
                     if form.is_valid():
                         fetch_user = form.save(commit=False)
                         fetch_user.user = request.user
-                        messages.success(request, 'Shipment data set successfully')
+                        messages.success(request,
+                                         'Shipment data set successfully')
                         form.save()
                     else:
                         return redirect('checkout')
@@ -259,7 +261,8 @@ class Checkout(View):
                     if form.is_valid():
                         fetch_user = form.save(commit=False)
                         fetch_user.user = request.user
-                        messages.success(request, 'Shipment data added successfully')
+                        messages.success(request,
+                                         'Shipment data added successfully')
                         form.save()
                     else:
                         return redirect('checkout')

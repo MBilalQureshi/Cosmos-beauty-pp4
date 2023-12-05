@@ -48,10 +48,10 @@
                     </span>
                     {% if product.stock < 10 %}
                     <input id="form-quntity" type="number" name="quant[1]" class="form-control input-number" value="1"
-                        min="1" max="{{ product.stock }}" aria-label="Get input from user in number">
+                        min="1" max="{{ product.stock }}" aria-label="Get input from user in number" disabled>
                     {% else %}
                     <input id="form-quntity" type="number" name="quant[1]" class="form-control input-number" value="1"
-                        min="1" max="10" aria-label="Get input from user in number">
+                        min="1" max="10" aria-label="Get input from user in number" disabled>
                     {% endif %}
                     <span class="input-group-btn">
                     <button type="button" class="btn btn-default btn-number ms-1" data-type="plus"
@@ -61,7 +61,7 @@
                     </span>
                 </div>
                 <div class="mb-4">
-                    <button type="button" class="hvr-sweep-to-right btn btn-dark btn-lg add-to-cart"
+                    <button id="cart-btn" type="button" class="hvr-sweep-to-right btn btn-dark btn-lg add-to-cart"
                         value="{{ product.id }}" style="width: 100%;">{% if add_to_cart == True %}
                     Remove from cart
                     {% else %}

@@ -437,7 +437,7 @@ The total was not updating at all even if the quantity is updated.
 
 ## Product detail buttons updation
 
-Product details page buttons was not maintaining state when user goes back from adding an item, go to cart and clicks back button. Better solution is to us AJAX and the code I tried is mentioned below which currently did not worked completely.
+Product details page buttons was not maintaining state when user goes back from adding an item, go to cart and clicks back button. Better solution is to us AJAX and the code I tried is mentioned below which currently did not worked completely. By going back means clicking back button from cart to same product. If user is redirected here using a link this issue doesn't appears at that point due to the fact that page is reloaded first like normally pages do.
 
 Inside product_detail.html
 ```
@@ -453,11 +453,11 @@ def update_button_states(request):
     user = request.user
     product_wish = False
     add_to_cart = False
-    # if request.user.is_authenticated:
-        # if Wishes.objects.filter(user=request.user, wish_id=product.id):
-        #     product_wish = True
-        # else:
-        #     product_wish = False
+     if request.user.is_authenticated:
+        if Wishes.objects.filter(user=request.user, wish_id=product.id):
+            product_wish = True
+        else:
+            product_wish = False
     if request.session.get('cart') is not None:
         if str(product_id) in request.session.get('cart'):
             add_to_cart = True
@@ -492,10 +492,9 @@ AJAX
                     console.log('1')
                     $('#cart-button').text('Remove from cart');
                 }
-                // else{
-                //     console.log('2')
-                //     $('#cart-button').text('Add to cart');
-                // }
+                else{
+                    $('#cart-button').text('Add to cart');
+                 }
             }
         });
     }
@@ -504,13 +503,14 @@ window.addEventListener('pageshow', function (event) {
         let isDetailsPage = window.location.pathname.includes('/details');
         let isCart = window.location.pathname.includes('/cart')
         if (isDetailsPage || isCart) {
-            window.location.reload();
+            //Goes to infinite reloads on page
+            //window.location.reload();
             updateButtonStates();
         }
     })
 ```    
 **Fix**
-This is fixed using js, the page will always reload when user comes to product details page so latest states of buttons can be recovered.
+This is fixed using js, the page will always reload when user comes to product details page and also on cart as cart is handled in some way as product details so latest states of buttons can be recovered.
 
 **Note** I tested reloading on product_detail and cart page when user goes back to these page and confirmed it on chrome devtool's various tablets and mobiles options as well. After deploying it to Heroku, I tested this functionality again and on my personal phone It was not working and the page was not reloading. I discussed it with one of the tutor and it was working on her side and as she advised this issue might be for some devices and i do have an old phone. But still I think it's better to mention this incase something like this reappears.
 

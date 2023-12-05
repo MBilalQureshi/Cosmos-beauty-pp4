@@ -9,7 +9,7 @@ $(document).ready(function () {
      */
     window.addEventListener("pageshow", function (event) {
         let isDetailsPage = window.location.pathname.includes('/details');
-        let isCart = window.location.pathname.includes('/cart')
+        let isCart = window.location.pathname.includes('/cart');
         let navigationEntries = performance.getEntriesByType('navigation');
         if ((isDetailsPage || isCart) && navigationEntries.length > 0 && navigationEntries[0].type === 'back_forward') {
             window.location.reload();
@@ -129,12 +129,11 @@ $(document).ready(function () {
      * and input was handled by session later. So input handling
      * was required. This ready to use code is taken from : 
      * https://www.codeply.com/go/2VmBU7TanF/bootstrap-plus-minus-counter-input
-     * depricated code was fixed and remaining code was updated
-     * as needed. 
+     * Altough input field is handled in below code but I still disabled it on
+     * html side to be on safe side. User can use + and - to increase and decrease quantity.
      */
     $('.btn-number').click(function (e) {
         e.preventDefault();
-
         let fieldName = $(this).attr('data-field');
         let type = $(this).attr('data-type');
         let input = $("input[name='" + fieldName + "']");
@@ -176,13 +175,13 @@ $(document).ready(function () {
         if (valueCurrent >= minValue) {
             $(".btn-number[data-type='minus'][data-field='" + name + "']").removeAttr('disabled');
         } else {
-            $(".form-errors").text('Sorry, kindly enter between 1 - 10').show();
+            $(".form-errors").text('Kindly enter between 1 - 10').show();
             $(this).val($(this).data('oldValue'));
         }
         if (valueCurrent <= maxValue) {
             $(".btn-number[data-type='plus'][data-field='" + name + "']").removeAttr('disabled');
         } else {
-            $(".form-errors").text('Sorry,  kindly enter between 1 - 10').show();
+            $(".form-errors").text('Kindly enter between 1 - 10').show();
             $(this).val($(this).data('oldValue'));
         }
     });
