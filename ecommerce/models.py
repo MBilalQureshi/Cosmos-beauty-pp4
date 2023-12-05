@@ -18,10 +18,16 @@ class ShipmentDetail(models.Model):
     last_name = models.CharField(max_length=30, null=False, blank=False)
     address_line_one = models.CharField(max_length=120, null=False,
                                         blank=False)
-    postal_code = models.PositiveIntegerField(null=False, blank=False)
+    postal_code = models.PositiveIntegerField(null=False, blank=False,
+                                              validators=[
+                                                  MaxValueValidator(999999)
+                                                  ])
     city = models.CharField(max_length=40, null=False, blank=False)
     country = models.CharField(max_length=40, null=False, blank=False)
-    mobile = models.PositiveIntegerField(unique=True, null=False, blank=False)
+    mobile = models.BigIntegerField(unique=True, null=False, blank=False,
+                                    validators=[
+                                      MaxValueValidator(9999999999999)
+                                      ])
     method = models.IntegerField(choices=PAYMENT_METHOD_CHOICES, default=0)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)

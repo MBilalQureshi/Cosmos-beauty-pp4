@@ -435,6 +435,24 @@ The total was not updating at all even if the quantity is updated.
 
 **Fix:** The total was not handled and I saw it during the testing and fixed my orders post view so that it could be seen on the page.
 
+## Shipping details number fields
+
+The postal code and mobile number values were causing shipping data to be not submitted to database plus user has no way of knowing what the issue was as the page was redirected to its self in cases of invalid inputs.
+
+**Fix**
+Instead of redirecting i used
+```
+messages.error(request, 'Your data was not saved')
+return render(
+    request,
+    'user_checkout.html',
+    {
+        'form': form
+    })
+```
+This way user can see the error inside the fields on submit button click.
+and inside modal, Max value validators for both fields are set also changed positive integer field to Big integer field for phone number.
+
 ## Product detail buttons updation
 
 Product details page buttons was not maintaining state when user goes back from adding an item, go to cart and clicks back button. Better solution is to us AJAX and the code I tried is mentioned below which currently did not worked completely. By going back means clicking back button from cart to same product. If user is redirected here using a link this issue doesn't appears at that point due to the fact that page is reloaded first like normally pages do.

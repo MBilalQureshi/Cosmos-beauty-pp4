@@ -265,7 +265,14 @@ class Checkout(View):
                                          'Shipment data added successfully')
                         form.save()
                     else:
-                        return redirect('checkout')
+                        messages.error(request,
+                                       'Your data was not saved')
+                        return render(
+                            request,
+                            'user_checkout.html',
+                            {
+                                'form': form
+                            })
             else:
                 messages.success(self.request, 'Order Already placed')
                 return redirect('myorders')
